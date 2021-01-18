@@ -43,7 +43,7 @@
                         <Font name="SansSerif Bold" size="20.0" />
                     </font>
                 </Label>
-                <TextField focusTraversable="false" layoutX="59.0" layoutY="120.0" promptText="User ID">
+                <TextField focusTraversable="false" layoutX="59.0" layoutY="120.0" promptText="Username">
                     <font>
                         <Font name="SansSerif Regular" size="14.0" />
                     </font>
