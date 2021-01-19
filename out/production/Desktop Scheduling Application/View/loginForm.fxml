@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="Controller.loginFormController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #41B3A3;" BorderPane.alignment="CENTER">
             <children>
@@ -53,7 +53,7 @@
                         <Font name="SansSerif Regular" size="14.0" />
                     </font>
                 </TextField>
-            <Button alignment="CENTER" layoutX="107.0" layoutY="213.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: #41B3A3; -fx-background-radius: 100;" text="Sign In" textFill="WHITE">
+            <Button fx:id="signInButton" alignment="CENTER" layoutX="107.0" layoutY="213.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="64.0" style="-fx-background-color: #41B3A3; -fx-background-radius: 100;" text="Sign In" textFill="WHITE" onAction="#signInButtonPushed">
                <font>
                   <Font name="SansSerif Regular" size="13.0" />
                </font>
