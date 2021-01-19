@@ -8,43 +8,59 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class addCustomerFormController {
+public class updateAppointmentFormController {
 
     @FXML
-    private AnchorPane divisionComboBox;
+    private TextField updateAppointmentIDTextField;
 
     @FXML
-    private TextField customerIdTextField;
+    private TextField updateAppointmentTitleTextField;
 
     @FXML
-    private TextField customerNameTextField;
+    private TextField updateAppointmentDescriptionTextField;
 
     @FXML
-    private TextField customerAddressTextField;
+    private TextField updateAppointmentLocationTextField;
 
     @FXML
-    private TextField customerPostalCodeTextField;
+    private ComboBox<?> updateContactComboBox;
 
     @FXML
-    private TextField customerPhoneTextField;
+    private ComboBox<?> updateTypeComboBox;
 
     @FXML
-    private ComboBox<?> countryComboBox;
+    private DatePicker updateStartDatePicker;
 
     @FXML
-    private Button customerSaveButton;
+    private Spinner<?> updateStartTimeSlider;
 
     @FXML
-    private Button customerCancelButton;
+    private DatePicker updateEndDatePicker;
 
     @FXML
-    private void cancelCustomerButtonPushed(ActionEvent event) throws IOException {
+    private Spinner<?> updateEndTimeSlider;
+
+    @FXML
+    private ComboBox<?> updateCustomerIdComboBox;
+
+    @FXML
+    private ComboBox<?> updateUserIdComboBox;
+
+    @FXML
+    private Button updateSaveAppointmentButton;
+
+    @FXML
+    private Button updateCancelAppointmentButton;
+
+    @FXML
+    private void updateSaveButtonPushed(ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
         Scene scene = new Scene(parent);
 
@@ -55,7 +71,7 @@ public class addCustomerFormController {
     }
 
     @FXML
-    private void saveCustomerButtonPushed(ActionEvent event) throws IOException {
+    private void updateCancelButtonPushed(ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
         Scene scene = new Scene(parent);
 
@@ -66,3 +82,4 @@ public class addCustomerFormController {
     }
 
 }
+

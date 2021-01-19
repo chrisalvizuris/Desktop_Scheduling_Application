@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.addCustomerFormController">
    <left>
       <AnchorPane fx:id="divisionComboBox" prefHeight="540.0" prefWidth="200.0" style="-fx-background-color: #41B3A3;" BorderPane.alignment="CENTER">
          <children>
@@ -71,16 +71,19 @@
                         <Font name="SansSerif Regular" size="13.0" />
                      </font>
                   </TextField>
-                  <ComboBox fx:id="countryComboBox" focusTraversable="false" prefWidth="150.0" promptText="Country" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" />
-                  <ComboBox focusTraversable="false" prefWidth="150.0" promptText="Division" style="-fx-background-color: #FFFFFF; -fx-border-color: #000000;" />
+                  <ComboBox fx:id="countryComboBox" focusTraversable="false" prefWidth="150.0" promptText="Country" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets></ComboBox>
+                  <ComboBox focusTraversable="false" prefWidth="150.0" promptText="Division" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
                   <HBox prefHeight="100.0" prefWidth="284.0" spacing="20.0" style="-fx-background-color: #FFFFFF;">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #41B3A3; -fx-background-radius: 100;" text="Save" textFill="WHITE">
+                        <Button fx:id="customerSaveButton" mnemonicParsing="false" onAction="#saveCustomerButtonPushed" style="-fx-background-color: #41B3A3; -fx-background-radius: 100;" text="Save" textFill="WHITE">
                            <font>
                               <Font name="SansSerif Regular" size="14.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #41B3A3; -fx-background-radius: 100;" text="Cancel" textFill="WHITE">
+                        <Button fx:id="customerCancelButton" mnemonicParsing="false" onAction="#cancelCustomerButtonPushed" style="-fx-background-color: #41B3A3; -fx-background-radius: 100;" text="Cancel" textFill="WHITE">
                            <font>
                               <Font name="SansSerif Regular" size="14.0" />
                            </font>
