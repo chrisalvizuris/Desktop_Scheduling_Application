@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.updateCustomerFormController">
+    <left>
+        <AnchorPane fx:id="divisionComboBox" prefHeight="540.0" prefWidth="200.0" style="-fx-background-color: #41B3A3;" BorderPane.alignment="CENTER">
+            <children>
+                <Label layoutX="65.0" layoutY="14.0" text="sM" textFill="WHITE">
+                    <font>
+                        <Font name="SansSerif Bold" size="50.0" />
+                    </font>
+                </Label>
+                <Label layoutX="10.0" layoutY="145.0" prefHeight="105.0" prefWidth="171.0" text="Here is where you can update an existing customer. Edit the customer's information in the Update Customer form." textFill="WHITE" wrapText="true">
+                    <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </left>
+    <center>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+            <top>
+                <Label text="Update Customer" textFill="#41b3a3" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="SansSerif Bold" size="20.0" />
+                    </font>
+                    <opaqueInsets>
+                        <Insets top="16.0" />
+                    </opaqueInsets>
+                    <padding>
+                        <Insets top="20.0" />
+                    </padding>
+                </Label>
+            </top>
+            <center>
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <TextField fx:id="customerIdTextField" editable="false" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Customer ID">
+                            <font>
+                                <Font name="SansSerif Regular" size="13.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="customerNameTextField" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Customer Name">
+                            <font>
+                                <Font name="SansSerif Regular" size="13.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="customerAddressTextField" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Address">
+                            <font>
+                                <Font name="SansSerif Regular" size="13.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="customerPostalCodeTextField" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Postal Code">
+                            <font>
+                                <Font name="SansSerif Regular" size="13.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="customerPhoneTextField" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Phone Number">
+                            <font>
+                                <Font name="SansSerif Regular" size="13.0" />
+                            </font>
+                        </TextField>
+                        <ComboBox fx:id="countryComboBox" focusTraversable="false" prefWidth="150.0" promptText="Country" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
+                        <ComboBox focusTraversable="false" prefWidth="150.0" promptText="Division" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
+                        <HBox prefHeight="100.0" prefWidth="284.0" spacing="20.0" style="-fx-background-color: #FFFFFF;">
+                            <children>
+                                <Button fx:id="updateCustomerSaveButton" mnemonicParsing="false" onAction="#updateSaveButtonPushed" style="-fx-background-color: #41B3A3; -fx-background-radius: 100;" text="Save" textFill="WHITE">
+                                    <font>
+                                        <Font name="SansSerif Regular" size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="updateCustomerCancelButton" mnemonicParsing="false" onAction="#updateCancelButtonPushed" style="-fx-background-color: #41B3A3; -fx-background-radius: 100;" text="Cancel" textFill="WHITE">
+                                    <font>
+                                        <Font name="SansSerif Regular" size="14.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets left="30.0" right="30.0" />
+                    </padding>
+                    <BorderPane.margin>
+                        <Insets top="30.0" />
+                    </BorderPane.margin>
+                </VBox>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>

@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,23 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="815.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.mainWindowController">
-   <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" side="RIGHT" style="-fx-background-color: #FFFFFF;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Month">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-          <Tab text="Week">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </center>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1095.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.mainWindowController">
    <left>
       <AnchorPane prefHeight="600.0" prefWidth="264.0" style="-fx-background-color: #41B3A3;" BorderPane.alignment="CENTER">
          <children>
@@ -47,7 +33,7 @@
                   </Label>
                   <HBox prefHeight="55.0" prefWidth="237.0" spacing="10.0">
                      <children>
-                        <Button fx:id="addAppointmentButton" mnemonicParsing="false" prefHeight="139.0" prefWidth="125.0" style="-fx-background-color: #41B3A3;" onAction="#newAppointmentButtonPushed">
+                        <Button fx:id="addAppointmentButton" mnemonicParsing="false" onAction="#newAppointmentButtonPushed" prefHeight="139.0" prefWidth="125.0" style="-fx-background-color: #41B3A3;">
                            <graphic>
                               <ImageView fitHeight="53.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -56,7 +42,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="editAppointmentButton" mnemonicParsing="false" style="-fx-background-color: #41B3A3;" onAction="#updateAppointmentButtonPushed">
+                        <Button fx:id="editAppointmentButton" mnemonicParsing="false" onAction="#updateAppointmentButtonPushed" style="-fx-background-color: #41B3A3;">
                            <graphic>
                               <ImageView fitHeight="56.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -89,7 +75,7 @@
                   </Label>
                   <HBox prefHeight="55.0" prefWidth="237.0" spacing="10.0">
                      <children>
-                        <Button fx:id="addCustomerButton" mnemonicParsing="false" prefHeight="139.0" prefWidth="125.0" style="-fx-background-color: #41B3A3;" onAction="#newCustomerButtonPushed">
+                        <Button fx:id="addCustomerButton" mnemonicParsing="false" onAction="#newCustomerButtonPushed" prefHeight="139.0" prefWidth="125.0" style="-fx-background-color: #41B3A3;">
                            <graphic>
                               <ImageView fitHeight="53.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -98,7 +84,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="editCustomerButton" mnemonicParsing="false" style="-fx-background-color: #41B3A3;" onAction="#updateCustomerButtonPushed">
+                        <Button fx:id="editCustomerButton" mnemonicParsing="false" onAction="#updateCustomerButtonPushed" style="-fx-background-color: #41B3A3;">
                            <graphic>
                               <ImageView fitHeight="56.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -135,4 +121,94 @@
          </children>
       </AnchorPane>
    </left>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <bottom>
+            <VBox prefHeight="244.0" prefWidth="646.0" spacing="10.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" prefHeight="23.0" prefWidth="830.0" text="All Customers" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" >
+                    <columns>
+                      <TableColumn prefWidth="75.0" style="-fx-background-color: #c5c6c7;" text="Cust ID"/>
+                      <TableColumn prefWidth="135.0" style="-fx-background-color: #c5c6c7;" text="Name" />
+                        <TableColumn prefWidth="209.0" style="-fx-background-color: #c5c6c7;" text="Address" />
+                        <TableColumn prefWidth="105.0" style="-fx-background-color: #c5c6c7;" text="Postal Code" />
+                        <TableColumn prefWidth="140.0" style="-fx-background-color: #c5c6c7;" text="Phone" />
+                        <TableColumn prefWidth="147.0" style="-fx-background-color: #c5c6c7;" text="Division" />
+                    </columns>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </VBox.margin>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                  </TableView>
+               </children>
+            </VBox>
+         </bottom>
+         <top>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="829.0" style="-fx-background-color: #FFFFFF;" text="My Appointments" textFill="#41b3a3" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets top="10.0" />
+               </BorderPane.margin>
+               <font>
+                  <Font name="SansSerif Bold" size="20.0" />
+               </font>
+            </Label>
+         </top>
+         <center>
+            <TabPane prefHeight="200.0" prefWidth="200.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab style="-fx-background-color: #41B3A3;" text="Month">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;">
+                           <children>
+                              <TableView layoutX="14.0" layoutY="14.0" prefHeight="304.0" prefWidth="770.0" style="-fx-background-color: #FFFFFF;">
+                                <columns>
+                                  <TableColumn prefWidth="69.0" style="-fx-background-color: #c5c6c7;" text="Apt ID" />
+                                  <TableColumn prefWidth="109.0" style="-fx-background-color: #c5c6c7;" text="Title" />
+                                    <TableColumn prefWidth="126.0" style="-fx-background-color: #c5c6c7;" text="Description"/>
+                                    <TableColumn prefWidth="79.0" style="-fx-background-color: #c5c6c7;" text="Location" />
+                                    <TableColumn prefWidth="70.0" style="-fx-background-color: #c5c6c7;" text="Contact" />
+                                    <TableColumn prefWidth="68.0" style="-fx-background-color: #c5c6c7;" text="Type" />
+                                    <TableColumn prefWidth="83.0" style="-fx-background-color: #c5c6c7;" text="Start" />
+                                    <TableColumn prefWidth="84.0" style="-fx-background-color: #c5c6c7;" text="End" />
+                                    <TableColumn prefWidth="81.0" style="-fx-background-color: #c5c6c7;" text="Cust ID" />
+                                </columns>
+                              </TableView>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                <Tab style="-fx-background-color: #41B3A3;" text="Week">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;">
+                           <children>
+                              <TableView layoutX="14.0" layoutY="14.0" prefHeight="304.0" prefWidth="770.0" style="-fx-background-color: #FFFFFF;">
+                                <columns>
+                                  <TableColumn prefWidth="70.0" style="-fx-background-color: #c5c6c7;" text="Apt ID" />
+                                  <TableColumn prefWidth="110.0" style="-fx-background-color: #c5c6c7;" text="Title" />
+                                    <TableColumn prefWidth="124.0" style="-fx-background-color: #c5c6c7;" text="Description" />
+                                    <TableColumn style="-fx-background-color: #c5c6c7;" text="Location" />
+                                    <TableColumn prefWidth="69.0" style="-fx-background-color: #c5c6c7;" text="Contact" />
+                                    <TableColumn prefWidth="68.0" style="-fx-background-color: #c5c6c7;" text="Type" />
+                                    <TableColumn prefWidth="85.0" style="-fx-background-color: #c5c6c7;" text="Start" />
+                                    <TableColumn prefWidth="82.0" style="-fx-background-color: #c5c6c7;" text="End" />
+                                    <TableColumn prefWidth="81.0" style="-fx-background-color: #c5c6c7;" text="Cust ID" />
+                                </columns>
+                              </TableView>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </center>
+      </BorderPane>
+   </center>
 </BorderPane>
