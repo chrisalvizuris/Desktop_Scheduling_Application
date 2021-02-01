@@ -24,17 +24,25 @@ public class DatabaseConnection {
     //password
     private static final String password = "53688653713";
 
+    //method to start the connection
     public static Connection beginConnection() {
         try {
             Class.forName(MYSQLJDBCDriver);
             conn = DriverManager.getConnection(jdbcURL, username, password);
             System.out.println("Connection Successful");
-        }   catch (ClassNotFoundException exception) {
+        }   catch (ClassNotFoundException | SQLException exception) {
             System.out.println(exception.getMessage());
+        }
+        return conn;
+    }
+
+    public static void closeConnection() {
+        try {
+            conn.close();
+            System.out.println("Connection closed");
         }   catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return conn;
     }
 
 
