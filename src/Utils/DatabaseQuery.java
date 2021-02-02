@@ -1,19 +1,20 @@
 package Utils;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseQuery {
     //statement reference
-    private static Statement statement;
+    private static PreparedStatement statement;
 
     //create statement object
-    public static void setStatement(Connection connection) throws SQLException {
-        statement = connection.createStatement();
+    public static void setPreparedStatement(Connection connection, String sqlStatement) throws SQLException {
+        statement = connection.prepareStatement(sqlStatement);
     }
 
-    public static Statement getStatement() {
+    public static PreparedStatement getPreparedStatement() {
         return statement;
     }
 }

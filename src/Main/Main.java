@@ -25,8 +25,7 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
         Connection conn = DatabaseConnection.beginConnection();
-        DatabaseQuery.setStatement(conn); // create statement object
-        Statement statement = DatabaseQuery.getStatement(); //get statement reference
+
         launch(args);
         DatabaseConnection.closeConnection();
     }
