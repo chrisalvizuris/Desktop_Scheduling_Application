@@ -12,6 +12,7 @@ public class Customers {
     private String customerCreatedBy;
     private LocalDateTime customerUpdateDate;
     private String customerUpdateBy;
+    private int divisionId;
 
     public Customers(String customerName, String customerAddress, String customerPostal, String customerPhone) {
         this.customerName = customerName;
@@ -91,4 +92,13 @@ public class Customers {
     public void setCustomerUpdateBy(String customerUpdateBy) {
         this.customerUpdateBy = customerUpdateBy;
     }
+
+    public void setDivisionId(int divisionId) {
+        this.divisionId = divisionId;
+    }
+
+    public int getDivisionId() {
+        return divisionId;
+    }
 }
+

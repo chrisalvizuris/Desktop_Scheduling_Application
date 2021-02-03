@@ -1,16 +1,18 @@
 package Main;
 
-import Utils.DatabaseConnection;
-import Utils.DatabaseQuery;
+import Dao.CustomerImp;
+import Dao.DatabaseConnection;
+import Model.Customers;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.time.LocalDateTime;
 
 public class Main extends Application {
 
@@ -25,6 +27,14 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
         Connection conn = DatabaseConnection.beginConnection();
+        Customers customers = new Customers("Chris", "111 Test street", "91911", "6198889999");
+        customers.setDivisionId(666);
+        customers.setCustomerCreateDate(LocalDateTime.now());
+        customers.setCustomerCreatedBy("Christian");
+        customers.setCustomerUpdateDate(LocalDateTime.now());
+        customers.setCustomerUpdateBy(null);
+        CustomerImp.addCustomer(customers);
+
 
         launch(args);
         DatabaseConnection.closeConnection();
