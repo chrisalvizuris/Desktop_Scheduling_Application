@@ -1,13 +1,16 @@
 package Dao;
 
 import Model.Customers;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class CustomerImp {
 
@@ -43,7 +46,7 @@ public class CustomerImp {
 
         //check rows affected
         if(preparedStatement.getUpdateCount() > 0) {
-            System.out.println(preparedStatement.getUpdateCount() + "row(s) affected.");
+            System.out.println(preparedStatement.getUpdateCount() + " row(s) affected.");
         }   else {
             System.out.println("No change.");
         }
@@ -53,28 +56,104 @@ public class CustomerImp {
     }
 
 
-    public Customers getCustomer(int customerId) {
-        DatabaseConnection.beginConnection();
+    public static Customers getCustomer(int customerId) throws SQLException {
+        Connection conn = DatabaseConnection.beginConnection();
+        String selectStatement = "SELECT * FROM customers WHERE Customer_ID = " + String.valueOf(customerId);
+        DatabaseQuery.setPreparedStatement(conn, selectStatement);
+        PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
 
+        Customers customer;
 
+        ResultSet resultSet = preparedStatement.getResultSet();
 
+        while(resultSet.next()) {
+            int customerID = resultSet.getInt("Customer_ID");
+            String customerName = resultSet.getString("Customer_Name");
+            String customerAddress = resultSet.getString("Address");
+            String customerZip = resultSet.getString("Postal_Code");
+            String customerPhone = resultSet.getString("Phone");
+            LocalDate createDate = resultSet.getDate("Create_Date").toLocalDate();
+            LocalTime createTime = resultSet.getTime("Create_Date").toLocalTime();
+            LocalDateTime createLDT = LocalDateTime.of(createDate, createTime);
+            String createdBy = resultSet.getString("Created_By");
+            LocalDate updateDate = resultSet.getDate("Last_Update").toLocalDate();
+            LocalTime updateTime = resultSet.getTime("Last_Update").toLocalTime();
+            LocalDateTime updateLDT = LocalDateTime.of(updateDate, updateTime);
+            String updatedBy = resultSet.getString("Last_Updated_By");
 
+            customer = new Customers(customerName, customerAddress, customerZip, customerPhone);
+            //FIXME: Do I need to add more variables to the customer class?
+
+            //check rows affected
+            if(preparedStatement.getUpdateCount() > 0) {
+                System.out.println(preparedStatement.getUpdateCount() + " row(s) affected.");
+            }   else {
+                System.out.println("No change.");
+            }
+
+            return customer;
+        }
+        DatabaseConnection.closeConnection();
         return null;
     }
 
 
-    public void updateCustomer(Customers customer) {
+    public static void updateCustomer(Customers customer) throws SQLException {
+        Connection conn = DatabaseConnection.beginConnection();
+        String updateStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ? WHERE Customer_ID = ?";
+        DatabaseQuery.setPreparedStatement(conn, updateStatement);
+        PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
+
+        String newName = customer.getCustomerName();
+        String newAddress = customer.getCustomerAddress();
+        String newPostal = customer.getCustomerPostal();
+        String newPhone = customer.getCustomerPhone();
+        int customerToUpdate = customer.getCustomerId();
+
+        preparedStatement.setString(1, newName);
+        preparedStatement.setString(2, newAddress);
+        preparedStatement.setString(3, newPostal);
+        preparedStatement.setString(4, newPhone);
+        preparedStatement.setString(5, String.valueOf(customerToUpdate));
+
+        preparedStatement.execute();
+
+        //check rows affected
+        if(preparedStatement.getUpdateCount() > 0) {
+            System.out.println(preparedStatement.getUpdateCount() + " row(s) affected.");
+        }   else {
+            System.out.println("No change.");
+        }
+
+        DatabaseConnection.closeConnection();
 
     }
 
 
-    public void deleteCustomer(int customerId) {
+    public static void deleteCustomer(int customerId) throws SQLException {
+
+        Connection connection = DatabaseConnection.beginConnection();
+        String deleteStatement = "DELETE FROM customers WHERE Customer_ID = " + String.valueOf(customerId);
+
+        DatabaseQuery.setPreparedStatement(connection, deleteStatement);
+        PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
+
+        preparedStatement.execute();
+
+        //check rows affected
+        if(preparedStatement.getUpdateCount() > 0) {
+            System.out.println(preparedStatement.getUpdateCount() + " row(s) affected.");
+        }   else {
+            System.out.println("No change.");
+        }
+
+        DatabaseConnection.closeConnection();
 
     }
 
 
-    public ObservableList<Customers> getAllCustomers() throws SQLException {
-
+    public static ObservableList<Customers> getAllCustomers() throws SQLException {
+        ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
         Connection conn = DatabaseConnection.beginConnection();
         String selectStatement = "SELECT * FROM customers";
         DatabaseQuery.setPreparedStatement(conn, selectStatement);
@@ -85,9 +164,32 @@ public class CustomerImp {
         ResultSet resultSet = preparedStatement.getResultSet();
 
         while(resultSet.next()) {
+            int customerID = resultSet.getInt("Customer_ID");
+            String customersName = resultSet.getString("Customer_Name");
+            String customerAddress = resultSet.getString("Address");
+            String customerZip = resultSet.getString("Postal_Code");
+            String customerPhone = resultSet.getString("Phone");
+            LocalDate createDate = resultSet.getDate("Create_Date").toLocalDate();
+            LocalTime createTime = resultSet.getTime("Create_Date").toLocalTime();
+            LocalDateTime createLDT = LocalDateTime.of(createDate, createTime);
+            String createdBy = resultSet.getString("Created_By");
+            LocalDate updateDate = resultSet.getDate("Last_Update").toLocalDate();
+            LocalTime updateTime = resultSet.getTime("Last_Update").toLocalTime();
+            LocalDateTime updateLDT = LocalDateTime.of(updateDate, updateTime);
+            String updatedBy = resultSet.getString("Last_Updated_By");
 
-        //TODO: Fill this out
+            Customers customer = new Customers(customersName, customerAddress, customerZip, customerPhone);
+
+            allCustomers.add(customer);
+
+            //check rows affected
+            if(preparedStatement.getUpdateCount() > 0) {
+                System.out.println(preparedStatement.getUpdateCount() + " row(s) affected.");
+            }   else {
+                System.out.println("No change.");
+            }
         }
-        return null;
+        DatabaseConnection.closeConnection();
+        return allCustomers;
     }
 }
