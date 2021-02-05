@@ -14,17 +14,19 @@ public class Appointments {
     private String appointmentCreatedBy;
     private LocalDateTime appointmentUpdateDate;
     private String appointmentUpdatedBy;
+    private int customerId;
+    private int userId;
+    private int contactId;
 
-    public Appointments(String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) {
+    public Appointments(int appointmentId, String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, int customerId) {
+        this.appointmentId = appointmentId;
         this.appointmentTitle = appointmentTitle;
         this.appointmentDescription = appointmentDescription;
         this.appointmentLocation = appointmentLocation;
         this.appointmentType = appointmentType;
         this.appointmentStart = appointmentStart;
         this.appointmentEnd = appointmentEnd;
-        int customerId = 0;
-        int userId = 0;
-        int contactId = 0;
+        this.customerId = customerId;
     }
 
     public int getAppointmentId() {
@@ -113,5 +115,29 @@ public class Appointments {
 
     public void setAppointmentUpdatedBy(String appointmentUpdatedBy) {
         this.appointmentUpdatedBy = appointmentUpdatedBy;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(int contactId) {
+        this.contactId = contactId;
     }
 }

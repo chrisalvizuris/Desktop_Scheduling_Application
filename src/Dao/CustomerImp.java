@@ -64,7 +64,7 @@ public class CustomerImp {
 
         Customers customer;
 
-        ResultSet resultSet = preparedStatement.getResultSet();
+        ResultSet resultSet = preparedStatement.executeQuery();
 
         while(resultSet.next()) {
             int customerID = resultSet.getInt("Customer_ID");
@@ -81,8 +81,7 @@ public class CustomerImp {
             LocalDateTime updateLDT = LocalDateTime.of(updateDate, updateTime);
             String updatedBy = resultSet.getString("Last_Updated_By");
 
-            customer = new Customers(customerName, customerAddress, customerZip, customerPhone);
-            //FIXME: Do I need to add more variables to the customer class?
+            customer = new Customers(customerID, customerName, customerAddress, customerZip, customerPhone, createLDT, createdBy, updateLDT, updatedBy);            //FIXME: Do I need to add more variables to the customer class?
 
             //check rows affected
             if(preparedStatement.getUpdateCount() > 0) {
@@ -90,7 +89,7 @@ public class CustomerImp {
             }   else {
                 System.out.println("No change.");
             }
-
+            DatabaseConnection.closeConnection();
             return customer;
         }
         DatabaseConnection.closeConnection();
@@ -159,9 +158,7 @@ public class CustomerImp {
         DatabaseQuery.setPreparedStatement(conn, selectStatement);
         PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
 
-        preparedStatement.execute();
-
-        ResultSet resultSet = preparedStatement.getResultSet();
+        ResultSet resultSet = preparedStatement.executeQuery();
 
         while(resultSet.next()) {
             int customerID = resultSet.getInt("Customer_ID");
@@ -178,7 +175,7 @@ public class CustomerImp {
             LocalDateTime updateLDT = LocalDateTime.of(updateDate, updateTime);
             String updatedBy = resultSet.getString("Last_Updated_By");
 
-            Customers customer = new Customers(customersName, customerAddress, customerZip, customerPhone);
+            Customers customer = new Customers(customerID, customersName, customerAddress, customerZip, customerPhone, createLDT, createdBy, updateLDT, updatedBy);
 
             allCustomers.add(customer);
 

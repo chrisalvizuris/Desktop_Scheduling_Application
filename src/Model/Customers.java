@@ -14,11 +14,16 @@ public class Customers {
     private String customerUpdateBy;
     private int divisionId;
 
-    public Customers(String customerName, String customerAddress, String customerPostal, String customerPhone) {
+    public Customers(int customerId, String customerName, String customerAddress, String customerPostal, String customerPhone, LocalDateTime customerCreateDate, String customerCreatedBy, LocalDateTime customerUpdateDate, String customerUpdateBy) {
+        this.customerId = customerId;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerPostal = customerPostal;
         this.customerPhone = customerPhone;
+        this.customerCreateDate = customerCreateDate;
+        this.customerCreatedBy = customerCreatedBy;
+        this.customerUpdateDate = customerUpdateDate;
+        this.customerUpdateBy = customerUpdateBy;
     }
 
     public int getCustomerId() {
