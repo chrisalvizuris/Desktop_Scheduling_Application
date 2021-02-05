@@ -99,7 +99,7 @@ public class CustomerImp {
 
     public static void updateCustomer(Customers customer) throws SQLException {
         Connection conn = DatabaseConnection.beginConnection();
-        String updateStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ? WHERE Customer_ID = ?";
+        String updateStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
         DatabaseQuery.setPreparedStatement(conn, updateStatement);
         PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
 
@@ -107,13 +107,22 @@ public class CustomerImp {
         String newAddress = customer.getCustomerAddress();
         String newPostal = customer.getCustomerPostal();
         String newPhone = customer.getCustomerPhone();
+        LocalDate updateDate = customer.getCustomerUpdateDate().toLocalDate();
+        LocalTime updateTime = customer.getCustomerUpdateDate().toLocalTime();
+        LocalDateTime customerUpdateDate = LocalDateTime.of(updateDate, updateTime);
+        String updatedBy = customer.getCustomerUpdateBy();
+        int divisionId = customer.getDivisionId();
+
         int customerToUpdate = customer.getCustomerId();
 
         preparedStatement.setString(1, newName);
         preparedStatement.setString(2, newAddress);
         preparedStatement.setString(3, newPostal);
         preparedStatement.setString(4, newPhone);
-        preparedStatement.setString(5, String.valueOf(customerToUpdate));
+        preparedStatement.setString(5, String.valueOf(customerUpdateDate));
+        preparedStatement.setString(6, updatedBy);
+        preparedStatement.setString(7, String.valueOf(divisionId));
+        preparedStatement.setString(8, String.valueOf(customerToUpdate));
 
         preparedStatement.execute();
 
