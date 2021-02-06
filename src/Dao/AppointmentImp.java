@@ -110,7 +110,7 @@ public class AppointmentImp {
             int apptUserId = resultSet.getInt("User_ID");
             int apptContactId = resultSet.getInt("Contact_ID");
 
-            appointment = new Appointments(apptId, apptTitle, apptDescription, apptLocation, apptType, apptStartDate, apptEndDate, apptCustomerId);
+            appointment = new Appointments(apptTitle, apptDescription, apptLocation, apptType, apptStartDate, apptEndDate, apptCustomerId);
 
             //check rows affected
             if(preparedStatement.getUpdateCount() > 0) {
@@ -221,7 +221,7 @@ public class AppointmentImp {
             int apptUserId = resultSet.getInt("User_ID");
             int apptContactId = resultSet.getInt("Contact_ID");
 
-            Appointments appointment = new Appointments(apptId, apptTitle, apptDescription, apptLocation, apptType, apptStartDate, apptEndDate, apptCustomerId);
+            Appointments appointment = new Appointments(apptTitle, apptDescription, apptLocation, apptType, apptStartDate, apptEndDate, apptCustomerId);
 
             allAppointments.add(appointment);
         }
@@ -263,5 +263,173 @@ public class AppointmentImp {
         allTypes.add(type4);
 
         return allTypes;
+    }
+
+    public static ObservableList<String> getStartTimes() {
+        ObservableList<String> allStartTimes = FXCollections.observableArrayList();
+        String time1 = "05:00:00";
+        String time2 = "05:30:00";
+        String time3 = "06:00:00";
+        String time4 = "06:30:00";
+        String time5 = "07:00:00";
+        String time6 = "07:30:00";
+        String time7 = "08:00:00";
+        String time8 = "08:30:00";
+        String time9 = "09:00:00";
+        String time10 = "09:30:00";
+        String time11 = "10:00:00";
+        String time12 = "10:30:00";
+        String time13 = "11:00:00";
+        String time14 = "11:30:00";
+        String time15 = "12:00:00";
+        String time16 = "12:30:00";
+        String time17 = "13:00:00";
+        String time18 = "13:30:00";
+        String time19 = "14:00:00";
+        String time20 = "14:30:00";
+        String time21 = "15:00:00";
+        String time22 = "15:30:00";
+        String time23 = "16:00:00";
+        String time24 = "16:30:00";
+        String time25 = "17:00:00";
+        String time26 = "17:30:00";
+        String time27 = "18:00:00";
+        String time28 = "18:30:00";
+        String time29 = "19:00:00";
+        String time30 = "19:30:00";
+        String time31 = "20:00:00";
+        String time32 = "20:30:00";
+        String time33 = "21:00:00";
+        String time34 = "21:30:00";
+        String time35 = "22:00:00";
+        String time36 = "22:30:00";
+        String time37 = "23:00:00";
+        String time38 = "23:30:00";
+
+        allStartTimes.add(time1);
+        allStartTimes.add(time2);
+        allStartTimes.add(time3);
+        allStartTimes.add(time4);
+        allStartTimes.add(time5);
+        allStartTimes.add(time6);
+        allStartTimes.add(time7);
+        allStartTimes.add(time8);
+        allStartTimes.add(time9);
+        allStartTimes.add(time10);
+        allStartTimes.add(time11);
+        allStartTimes.add(time12);
+        allStartTimes.add(time13);
+        allStartTimes.add(time14);
+        allStartTimes.add(time15);
+        allStartTimes.add(time16);
+        allStartTimes.add(time17);
+        allStartTimes.add(time18);
+        allStartTimes.add(time19);
+        allStartTimes.add(time20);
+        allStartTimes.add(time21);
+        allStartTimes.add(time22);
+        allStartTimes.add(time23);
+        allStartTimes.add(time24);
+        allStartTimes.add(time25);
+        allStartTimes.add(time26);
+        allStartTimes.add(time27);
+        allStartTimes.add(time28);
+        allStartTimes.add(time29);
+        allStartTimes.add(time30);
+        allStartTimes.add(time31);
+        allStartTimes.add(time32);
+        allStartTimes.add(time33);
+        allStartTimes.add(time34);
+        allStartTimes.add(time35);
+        allStartTimes.add(time36);
+        allStartTimes.add(time37);
+        allStartTimes.add(time38);
+
+        return allStartTimes;
+    }
+
+    public static ObservableList<String> getEndTimes() {
+        ObservableList<String> allEndTimes = FXCollections.observableArrayList();
+
+        String time1 = "05:00:00";
+        String time2 = "05:30:00";
+        String time3 = "06:00:00";
+        String time4 = "06:30:00";
+        String time5 = "07:00:00";
+        String time6 = "07:30:00";
+        String time7 = "08:00:00";
+        String time8 = "08:30:00";
+        String time9 = "09:00:00";
+        String time10 = "09:30:00";
+        String time11 = "10:00:00";
+        String time12 = "10:30:00";
+        String time13 = "11:00:00";
+        String time14 = "11:30:00";
+        String time15 = "12:00:00";
+        String time16 = "12:30:00";
+        String time17 = "13:00:00";
+        String time18 = "13:30:00";
+        String time19 = "14:00:00";
+        String time20 = "14:30:00";
+        String time21 = "15:00:00";
+        String time22 = "15:30:00";
+        String time23 = "16:00:00";
+        String time24 = "16:30:00";
+        String time25 = "17:00:00";
+        String time26 = "17:30:00";
+        String time27 = "18:00:00";
+        String time28 = "18:30:00";
+        String time29 = "19:00:00";
+        String time30 = "19:30:00";
+        String time31 = "20:00:00";
+        String time32 = "20:30:00";
+        String time33 = "21:00:00";
+        String time34 = "21:30:00";
+        String time35 = "22:00:00";
+        String time36 = "22:30:00";
+        String time37 = "23:00:00";
+        String time38 = "23:30:00";
+
+        allEndTimes.add(time1);
+        allEndTimes.add(time2);
+        allEndTimes.add(time3);
+        allEndTimes.add(time4);
+        allEndTimes.add(time5);
+        allEndTimes.add(time6);
+        allEndTimes.add(time7);
+        allEndTimes.add(time8);
+        allEndTimes.add(time9);
+        allEndTimes.add(time10);
+        allEndTimes.add(time11);
+        allEndTimes.add(time12);
+        allEndTimes.add(time13);
+        allEndTimes.add(time14);
+        allEndTimes.add(time15);
+        allEndTimes.add(time16);
+        allEndTimes.add(time17);
+        allEndTimes.add(time18);
+        allEndTimes.add(time19);
+        allEndTimes.add(time20);
+        allEndTimes.add(time21);
+        allEndTimes.add(time22);
+        allEndTimes.add(time23);
+        allEndTimes.add(time24);
+        allEndTimes.add(time25);
+        allEndTimes.add(time26);
+        allEndTimes.add(time27);
+        allEndTimes.add(time28);
+        allEndTimes.add(time29);
+        allEndTimes.add(time30);
+        allEndTimes.add(time31);
+        allEndTimes.add(time32);
+        allEndTimes.add(time33);
+        allEndTimes.add(time34);
+        allEndTimes.add(time35);
+        allEndTimes.add(time36);
+        allEndTimes.add(time37);
+        allEndTimes.add(time38);
+
+        return allEndTimes;
+
     }
 }

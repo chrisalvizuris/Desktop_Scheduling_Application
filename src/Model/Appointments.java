@@ -21,8 +21,7 @@ public class Appointments {
     private int userId;
     private int contactId;
 
-    public Appointments(int appointmentId, String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, int customerId) {
-        this.appointmentId = appointmentId;
+    public Appointments(String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, int customerId) {
         this.appointmentTitle = appointmentTitle;
         this.appointmentDescription = appointmentDescription;
         this.appointmentLocation = appointmentLocation;

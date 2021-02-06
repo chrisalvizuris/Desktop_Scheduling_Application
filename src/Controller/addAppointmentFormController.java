@@ -4,6 +4,7 @@ import Dao.AppointmentImp;
 import Dao.ContactsImp;
 import Dao.CustomerImp;
 import Dao.UserImp;
+import Model.Appointments;
 import Model.Contacts;
 import Model.Customers;
 import Model.Users;
@@ -15,9 +16,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.MonthDay;
 
 public class addAppointmentFormController {
 
@@ -43,13 +49,13 @@ public class addAppointmentFormController {
     private DatePicker startDatePicker;
 
     @FXML
-    private Spinner<?> startTimeSpinner;
-
-    @FXML
     private DatePicker endDatePicker;
 
     @FXML
-    private Spinner<?> endTimeSpinner;
+    private ComboBox<String> startTimeComboBox;
+
+    @FXML
+    private ComboBox<String> endTimeComboBox;
 
     @FXML
     private ComboBox<Customers> customerIdComboBox;
@@ -75,18 +81,45 @@ public class addAppointmentFormController {
     }
 
     @FXML
-    private void saveAppointmentButtonPushed(ActionEvent event) throws IOException {
-        String appointmentTitle = appointmentTitleTextField.getText();
-        String appointmentDescription = appointmentDescriptionTextField.getText();
-        String appointmentLocation = appointmentLocationTextField.getText();
+    private void saveAppointmentButtonPushed(ActionEvent event) throws IOException, SQLException {
+        try {
+            String appointmentTitle = appointmentTitleTextField.getText();
+            String appointmentDescription = appointmentDescriptionTextField.getText();
+            String appointmentLocation = appointmentLocationTextField.getText();
+            int contactId = contactComboBox.getSelectionModel().getSelectedItem().getContactId();
+            String appointmentType = typeComboBox.getSelectionModel().getSelectedItem();
+            LocalDate startDate = startDatePicker.getValue();
+            LocalTime startTime = LocalTime.parse(startTimeComboBox.getSelectionModel().getSelectedItem());
+            LocalDateTime appointmentStart = LocalDateTime.of(startDate, startTime);
+            LocalDate endDate = endDatePicker.getValue();
+            LocalTime endTime = LocalTime.parse(endTimeComboBox.getSelectionModel().getSelectedItem());
+            LocalDateTime appointmentEnd = LocalDateTime.of(endDate, endTime);
+            int customerId = customerIdComboBox.getSelectionModel().getSelectedItem().getCustomerId();
+            int userId = userIdComboBox.getSelectionModel().getSelectedItem().getUserId();
 
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-        Scene scene = new Scene(parent);
+            Appointments appointment = new Appointments(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, customerId);
+            appointment.setContactId(contactId);
+            appointment.setUserId(userId);
+            appointment.setAppointmentCreateDate(LocalDateTime.now());
+            appointment.setAppointmentCreatedBy("admin");
+            //TODO: find a way to automate this createdby
+            appointment.setAppointmentUpdateDate(LocalDateTime.now());
 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            AppointmentImp.addAppointment(appointment);
 
-        window.setScene(scene);
-        window.show();
+            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
+            Scene scene = new Scene(parent);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(scene);
+            window.show();
+        }   catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setContentText("Error: The data you entered is invalid. Please review and try again.");
+            alert.showAndWait();
+        }
     }
 
     public void initialize() throws SQLException {
@@ -94,5 +127,8 @@ public class addAppointmentFormController {
         userIdComboBox.setItems(UserImp.getAllUsers());
         typeComboBox.setItems(AppointmentImp.appointmentTypes());
         contactComboBox.setItems(ContactsImp.getAllContacts());
+        startTimeComboBox.setItems(AppointmentImp.getStartTimes());
+        endTimeComboBox.setItems(AppointmentImp.getEndTimes());
+
     }
 }
