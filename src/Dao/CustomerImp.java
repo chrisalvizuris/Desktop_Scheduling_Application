@@ -31,6 +31,8 @@ public class CustomerImp {
         String updatedBy = customer.getCustomerUpdateBy();
         int divisionId = customer.getDivisionId();
 
+        //System.out.println("Division ID is " + divisionId);
+
         //key-value mapping
         preparedStatement.setString(1, customerName);
         preparedStatement.setString(2, customerAddress);
@@ -81,7 +83,7 @@ public class CustomerImp {
             LocalDateTime updateLDT = LocalDateTime.of(updateDate, updateTime);
             String updatedBy = resultSet.getString("Last_Updated_By");
 
-            customer = new Customers(customerID, customerName, customerAddress, customerZip, customerPhone, createLDT, createdBy, updateLDT, updatedBy);            //FIXME: Do I need to add more variables to the customer class?
+            customer = new Customers(customerName, customerAddress, customerZip, customerPhone, createLDT, createdBy, updateLDT, updatedBy);
 
             //check rows affected
             if(preparedStatement.getUpdateCount() > 0) {
@@ -184,16 +186,9 @@ public class CustomerImp {
             LocalDateTime updateLDT = LocalDateTime.of(updateDate, updateTime);
             String updatedBy = resultSet.getString("Last_Updated_By");
 
-            Customers customer = new Customers(customerID, customersName, customerAddress, customerZip, customerPhone, createLDT, createdBy, updateLDT, updatedBy);
+            Customers customer = new Customers(customersName, customerAddress, customerZip, customerPhone, createLDT, createdBy, updateLDT, updatedBy);
 
             allCustomers.add(customer);
-
-            //check rows affected
-            if(preparedStatement.getUpdateCount() > 0) {
-                System.out.println(preparedStatement.getUpdateCount() + " row(s) affected.");
-            }   else {
-                System.out.println("No change.");
-            }
         }
         DatabaseConnection.closeConnection();
         return allCustomers;

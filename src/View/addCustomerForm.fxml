@@ -13,7 +13,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.addCustomerFormController">
    <left>
-      <AnchorPane fx:id="divisionComboBox" prefHeight="540.0" prefWidth="200.0" style="-fx-background-color: #41B3A3;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="540.0" prefWidth="200.0" style="-fx-background-color: #41B3A3;" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="65.0" layoutY="14.0" text="sM" textFill="WHITE">
                <font>
@@ -46,7 +46,7 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="customerIdTextField" editable="false" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Customer ID">
+                  <TextField fx:id="customerIdTextField" disable="true" editable="false" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Customer ID Auto-Generated">
                      <font>
                         <Font name="SansSerif Regular" size="13.0" />
                      </font>
@@ -75,7 +75,7 @@
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets></ComboBox>
-                  <ComboBox focusTraversable="false" prefWidth="150.0" promptText="Division" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
+                  <ComboBox fx:id="divisionsComboBox" focusTraversable="false" prefWidth="150.0" promptText="Division" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
                   <HBox prefHeight="100.0" prefWidth="284.0" spacing="20.0" style="-fx-background-color: #FFFFFF;">
                      <children>
                         <Button fx:id="customerSaveButton" mnemonicParsing="false" onAction="#saveCustomerButtonPushed" style="-fx-background-color: #41B3A3; -fx-background-radius: 100;" text="Save" textFill="WHITE">

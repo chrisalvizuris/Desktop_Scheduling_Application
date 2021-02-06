@@ -224,13 +224,6 @@ public class AppointmentImp {
             Appointments appointment = new Appointments(apptId, apptTitle, apptDescription, apptLocation, apptType, apptStartDate, apptEndDate, apptCustomerId);
 
             allAppointments.add(appointment);
-
-            //check rows affected
-            if(preparedStatement.getUpdateCount() > 0) {
-                System.out.println(preparedStatement.getUpdateCount() + " row(s) affected.");
-            }   else {
-                System.out.println("No change.");
-            }
         }
         DatabaseConnection.closeConnection();
         return allAppointments;

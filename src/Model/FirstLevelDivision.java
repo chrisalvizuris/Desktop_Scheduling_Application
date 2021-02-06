@@ -15,7 +15,6 @@ public class FirstLevelDivision {
         this.divisionCreateDate = LocalDateTime.now();
         this.divisionUpdateDate = null;
         this.divisionUpdateBy = null;
-        int countryId = 0;
     }
 
     public int getDivisionId() {
@@ -64,5 +63,10 @@ public class FirstLevelDivision {
 
     public void setDivisionUpdateBy(String divisionUpdateBy) {
         this.divisionUpdateBy = divisionUpdateBy;
+    }
+
+    @Override
+    public String toString() {
+        return divisionName;
     }
 }

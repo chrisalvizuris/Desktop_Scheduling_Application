@@ -16,7 +16,7 @@ public class Countries {
     public Countries(String countryName) {
         this.countryName = countryName;
         this.countryCreateDate = LocalDateTime.now();
-        this.countryLastUpdate = null;
+        this.countryLastUpdate = LocalDateTime.now();
         this.countryLastUpdateBy = null;
     }
 
@@ -66,5 +66,10 @@ public class Countries {
 
     public void setCountryLastUpdateBy(String countryLastUpdateBy) {
         this.countryLastUpdateBy = countryLastUpdateBy;
+    }
+
+    @Override
+    public String toString() {
+        return countryName;
     }
 }

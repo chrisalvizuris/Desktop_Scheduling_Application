@@ -12,10 +12,10 @@ public class Customers {
     private String customerCreatedBy;
     private LocalDateTime customerUpdateDate;
     private String customerUpdateBy;
+    private int countryId;
     private int divisionId;
 
-    public Customers(int customerId, String customerName, String customerAddress, String customerPostal, String customerPhone, LocalDateTime customerCreateDate, String customerCreatedBy, LocalDateTime customerUpdateDate, String customerUpdateBy) {
-        this.customerId = customerId;
+    public Customers(String customerName, String customerAddress, String customerPostal, String customerPhone, LocalDateTime customerCreateDate, String customerCreatedBy, LocalDateTime customerUpdateDate, String customerUpdateBy) {
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerPostal = customerPostal;
@@ -104,6 +104,14 @@ public class Customers {
 
     public int getDivisionId() {
         return divisionId;
+    }
+
+    public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
     }
 }
 
