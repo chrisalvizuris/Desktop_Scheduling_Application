@@ -73,10 +73,8 @@ public class addCustomerFormController {
             String customerAddress = customerAddressTextField.getText();
             String customerPostal = customerPostalCodeTextField.getText();
             String customerPhone = customerPhoneTextField.getText();
-            String customerCountry = String.valueOf(countryComboBox.getValue());
             Countries country = countryComboBox.getSelectionModel().getSelectedItem();
             FirstLevelDivision city = divisionsComboBox.getSelectionModel().getSelectedItem();
-            String customerDivision = String.valueOf(divisionsComboBox.getValue());
 
 
             LocalDateTime createDate = LocalDateTime.now();

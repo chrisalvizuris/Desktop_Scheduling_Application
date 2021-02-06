@@ -71,4 +71,9 @@ public class Users {
     public void setUserUpdatedBy(String userUpdatedBy) {
         this.userUpdatedBy = userUpdatedBy;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(userId);
+    }
 }

@@ -1,5 +1,12 @@
 package Controller;
 
+import Dao.AppointmentImp;
+import Dao.ContactsImp;
+import Dao.CustomerImp;
+import Dao.UserImp;
+import Model.Contacts;
+import Model.Customers;
+import Model.Users;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class addAppointmentFormController {
 
@@ -26,10 +34,10 @@ public class addAppointmentFormController {
     private TextField appointmentLocationTextField;
 
     @FXML
-    private ComboBox<?> contactComboBox;
+    private ComboBox<Contacts> contactComboBox;
 
     @FXML
-    private ComboBox<?> typeComboBox;
+    private ComboBox<String> typeComboBox;
 
     @FXML
     private DatePicker startDatePicker;
@@ -44,10 +52,10 @@ public class addAppointmentFormController {
     private Spinner<?> endTimeSpinner;
 
     @FXML
-    private ComboBox<?> customerIdComboBox;
+    private ComboBox<Customers> customerIdComboBox;
 
     @FXML
-    private ComboBox<?> userIdComboBox;
+    private ComboBox<Users> userIdComboBox;
 
     @FXML
     private Button appointmentSaveButton;
@@ -68,6 +76,10 @@ public class addAppointmentFormController {
 
     @FXML
     private void saveAppointmentButtonPushed(ActionEvent event) throws IOException {
+        String appointmentTitle = appointmentTitleTextField.getText();
+        String appointmentDescription = appointmentDescriptionTextField.getText();
+        String appointmentLocation = appointmentLocationTextField.getText();
+
         Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
         Scene scene = new Scene(parent);
 
@@ -75,5 +87,12 @@ public class addAppointmentFormController {
 
         window.setScene(scene);
         window.show();
+    }
+
+    public void initialize() throws SQLException {
+        customerIdComboBox.setItems(CustomerImp.getAllCustomers());
+        userIdComboBox.setItems(UserImp.getAllUsers());
+        typeComboBox.setItems(AppointmentImp.appointmentTypes());
+        contactComboBox.setItems(ContactsImp.getAllContacts());
     }
 }

@@ -22,8 +22,10 @@ public class CountriesImp {
 
         while (resultSet.next()) {
             String countryName = resultSet.getString("Country");
+            int id = resultSet.getInt("Country_ID");
 
             Countries country = new Countries(countryName);
+            country.setCountryID(id);
 
             allCountries.add(country);
         }

@@ -82,8 +82,10 @@ public class CustomerImp {
             LocalTime updateTime = resultSet.getTime("Last_Update").toLocalTime();
             LocalDateTime updateLDT = LocalDateTime.of(updateDate, updateTime);
             String updatedBy = resultSet.getString("Last_Updated_By");
+            int divisionId = resultSet.getInt("Division_ID");
 
             customer = new Customers(customerName, customerAddress, customerZip, customerPhone, createLDT, createdBy, updateLDT, updatedBy);
+            customer.setDivisionId(divisionId);
 
             //check rows affected
             if(preparedStatement.getUpdateCount() > 0) {
@@ -185,8 +187,11 @@ public class CustomerImp {
             LocalTime updateTime = resultSet.getTime("Last_Update").toLocalTime();
             LocalDateTime updateLDT = LocalDateTime.of(updateDate, updateTime);
             String updatedBy = resultSet.getString("Last_Updated_By");
+            int divisionId = resultSet.getInt("Division_ID");
 
             Customers customer = new Customers(customersName, customerAddress, customerZip, customerPhone, createLDT, createdBy, updateLDT, updatedBy);
+            customer.setDivisionId(divisionId);
+            customer.setCustomerId(customerID);
 
             allCustomers.add(customer);
         }

@@ -249,4 +249,19 @@ public class AppointmentImp {
         DatabaseConnection.closeConnection();
 
     }
+
+    public static ObservableList<String> appointmentTypes() {
+        ObservableList<String> allTypes = FXCollections.observableArrayList();
+        String type1 = "General Meeting";
+        String type2 = "Consultation";
+        String type3 = "Quarterly Business Review";
+        String type4 = "Interview";
+
+        allTypes.add(type1);
+        allTypes.add(type2);
+        allTypes.add(type3);
+        allTypes.add(type4);
+
+        return allTypes;
+    }
 }

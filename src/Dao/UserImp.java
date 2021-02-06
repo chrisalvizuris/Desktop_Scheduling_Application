@@ -1,6 +1,8 @@
 package Dao;
 
 import Model.Users;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -143,5 +145,38 @@ public class UserImp {
         }
 
         DatabaseConnection.closeConnection();
+    }
+
+    public static ObservableList<Users> getAllUsers() throws SQLException {
+        ObservableList<Users> allUsers = FXCollections.observableArrayList();
+        Connection connection = DatabaseConnection.beginConnection();
+        String selectAllStatement = "SELECT * FROM users";
+
+        DatabaseQuery.setPreparedStatement(connection, selectAllStatement);
+        PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while(resultSet.next()) {
+            int userID = resultSet.getInt("User_ID");
+            String username = resultSet.getString("User_Name");
+            String password = resultSet.getString("Password");
+            LocalDate createDate = resultSet.getDate("Create_Date").toLocalDate();
+            LocalTime createTime = resultSet.getTime("Create_Date").toLocalTime();
+            LocalDateTime userCreateDate = LocalDateTime.of(createDate, createTime);
+            String createdBy = resultSet.getString("Created_By");
+            LocalDate updateDate = resultSet.getDate("Last_Update").toLocalDate();
+            LocalTime updateTime = resultSet.getTime("Last_Update").toLocalTime();
+            LocalDateTime userUpdateDate = LocalDateTime.of(updateDate, updateTime);
+            String userUpdatedBy = resultSet.getString("Last_Updated_By");
+
+            Users user = new Users(username, password);
+            user.setUserId(userID);
+
+            allUsers.add(user);
+
+        }
+        DatabaseConnection.closeConnection();
+        return allUsers;
     }
 }
