@@ -5,7 +5,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -54,13 +53,13 @@
                         <HBox prefHeight="36.0" prefWidth="360.0" spacing="10.0" style="-fx-background-color: #FFFFFF;">
                             <children>
                                 <DatePicker fx:id="updateStartDatePicker" focusTraversable="false" prefHeight="27.0" prefWidth="124.0" promptText="Start Date" />
-                                <Spinner fx:id="updateStartTimeSlider" focusTraversable="false" prefHeight="27.0" prefWidth="145.0" />
+                        <ComboBox fx:id="startTimeComboBox" prefWidth="150.0" promptText="Start Time" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
                             </children>
                         </HBox>
                         <HBox prefHeight="36.0" prefWidth="360.0" spacing="10.0" style="-fx-background-color: #FFFFFF;">
                             <children>
                                 <DatePicker fx:id="updateEndDatePicker" focusTraversable="false" prefHeight="27.0" prefWidth="125.0" promptText="End Date" />
-                                <Spinner fx:id="updateEndTimeSlider" focusTraversable="false" prefHeight="27.0" prefWidth="144.0" />
+                        <ComboBox fx:id="endTimeComboBox" prefWidth="150.0" promptText="End Time" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
                             </children>
                         </HBox>
                         <ComboBox fx:id="updateCustomerIdComboBox" focusTraversable="false" prefHeight="27.0" prefWidth="226.0" promptText="Select a Customer ID" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />

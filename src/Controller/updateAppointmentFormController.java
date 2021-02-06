@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.Contacts;
+import Model.Customers;
+import Model.Users;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -30,34 +32,34 @@ public class updateAppointmentFormController {
     private TextField updateAppointmentLocationTextField;
 
     @FXML
-    private ComboBox<?> updateContactComboBox;
+    private ComboBox<Contacts> updateContactComboBox;
 
     @FXML
-    private ComboBox<?> updateTypeComboBox;
+    private ComboBox<String> updateTypeComboBox;
 
     @FXML
     private DatePicker updateStartDatePicker;
 
     @FXML
-    private Spinner<?> updateStartTimeSlider;
-
-    @FXML
     private DatePicker updateEndDatePicker;
 
     @FXML
-    private Spinner<?> updateEndTimeSlider;
+    private ComboBox<Customers> updateCustomerIdComboBox;
 
     @FXML
-    private ComboBox<?> updateCustomerIdComboBox;
-
-    @FXML
-    private ComboBox<?> updateUserIdComboBox;
+    private ComboBox<Users> updateUserIdComboBox;
 
     @FXML
     private Button updateSaveAppointmentButton;
 
     @FXML
     private Button updateCancelAppointmentButton;
+
+    @FXML
+    private ComboBox<String> startTimeComboBox;
+
+    @FXML
+    private ComboBox<String> endTimeComboBox;
 
     @FXML
     private void updateSaveButtonPushed(ActionEvent event) throws IOException {
