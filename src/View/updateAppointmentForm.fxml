@@ -44,7 +44,7 @@
             <center>
                 <VBox prefHeight="362.0" prefWidth="362.0" spacing="10.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
                     <children>
-                        <TextField fx:id="updateAppointmentIDTextField" focusTraversable="false" prefHeight="27.0" prefWidth="326.0" promptText="Appointment ID" />
+                        <TextField fx:id="updateAppointmentIDTextField" focusTraversable="false" prefHeight="27.0" prefWidth="326.0" promptText="Appointment ID" disable="true"/>
                         <TextField fx:id="updateAppointmentTitleTextField" focusTraversable="false" prefHeight="27.0" prefWidth="326.0" promptText="Title" />
                         <TextField fx:id="updateAppointmentDescriptionTextField" focusTraversable="false" prefHeight="27.0" prefWidth="326.0" promptText="Description" />
                         <TextField fx:id="updateAppointmentLocationTextField" focusTraversable="false" prefHeight="27.0" prefWidth="326.0" promptText="Location" />
