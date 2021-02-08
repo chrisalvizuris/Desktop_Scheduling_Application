@@ -166,7 +166,7 @@
          <center>
             <TabPane prefHeight="200.0" prefWidth="200.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                <Tab style="-fx-background-color: #41B3A3;" text="Month">
+                <Tab fx:id="monthTab" style="-fx-background-color: #41B3A3;" text="Month">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;">
                            <children>
@@ -186,7 +186,7 @@
                            </children></AnchorPane>
                   </content>
                 </Tab>
-                <Tab style="-fx-background-color: #41B3A3;" text="Week">
+                <Tab fx:id="weekTab" style="-fx-background-color: #41B3A3;" text="Week">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;">
                            <children>

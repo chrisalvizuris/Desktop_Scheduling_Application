@@ -17,12 +17,11 @@ public class AppointmentImp {
     public static void addAppointment(Appointments appointment) throws SQLException {
 
         Connection connection = DatabaseConnection.beginConnection();
-        String insertStatement = "INSERT INTO appointments(Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String insertStatement = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         DatabaseQuery.setPreparedStatement(connection, insertStatement);
         PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
 
-        int apptId = appointment.getAppointmentId();
         String apptTitle = appointment.getAppointmentTitle();
         String apptDescription = appointment.getAppointmentDescription();
         String apptLocation = appointment.getAppointmentLocation();
@@ -45,20 +44,19 @@ public class AppointmentImp {
         int apptUserId = appointment.getUserId();
         int apptContactId = appointment.getContactId();
 
-        preparedStatement.setString(1, String.valueOf(apptId));
-        preparedStatement.setString(2, apptTitle);
-        preparedStatement.setString(3, apptDescription);
-        preparedStatement.setString(4, apptLocation);
-        preparedStatement.setString(5, apptType);
-        preparedStatement.setString(6, String.valueOf(apptStartTime));
-        preparedStatement.setString(7, String.valueOf(apptEndTime));
-        preparedStatement.setString(8, String.valueOf(apptCreateDate));
-        preparedStatement.setString(9, apptCreatedBy);
-        preparedStatement.setString(10, String.valueOf(apptUpdateDate));
-        preparedStatement.setString(11, apptUpdateBy);
-        preparedStatement.setString(12, String.valueOf(apptCustomerId));
-        preparedStatement.setString(13, String.valueOf(apptUserId));
-        preparedStatement.setString(14, String.valueOf(apptContactId));
+        preparedStatement.setString(1, apptTitle);
+        preparedStatement.setString(2, apptDescription);
+        preparedStatement.setString(3, apptLocation);
+        preparedStatement.setString(4, apptType);
+        preparedStatement.setString(5, String.valueOf(apptStartTime));
+        preparedStatement.setString(6, String.valueOf(apptEndTime));
+        preparedStatement.setString(7, String.valueOf(apptCreateDate));
+        preparedStatement.setString(8, apptCreatedBy);
+        preparedStatement.setString(9, String.valueOf(apptUpdateDate));
+        preparedStatement.setString(10, apptUpdateBy);
+        preparedStatement.setString(11, String.valueOf(apptCustomerId));
+        preparedStatement.setString(12, String.valueOf(apptUserId));
+        preparedStatement.setString(13, String.valueOf(apptContactId));
 
         preparedStatement.execute();
 
@@ -111,6 +109,13 @@ public class AppointmentImp {
             int apptContactId = resultSet.getInt("Contact_ID");
 
             appointment = new Appointments(apptTitle, apptDescription, apptLocation, apptType, apptStartDate, apptEndDate, apptCustomerId);
+            appointment.setAppointmentId(apptId);
+            appointment.setAppointmentCreateDate(apptCreateDate);
+            appointment.setAppointmentCreatedBy(apptCreatedBy);
+            appointment.setAppointmentUpdateDate(apptUpdateDate);
+            appointment.setAppointmentUpdatedBy(apptUpdatedBy);
+            appointment.setUserId(apptUserId);
+            appointment.setContactId(apptContactId);
 
             //check rows affected
             if(preparedStatement.getUpdateCount() > 0) {
@@ -233,7 +238,7 @@ public class AppointmentImp {
     public static ObservableList<Appointments> getAllAppointmentsThisWeek() throws SQLException {
         ObservableList<Appointments> allAppointmentsThisWeek = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
-        String selectThisMonthStatement = "SELECT * FROM appointments WHERE YEARWEEK(Start) = YEARWEEK(curdate())";
+        String selectThisMonthStatement = "SELECT * FROM appointments WHERE YEARWEEK(Start) = YEARWEEK(CURDATE())";
 
         DatabaseQuery.setPreparedStatement(connection, selectThisMonthStatement);
         PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
@@ -266,6 +271,12 @@ public class AppointmentImp {
 
             Appointments appointment = new Appointments(apptTitle, apptDescription, apptLocation, apptType, apptStartDate, apptEndDate, apptCustomerId);
             appointment.setAppointmentId(apptId);
+            appointment.setAppointmentCreateDate(apptCreateDate);
+            appointment.setAppointmentCreatedBy(apptCreatedBy);
+            appointment.setAppointmentUpdateDate(apptUpdateDate);
+            appointment.setAppointmentUpdatedBy(apptUpdatedBy);
+            appointment.setUserId(apptUserId);
+            appointment.setContactId(apptContactId);
 
             allAppointmentsThisWeek.add(appointment);
         }
@@ -276,7 +287,7 @@ public class AppointmentImp {
     public static ObservableList<Appointments> getAllAppointmentsThisMonth() throws SQLException {
         ObservableList<Appointments> allAppointmentsThisMonth = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
-        String selectThisMonthStatement = "SELECT * FROM appointments WHERE MONTH(Start) = MONTH(curdate())";
+        String selectThisMonthStatement = "SELECT * FROM appointments WHERE MONTH(Start) = MONTH(CURDATE())";
 
         DatabaseQuery.setPreparedStatement(connection, selectThisMonthStatement);
         PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
@@ -309,6 +320,12 @@ public class AppointmentImp {
 
             Appointments appointment = new Appointments(apptTitle, apptDescription, apptLocation, apptType, apptStartDate, apptEndDate, apptCustomerId);
             appointment.setAppointmentId(apptId);
+            appointment.setContactId(apptContactId);
+            appointment.setUserId(apptUserId);
+            appointment.setAppointmentUpdatedBy(apptUpdatedBy);
+            appointment.setAppointmentUpdateDate(apptUpdateDate);
+            appointment.setAppointmentCreateDate(apptCreateDate);
+            appointment.setAppointmentCreatedBy(apptCreatedBy);
 
             allAppointmentsThisMonth.add(appointment);
         }

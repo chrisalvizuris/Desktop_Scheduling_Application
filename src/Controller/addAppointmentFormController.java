@@ -86,7 +86,7 @@ public class addAppointmentFormController {
             String appointmentTitle = appointmentTitleTextField.getText();
             String appointmentDescription = appointmentDescriptionTextField.getText();
             String appointmentLocation = appointmentLocationTextField.getText();
-            int contactId = contactComboBox.getSelectionModel().getSelectedItem().getContactId();
+            int contactID = contactComboBox.getSelectionModel().getSelectedItem().getContactId();
             String appointmentType = typeComboBox.getSelectionModel().getSelectedItem();
             LocalDate startDate = startDatePicker.getValue();
             LocalTime startTime = LocalTime.parse(startTimeComboBox.getSelectionModel().getSelectedItem());
@@ -98,7 +98,7 @@ public class addAppointmentFormController {
             int userId = userIdComboBox.getSelectionModel().getSelectedItem().getUserId();
 
             Appointments appointment = new Appointments(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, customerId);
-            appointment.setContactId(contactId);
+            appointment.setContactId(contactID);
             appointment.setUserId(userId);
             appointment.setAppointmentCreateDate(LocalDateTime.now());
             appointment.setAppointmentCreatedBy("admin");

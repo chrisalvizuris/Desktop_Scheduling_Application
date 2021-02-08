@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -125,6 +126,12 @@ public class mainWindowController {
     private TableColumn<Appointments, Integer> apptWeekCustIdColumn;
 
     @FXML
+    private Tab monthTab;
+
+    @FXML
+    private Tab weekTab;
+
+    @FXML
     private void newAppointmentButtonPushed(ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/addAppointmentForm.fxml"));
         Scene scene = new Scene(parent);
@@ -184,19 +191,17 @@ public class mainWindowController {
         Scene updateAppointmentScene = new Scene(updateAppointmentParent);
 
         updateAppointmentFormController controller = loader.getController();
-        controller.initUpdateAppointment(appointmentsMonthTableView.getSelectionModel().getSelectedItem());
-//        controller.initUpdateAppointment(appointmentsWeekTableView.getSelectionModel().getSelectedItem());
+
+        if(monthTab.isSelected()) {
+            controller.initUpdateAppointment(appointmentsMonthTableView.getSelectionModel().getSelectedItem());
+        }
+        if(weekTab.isSelected()) {
+            controller.initUpdateAppointment(appointmentsWeekTableView.getSelectionModel().getSelectedItem());
+        }
 
         Stage window = (Stage) ((Node) updateAppointment.getSource()).getScene().getWindow();
         window.setScene(updateAppointmentScene);
         window.show();
-//        Parent parent = FXMLLoader.load(getClass().getResource("/View/updateAppointmentForm.fxml"));
-//        Scene scene = new Scene(parent);
-//
-//        Stage window = (Stage) ((Node) updateAppointment.getSource()).getScene().getWindow();
-//
-//        window.setScene(scene);
-//        window.show();
     }
 
     public void initialize() throws SQLException {
@@ -213,6 +218,7 @@ public class mainWindowController {
         apptWeekTitleColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
         apptWeekDescColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
         apptWeekLocationColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
+        apptWeekContactColumn.setCellValueFactory(new PropertyValueFactory<>("contactId"));
         apptWeekTypeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
         apptWeekStartColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
         apptWeekEndColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
@@ -223,6 +229,7 @@ public class mainWindowController {
         apptTitleMonthColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
         apptMonthDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
         apptMonthLocationColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
+        apptMonthContactColumn.setCellValueFactory(new PropertyValueFactory<>("contactId"));
         apptMonthTypeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
         apptMonthStartColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
         apptMonthEndColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
