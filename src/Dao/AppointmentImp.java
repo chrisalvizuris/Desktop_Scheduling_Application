@@ -229,6 +229,92 @@ public class AppointmentImp {
         return allAppointments;
     }
 
+    public static ObservableList<Appointments> getAllAppointmentsThisWeek() throws SQLException {
+        ObservableList<Appointments> allAppointmentsThisWeek = FXCollections.observableArrayList();
+        Connection connection = DatabaseConnection.beginConnection();
+        String selectThisMonthStatement = "SELECT * FROM appointments WHERE YEARWEEK(Start) = YEARWEEK(curdate())";
+
+        DatabaseQuery.setPreparedStatement(connection, selectThisMonthStatement);
+        PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while(resultSet.next()) {
+            int apptId = resultSet.getInt("Appointment_ID");
+            String apptTitle = resultSet.getString("Title");
+            String apptDescription = resultSet.getString("Description");
+            String apptLocation = resultSet.getString("Location");
+            String apptType = resultSet.getString("Type");
+            LocalDate apptStart = resultSet.getDate("Start").toLocalDate();
+            LocalTime apptTime = resultSet.getTime("Start").toLocalTime();
+            LocalDateTime apptStartDate = LocalDateTime.of(apptStart, apptTime);
+            LocalDate apptEnd = resultSet.getDate("End").toLocalDate();
+            LocalTime apptEndTime = resultSet.getTime("End").toLocalTime();
+            LocalDateTime apptEndDate = LocalDateTime.of(apptEnd, apptEndTime);
+            LocalDate createDate = resultSet.getDate("Create_Date").toLocalDate();
+            LocalTime createTime = resultSet.getTime("Create_Date").toLocalTime();
+            LocalDateTime apptCreateDate = LocalDateTime.of(createDate, createTime);
+            String apptCreatedBy = resultSet.getString("Created_By");
+            LocalDate updateDate = resultSet.getDate("Last_Update").toLocalDate();
+            LocalTime updateTime = resultSet.getTime("Last_Update").toLocalTime();
+            LocalDateTime apptUpdateDate = LocalDateTime.of(updateDate, updateTime);
+            String apptUpdatedBy = resultSet.getString("Last_Updated_By");
+            int apptCustomerId = resultSet.getInt("Customer_ID");
+            int apptUserId = resultSet.getInt("User_ID");
+            int apptContactId = resultSet.getInt("Contact_ID");
+
+            Appointments appointment = new Appointments(apptTitle, apptDescription, apptLocation, apptType, apptStartDate, apptEndDate, apptCustomerId);
+            appointment.setAppointmentId(apptId);
+
+            allAppointmentsThisWeek.add(appointment);
+        }
+        DatabaseConnection.closeConnection();
+        return allAppointmentsThisWeek;
+    }
+
+    public static ObservableList<Appointments> getAllAppointmentsThisMonth() throws SQLException {
+        ObservableList<Appointments> allAppointmentsThisMonth = FXCollections.observableArrayList();
+        Connection connection = DatabaseConnection.beginConnection();
+        String selectThisMonthStatement = "SELECT * FROM appointments WHERE MONTH(Start) = MONTH(curdate())";
+
+        DatabaseQuery.setPreparedStatement(connection, selectThisMonthStatement);
+        PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while(resultSet.next()) {
+            int apptId = resultSet.getInt("Appointment_ID");
+            String apptTitle = resultSet.getString("Title");
+            String apptDescription = resultSet.getString("Description");
+            String apptLocation = resultSet.getString("Location");
+            String apptType = resultSet.getString("Type");
+            LocalDate apptStart = resultSet.getDate("Start").toLocalDate();
+            LocalTime apptTime = resultSet.getTime("Start").toLocalTime();
+            LocalDateTime apptStartDate = LocalDateTime.of(apptStart, apptTime);
+            LocalDate apptEnd = resultSet.getDate("End").toLocalDate();
+            LocalTime apptEndTime = resultSet.getTime("End").toLocalTime();
+            LocalDateTime apptEndDate = LocalDateTime.of(apptEnd, apptEndTime);
+            LocalDate createDate = resultSet.getDate("Create_Date").toLocalDate();
+            LocalTime createTime = resultSet.getTime("Create_Date").toLocalTime();
+            LocalDateTime apptCreateDate = LocalDateTime.of(createDate, createTime);
+            String apptCreatedBy = resultSet.getString("Created_By");
+            LocalDate updateDate = resultSet.getDate("Last_Update").toLocalDate();
+            LocalTime updateTime = resultSet.getTime("Last_Update").toLocalTime();
+            LocalDateTime apptUpdateDate = LocalDateTime.of(updateDate, updateTime);
+            String apptUpdatedBy = resultSet.getString("Last_Updated_By");
+            int apptCustomerId = resultSet.getInt("Customer_ID");
+            int apptUserId = resultSet.getInt("User_ID");
+            int apptContactId = resultSet.getInt("Contact_ID");
+
+            Appointments appointment = new Appointments(apptTitle, apptDescription, apptLocation, apptType, apptStartDate, apptEndDate, apptCustomerId);
+            appointment.setAppointmentId(apptId);
+
+            allAppointmentsThisMonth.add(appointment);
+        }
+        DatabaseConnection.closeConnection();
+        return allAppointmentsThisMonth;
+    }
+
     public static void deleteAppointment(int appointmentId) throws SQLException {
 
         Connection connection = DatabaseConnection.beginConnection();

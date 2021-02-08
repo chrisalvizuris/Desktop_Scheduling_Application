@@ -8,4 +8,7 @@ module Desktop.Scheduling.Application {
     opens View;
     opens Main;
     opens Controller;
+    opens Dao;
+    opens Model;
+    opens Images;
 }
