@@ -9,6 +9,7 @@ public class FirstLevelDivision {
     private String divisionCreatedBy;
     private LocalDateTime divisionUpdateDate;
     private String divisionUpdateBy;
+    private int divisionCountryId;
 
     public FirstLevelDivision(String divisionName) {
         this.divisionName = divisionName;
@@ -63,6 +64,14 @@ public class FirstLevelDivision {
 
     public void setDivisionUpdateBy(String divisionUpdateBy) {
         this.divisionUpdateBy = divisionUpdateBy;
+    }
+
+    public int getDivisionCountryId() {
+        return divisionCountryId;
+    }
+
+    public void setDivisionCountryId(int divisionCountryId) {
+        this.divisionCountryId = divisionCountryId;
     }
 
     @Override

@@ -31,8 +31,6 @@ public class CustomerImp {
         String updatedBy = customer.getCustomerUpdateBy();
         int divisionId = customer.getDivisionId();
 
-        //System.out.println("Division ID is " + divisionId);
-
         //key-value mapping
         preparedStatement.setString(1, customerName);
         preparedStatement.setString(2, customerAddress);
@@ -86,6 +84,7 @@ public class CustomerImp {
 
             customer = new Customers(customerName, customerAddress, customerZip, customerPhone, createLDT, createdBy, updateLDT, updatedBy);
             customer.setDivisionId(divisionId);
+            customer.setCustomerId(customerID);
 
             //check rows affected
             if(preparedStatement.getUpdateCount() > 0) {

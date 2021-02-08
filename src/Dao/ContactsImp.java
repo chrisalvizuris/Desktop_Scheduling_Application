@@ -31,4 +31,29 @@ public class ContactsImp {
         DatabaseConnection.closeConnection();
         return allContacts;
     }
+
+    public static Contacts getContact(int contactsID) throws SQLException {
+        Connection connection = DatabaseConnection.beginConnection();
+        String selectStatement = "SELECT * FROM contacts WHERE Contact_ID = " + String.valueOf(contactsID);
+        DatabaseQuery.setPreparedStatement(connection, selectStatement);
+        PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
+
+        Contacts contact;
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while(resultSet.next()) {
+            int contactsId = resultSet.getInt("Contact_ID");
+            String contactName = resultSet.getString("Contact_Name");
+            String email = resultSet.getString("Email");
+
+            contact = new Contacts(contactName, email);
+            contact.setContactId(contactsId);
+
+            DatabaseConnection.closeConnection();
+            return contact;
+        }
+        DatabaseConnection.closeConnection();
+        return null;
+    }
 }

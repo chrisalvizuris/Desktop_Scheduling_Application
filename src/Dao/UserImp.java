@@ -75,6 +75,11 @@ public class UserImp {
             String userUpdatedBy = resultSet.getString("Last_Updated_By");
 
             user = new Users(username, password);
+            user.setUserId(userID);
+            user.setUserCreateDate(userCreateDate);
+            user.setUserCreatedBy(createdBy);
+            user.setUserUpdatedDate(userUpdateDate);
+            user.setUserUpdatedBy(userUpdatedBy);
 
             //check rows affected
             if(preparedStatement.getUpdateCount() > 0) {
@@ -172,6 +177,10 @@ public class UserImp {
 
             Users user = new Users(username, password);
             user.setUserId(userID);
+            user.setUserCreateDate(userCreateDate);
+            user.setUserCreatedBy(createdBy);
+            user.setUserUpdatedDate(userUpdateDate);
+            user.setUserUpdatedBy(userUpdatedBy);
 
             allUsers.add(user);
 

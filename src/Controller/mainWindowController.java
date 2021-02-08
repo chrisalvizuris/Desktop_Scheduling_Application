@@ -158,25 +158,45 @@ public class mainWindowController {
     }
 
     @FXML
-    private void updateCustomerButtonPushed(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/updateCustomerForm.fxml"));
-        Scene scene = new Scene(parent);
+    private void updateCustomerButtonPushed(ActionEvent event) throws IOException, SQLException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/updateCustomerForm.fxml"));
+        Parent updateCustomerParent = loader.load();
+        Scene updateCustomerScene = new Scene(updateCustomerParent);
+
+        updateCustomerFormController controller = loader.getController();
+        controller.initUpdateCustomer(customersTableView.getSelectionModel().getSelectedItem());
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        window.setScene(scene);
+        window.setScene(updateCustomerScene);
         window.show();
+
     }
 
     @FXML
-    private void updateAppointmentButtonPushed(ActionEvent updateAppointment) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/updateAppointmentForm.fxml"));
-        Scene scene = new Scene(parent);
+    private void updateAppointmentButtonPushed(ActionEvent updateAppointment) throws IOException, SQLException {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/updateAppointmentForm.fxml"));
+        Parent updateAppointmentParent = loader.load();
+        Scene updateAppointmentScene = new Scene(updateAppointmentParent);
+
+        updateAppointmentFormController controller = loader.getController();
+        controller.initUpdateAppointment(appointmentsMonthTableView.getSelectionModel().getSelectedItem());
+//        controller.initUpdateAppointment(appointmentsWeekTableView.getSelectionModel().getSelectedItem());
 
         Stage window = (Stage) ((Node) updateAppointment.getSource()).getScene().getWindow();
-
-        window.setScene(scene);
+        window.setScene(updateAppointmentScene);
         window.show();
+//        Parent parent = FXMLLoader.load(getClass().getResource("/View/updateAppointmentForm.fxml"));
+//        Scene scene = new Scene(parent);
+//
+//        Stage window = (Stage) ((Node) updateAppointment.getSource()).getScene().getWindow();
+//
+//        window.setScene(scene);
+//        window.show();
     }
 
     public void initialize() throws SQLException {

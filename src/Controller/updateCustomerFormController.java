@@ -1,6 +1,8 @@
 package Controller;
 
+import Dao.CountriesImp;
 import Dao.CustomerImp;
+import Dao.DivisionsImp;
 import Model.Countries;
 import Model.Customers;
 import Model.FirstLevelDivision;
@@ -14,7 +16,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ import java.time.LocalDateTime;
 
 public class updateCustomerFormController {
 
+    private Customers updatedCustomer;
 
     @FXML
     private TextField customerIdTextField;
@@ -96,6 +98,21 @@ public class updateCustomerFormController {
 
         window.setScene(scene);
         window.show();
+
+    }
+
+    public void initUpdateCustomer(Customers customer) throws SQLException {
+        countryComboBox.setItems(CountriesImp.getAllCountries());
+        divisionsComboBox.setItems(DivisionsImp.getAllDivisions());
+
+        updatedCustomer = customer;
+        customerIdTextField.setText(String.valueOf(customer.getCustomerId()));
+        customerNameTextField.setText(customer.getCustomerName());
+        customerAddressTextField.setText(customer.getCustomerAddress());
+        customerPostalCodeTextField.setText(customer.getCustomerPostal());
+        customerPhoneTextField.setText(customer.getCustomerPhone());
+        countryComboBox.setValue(CountriesImp.getCountry(customer.getCountryId()));
+        divisionsComboBox.setValue(DivisionsImp.getDivision(customer.getDivisionId()));
 
     }
 

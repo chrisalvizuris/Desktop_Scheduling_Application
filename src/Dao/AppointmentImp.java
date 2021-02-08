@@ -27,8 +27,8 @@ public class AppointmentImp {
         String apptDescription = appointment.getAppointmentDescription();
         String apptLocation = appointment.getAppointmentLocation();
         String apptType = appointment.getAppointmentType();
-        LocalDate apptDateStart = appointment.getAppointmentCreateDate().toLocalDate();
-        LocalTime apptTimeStart = appointment.getAppointmentCreateDate().toLocalTime();
+        LocalDate apptDateStart = appointment.getAppointmentStart().toLocalDate();
+        LocalTime apptTimeStart = appointment.getAppointmentStart().toLocalTime();
         LocalDateTime apptStartTime = LocalDateTime.of(apptDateStart, apptTimeStart);
         LocalDate apptDateEnd = appointment.getAppointmentEnd().toLocalDate();
         LocalTime apptTimeEnd = appointment.getAppointmentEnd().toLocalTime();
@@ -140,16 +140,12 @@ public class AppointmentImp {
         String apptDescription = appointment.getAppointmentDescription();
         String apptLocation = appointment.getAppointmentLocation();
         String apptType = appointment.getAppointmentType();
-        LocalDate apptDateStart = appointment.getAppointmentCreateDate().toLocalDate();
-        LocalTime apptTimeStart = appointment.getAppointmentCreateDate().toLocalTime();
+        LocalDate apptDateStart = appointment.getAppointmentStart().toLocalDate();
+        LocalTime apptTimeStart = appointment.getAppointmentStart().toLocalTime();
         LocalDateTime apptStartTime = LocalDateTime.of(apptDateStart, apptTimeStart);
         LocalDate apptDateEnd = appointment.getAppointmentEnd().toLocalDate();
         LocalTime apptTimeEnd = appointment.getAppointmentEnd().toLocalTime();
         LocalDateTime apptEndTime = LocalDateTime.of(apptDateEnd, apptTimeEnd);
-        LocalDate createDate = appointment.getAppointmentCreateDate().toLocalDate();
-        LocalTime createTime = appointment.getAppointmentCreateDate().toLocalTime();
-        LocalDateTime apptCreateDate = LocalDateTime.of(createDate, createTime);
-        String apptCreatedBy = appointment.getAppointmentCreatedBy();
         LocalDate updateDate = appointment.getAppointmentUpdateDate().toLocalDate();
         LocalTime updateTime = appointment.getAppointmentUpdateDate().toLocalTime();
         LocalDateTime apptUpdateDate = LocalDateTime.of(updateDate, updateTime);
@@ -158,20 +154,18 @@ public class AppointmentImp {
         int apptUserId = appointment.getUserId();
         int apptContactId = appointment.getContactId();
 
-        preparedStatement.setString(1, String.valueOf(apptId));
-        preparedStatement.setString(2, apptTitle);
-        preparedStatement.setString(3, apptDescription);
-        preparedStatement.setString(4, apptLocation);
-        preparedStatement.setString(5, apptType);
-        preparedStatement.setString(6, String.valueOf(apptStartTime));
-        preparedStatement.setString(7, String.valueOf(apptEndTime));
-        preparedStatement.setString(8, String.valueOf(apptCreateDate));
-        preparedStatement.setString(9, apptCreatedBy);
-        preparedStatement.setString(10, String.valueOf(apptUpdateDate));
-        preparedStatement.setString(11, apptUpdateBy);
-        preparedStatement.setString(12, String.valueOf(apptCustomerId));
-        preparedStatement.setString(13, String.valueOf(apptUserId));
-        preparedStatement.setString(14, String.valueOf(apptContactId));
+        preparedStatement.setString(1, apptTitle);
+        preparedStatement.setString(2, apptDescription);
+        preparedStatement.setString(3, apptLocation);
+        preparedStatement.setString(4, apptType);
+        preparedStatement.setString(5, String.valueOf(apptStartTime));
+        preparedStatement.setString(6, String.valueOf(apptEndTime));
+        preparedStatement.setString(7, String.valueOf(apptUpdateDate));
+        preparedStatement.setString(8, apptUpdateBy);
+        preparedStatement.setString(9, String.valueOf(apptCustomerId));
+        preparedStatement.setString(10, String.valueOf(apptUserId));
+        preparedStatement.setString(11, String.valueOf(apptContactId));
+        preparedStatement.setString(12, String.valueOf(apptId));
 
         preparedStatement.execute();
 
@@ -222,6 +216,13 @@ public class AppointmentImp {
             int apptContactId = resultSet.getInt("Contact_ID");
 
             Appointments appointment = new Appointments(apptTitle, apptDescription, apptLocation, apptType, apptStartDate, apptEndDate, apptCustomerId);
+            appointment.setAppointmentId(apptId);
+            appointment.setAppointmentCreateDate(apptCreateDate);
+            appointment.setAppointmentCreatedBy(apptCreatedBy);
+            appointment.setAppointmentUpdateDate(apptUpdateDate);
+            appointment.setAppointmentUpdatedBy(apptUpdatedBy);
+            appointment.setUserId(apptUserId);
+            appointment.setContactId(apptContactId);
 
             allAppointments.add(appointment);
         }
