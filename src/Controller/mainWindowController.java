@@ -234,5 +234,6 @@ public class mainWindowController {
         apptMonthStartColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
         apptMonthEndColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
         apptMonthCustIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
     }
 }

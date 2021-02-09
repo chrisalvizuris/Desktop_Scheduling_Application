@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Comparator;
 
 public class AppointmentImp {
 
@@ -279,6 +280,10 @@ public class AppointmentImp {
             appointment.setContactId(apptContactId);
 
             allAppointmentsThisWeek.add(appointment);
+
+            //sort list by start date
+            Comparator<Appointments> comparator = (appointment1, appointment2) -> appointment1.getAppointmentStart().compareTo(appointment2.getAppointmentStart());
+            allAppointmentsThisWeek.sort(comparator);
         }
         DatabaseConnection.closeConnection();
         return allAppointmentsThisWeek;
@@ -328,6 +333,10 @@ public class AppointmentImp {
             appointment.setAppointmentCreatedBy(apptCreatedBy);
 
             allAppointmentsThisMonth.add(appointment);
+
+            //sort list by start date
+            Comparator<Appointments> comparator = (appointment1, appointment2) -> appointment1.getAppointmentStart().compareTo(appointment2.getAppointmentStart());
+            allAppointmentsThisMonth.sort(comparator);
         }
         DatabaseConnection.closeConnection();
         return allAppointmentsThisMonth;

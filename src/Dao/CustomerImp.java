@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class CustomerImp {
 
@@ -193,6 +195,8 @@ public class CustomerImp {
             customer.setCustomerId(customerID);
 
             allCustomers.add(customer);
+            Comparator<Customers> comparator = (customer1, customer2) -> customer1.getCustomerName().compareTo(customer2.getCustomerName());
+            allCustomers.sort(comparator);
         }
         DatabaseConnection.closeConnection();
         return allCustomers;
