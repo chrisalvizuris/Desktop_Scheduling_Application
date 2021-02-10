@@ -4,22 +4,21 @@ import Dao.AppointmentImp;
 import Dao.CustomerImp;
 import Model.Appointments;
 import Model.Customers;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class mainWindowController {
 
@@ -235,5 +234,18 @@ public class mainWindowController {
         apptMonthEndColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
         apptMonthCustIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
+        ObservableList<Appointments> allAppointments = AppointmentImp.getAllAppointments();
+        int count = 0;
+        for (int i = 0; i < allAppointments.size(); i++) {
+            if (allAppointments.get(i).getAppointmentStart().isAfter(LocalDateTime.now()) && allAppointments.get(i).getAppointmentStart().isBefore(LocalDateTime.now().plusMinutes(15))) {
+                count += 1;
+            }
+        }
+        if (count > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning: Upcoming Meeting");
+            alert.setContentText("A meeting is scheduled to start within the next 15 minutes or less.");
+            alert.show();
+        }
     }
 }
