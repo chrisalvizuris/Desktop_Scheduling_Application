@@ -42,12 +42,12 @@
                   <Font name="SansSerif Bold" size="25.0" />
                </font>
             </Label>
-            <TextField focusTraversable="false" layoutX="71.0" layoutY="109.0" promptText="Username">
+            <TextField fx:id="usernameTextField" focusTraversable="false" layoutX="71.0" layoutY="109.0" promptText="Username">
                <font>
                   <Font name="SansSerif Regular" size="13.0" />
                </font>
             </TextField>
-            <TextField focusTraversable="false" layoutX="71.0" layoutY="159.0" promptText="Password">
+            <TextField fx:id="passwordTextField" focusTraversable="false" layoutX="71.0" layoutY="159.0" promptText="Password">
                <font>
                   <Font name="SansSerif Regular" size="13.0" />
                </font>
