@@ -133,12 +133,12 @@
                   </Label>
                   <TableView fx:id="customersTableView" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;">
                     <columns>
-                      <TableColumn fx:id="custIdColumn" prefWidth="75.0" style="-fx-background-color: #FFFFFF;" text="Cust ID" />
-                      <TableColumn fx:id="custNameColumn" prefWidth="135.0" style="-fx-background-color: #FFFFFF;" text="Name" />
-                        <TableColumn fx:id="custAddressColumn" prefWidth="209.0" style="-fx-background-color: #FFFFFF;" text="Address" />
-                        <TableColumn fx:id="custPostalColumn" prefWidth="105.0" style="-fx-background-color: #FFFFFF;" text="Postal Code" />
-                        <TableColumn fx:id="custPhoneColumn" prefWidth="140.0" style="-fx-background-color: #FFFFFF;" text="Phone" />
-                        <TableColumn fx:id="custDivisionColumn" prefWidth="147.0" style="-fx-background-color: #FFFFFF;" text="Division" />
+                      <TableColumn fx:id="custIdColumn" prefWidth="75.0" text="Cust ID" />
+                      <TableColumn fx:id="custNameColumn" prefWidth="135.0" text="Name" />
+                        <TableColumn fx:id="custAddressColumn" prefWidth="209.0" text="Address" />
+                        <TableColumn fx:id="custPostalColumn" prefWidth="105.0" text="Postal Code" />
+                        <TableColumn fx:id="custPhoneColumn" prefWidth="140.0" text="Phone" />
+                        <TableColumn fx:id="custDivisionColumn" prefWidth="147.0" text="Division" />
                     </columns>
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" />

@@ -235,16 +235,25 @@ public class mainWindowController {
         apptMonthCustIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
         ObservableList<Appointments> allAppointments = AppointmentImp.getAllAppointments();
+        int apptID = 0;
+        LocalDateTime apptTime = null;
         int count = 0;
         for (int i = 0; i < allAppointments.size(); i++) {
             if (allAppointments.get(i).getAppointmentStart().isAfter(LocalDateTime.now()) && allAppointments.get(i).getAppointmentStart().isBefore(LocalDateTime.now().plusMinutes(15))) {
+                apptID = allAppointments.get(i).getAppointmentId();
+                apptTime = allAppointments.get(i).getAppointmentStart();
                 count += 1;
             }
         }
         if (count > 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning: Upcoming Meeting");
-            alert.setContentText("A meeting is scheduled to start within the next 15 minutes or less.");
+            alert.setContentText("A meeting is scheduled to start within the next 15 minutes or less. Appointment ID: " + String.valueOf(apptID) + " starts at " + String.valueOf(apptTime));
+            alert.show();
+        }   else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Appointment Updates");
+            alert.setContentText("You have no meetings starting in the next 15 minutes.");
             alert.show();
         }
     }
