@@ -6,6 +6,8 @@ import Dao.DivisionsImp;
 import Model.Countries;
 import Model.Customers;
 import Model.FirstLevelDivision;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,7 +56,7 @@ public class updateCustomerFormController {
     private Button updateCustomerCancelButton;
 
     @FXML
-    private void updateSaveButtonPushed(ActionEvent event) throws IOException, SQLException {
+    public void updateSaveButtonPushed(ActionEvent event) throws IOException, SQLException {
         try {
             int customerId = Integer.parseInt(customerIdTextField.getText());
             String updateName = customerNameTextField.getText();
@@ -67,10 +69,12 @@ public class updateCustomerFormController {
             LocalDateTime updateDate = LocalDateTime.now();
             String updatedBy = "admin";
             int divisionId = city.getDivisionId();
+            int countryId = country.getCountryID();
 
             Customers customer = new Customers(updateName, updateAddress, updateZipCode, updatePhone, LocalDateTime.now(), "admin", updateDate, updatedBy);
             customer.setDivisionId(divisionId);
             customer.setCustomerId(customerId);
+            customer.setCountryId(countryId);
 
             CustomerImp.updateCustomer(customer);
 
@@ -90,7 +94,7 @@ public class updateCustomerFormController {
     }
 
     @FXML
-    private void updateCancelButtonPushed(ActionEvent event) throws IOException {
+    public void updateCancelButtonPushed(ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
         Scene scene = new Scene(parent);
 
@@ -101,8 +105,25 @@ public class updateCustomerFormController {
 
     }
 
+    public void newCountrySelected(ActionEvent countrySelected) throws IOException, SQLException {
+        if(!(countryComboBox.getSelectionModel().isEmpty())) {
+            Countries country = countryComboBox.getSelectionModel().getSelectedItem();
+            int countryId = country.getCountryID();
+            ObservableList<FirstLevelDivision> getAllCities = DivisionsImp.getAllDivisions();
+            ObservableList<FirstLevelDivision> relatedCities = FXCollections.observableArrayList();
+            for(int i = 0; i < getAllCities.size(); i++) {
+                if(getAllCities.get(i).getDivisionCountryId() == countryId) {
+                    relatedCities.add(getAllCities.get(i));
+                }
+            }
+            divisionsComboBox.setDisable(false);
+            divisionsComboBox.setItems(relatedCities);
+        }
+    }
+
     public void initUpdateCustomer(Customers customer) throws SQLException {
         countryComboBox.setItems(CountriesImp.getAllCountries());
+        ObservableList<FirstLevelDivision> allDivisions = DivisionsImp.getAllDivisions();
         divisionsComboBox.setItems(DivisionsImp.getAllDivisions());
 
         updatedCustomer = customer;
@@ -111,7 +132,16 @@ public class updateCustomerFormController {
         customerAddressTextField.setText(customer.getCustomerAddress());
         customerPostalCodeTextField.setText(customer.getCustomerPostal());
         customerPhoneTextField.setText(customer.getCustomerPhone());
-        countryComboBox.setValue(CountriesImp.getCountry(customer.getCountryId()));
+        FirstLevelDivision city = DivisionsImp.getDivision(customer.getDivisionId());
+        countryComboBox.setValue(CountriesImp.getCountry(city.getDivisionCountryId()));
+
+        ObservableList<FirstLevelDivision> relatedCities = FXCollections.observableArrayList();
+        for(int i = 0; i < allDivisions.size(); i++) {
+            if(allDivisions.get(i).getDivisionCountryId() == city.getDivisionCountryId()) {
+                relatedCities.add(allDivisions.get(i));
+            }
+        }
+        divisionsComboBox.setItems(relatedCities);
         divisionsComboBox.setValue(DivisionsImp.getDivision(customer.getDivisionId()));
 
     }

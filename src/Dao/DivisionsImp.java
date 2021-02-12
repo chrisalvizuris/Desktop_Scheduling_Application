@@ -25,9 +25,12 @@ public class DivisionsImp {
         while (resultSet.next()) {
             String name = resultSet.getString("Division");
             int id = resultSet.getInt("Division_ID");
+            int countryId = resultSet.getInt("COUNTRY_ID");
 
             FirstLevelDivision city = new FirstLevelDivision(name);
             city.setDivisionId(id);
+            city.setDivisionCountryId(countryId);
+
 
             allDivisions.add(city);
         }

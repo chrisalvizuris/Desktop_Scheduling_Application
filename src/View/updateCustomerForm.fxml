@@ -71,7 +71,7 @@
                                 <Font name="SansSerif Regular" size="13.0" />
                             </font>
                         </TextField>
-                        <ComboBox fx:id="countryComboBox" focusTraversable="false" prefWidth="150.0" promptText="Country" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
+                        <ComboBox fx:id="countryComboBox" focusTraversable="false" prefWidth="150.0" promptText="Country" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" onAction="#newCountrySelected"/>
                         <ComboBox fx:id="divisionsComboBox" focusTraversable="false" prefWidth="150.0" promptText="Division" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
                         <HBox prefHeight="100.0" prefWidth="284.0" spacing="20.0" style="-fx-background-color: #FFFFFF;">
                             <children>

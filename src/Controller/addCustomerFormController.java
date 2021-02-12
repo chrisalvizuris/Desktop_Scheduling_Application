@@ -6,6 +6,8 @@ import Dao.DivisionsImp;
 import Model.Countries;
 import Model.Customers;
 import Model.FirstLevelDivision;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -113,6 +115,22 @@ public class addCustomerFormController {
             alert.setTitle("Error Message");
             alert.setContentText("Error: The data you entered is invalid. Please review and try again.");
             alert.showAndWait();
+        }
+    }
+
+    public void countryBoxSelected(ActionEvent countrySelected) throws IOException, SQLException {
+        if (!(countryComboBox.getSelectionModel().isEmpty())) {
+            Countries country = countryComboBox.getSelectionModel().getSelectedItem();
+            int countryId = country.getCountryID();
+            ObservableList<FirstLevelDivision> getAllCities = DivisionsImp.getAllDivisions();
+            ObservableList<FirstLevelDivision> relatedCities = FXCollections.observableArrayList();
+            for(int i = 0; i < getAllCities.size(); i++) {
+                if(getAllCities.get(i).getDivisionCountryId() == countryId) {
+                    relatedCities.add(getAllCities.get(i));
+                }
+            }
+            divisionsComboBox.setDisable(false);
+            divisionsComboBox.setItems(relatedCities);
         }
     }
 

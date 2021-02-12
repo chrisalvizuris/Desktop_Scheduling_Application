@@ -234,6 +234,13 @@ public class mainWindowController {
         apptMonthEndColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
         apptMonthCustIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
+        addAppointmentButton.setTooltip(new Tooltip("Add Appointment"));
+        editAppointmentButton.setTooltip(new Tooltip("Update Appointment"));
+        deleteAppointmentButton.setTooltip(new Tooltip("Delete Appointment"));
+        addCustomerButton.setTooltip(new Tooltip("Add Customer"));
+        editCustomerButton.setTooltip(new Tooltip("Update Customer"));
+        deleteCustomerButton.setTooltip(new Tooltip("Delete Customer"));
+
         ObservableList<Appointments> allAppointments = AppointmentImp.getAllAppointments();
         int apptID = 0;
         LocalDateTime apptTime = null;
