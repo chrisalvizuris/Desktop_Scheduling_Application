@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -19,6 +20,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class loginFormController {
 
@@ -31,10 +34,20 @@ public class loginFormController {
     @FXML
     private TextField passwordTextField;
 
+    @FXML
+    private Label signInLabel;
+
+    @FXML
+    private Label welcomeLabel;
+
+    @FXML
+    private Label loginDescription;
+
     public void signInButtonPushed(ActionEvent event) throws IOException, SQLException {
         ObservableList<Users> allUsers = UserImp.getAllUsers();
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("Utilities/Nat", Locale.getDefault());
         int count = 0;
         for (int i = 0; i < allUsers.size(); i++) {
             if(allUsers.get(i).getUserName().equals(username) && allUsers.get(i).getPassword().equals(password)) {
@@ -67,6 +80,13 @@ public class loginFormController {
             outputFile.println(entry);
             outputFile.close();
 
+            if(Locale.getDefault().equals("fr")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle(resourceBundle.getString("Error"));
+                alert.setContentText(resourceBundle.getString("loginWarning"));
+                alert.showAndWait();
+            }
+
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setContentText("Error: The username or password you entered is invalid. Please review and try again.");
@@ -74,5 +94,18 @@ public class loginFormController {
         }
 
 
+    }
+
+    public void initialize() {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("Utilities/Nat", Locale.getDefault());
+        if(Locale.getDefault().equals("fr")) {
+            usernameTextField.setPromptText(resourceBundle.getString("Username"));
+            passwordTextField.setPromptText(resourceBundle.getString("Password"));
+            signInLabel.setText(resourceBundle.getString("Login"));
+            welcomeLabel.setText(resourceBundle.getString("LoginWelcome"));
+            loginDescription.setText(resourceBundle.getString("LoginDescription"));
+            signInButton.setText(resourceBundle.getString("Login"));
+
+        }
     }
 }

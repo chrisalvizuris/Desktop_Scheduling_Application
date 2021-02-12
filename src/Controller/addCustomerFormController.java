@@ -12,21 +12,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class addCustomerFormController {
-
-    @FXML
-    private AnchorPane divisionComboBox;
 
     @FXML
     private TextField customerIdTextField;
@@ -54,6 +50,12 @@ public class addCustomerFormController {
 
     @FXML
     private Button customerCancelButton;
+
+    @FXML
+    private Label customerDescriptionLabel;
+
+    @FXML
+    private Label addCustomerHeadlineLabel;
 
     @FXML
     private void cancelCustomerButtonPushed(ActionEvent event) throws IOException {
@@ -99,6 +101,14 @@ public class addCustomerFormController {
             window.setScene(scene);
             window.show();
         }   catch (Exception e) {
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("Utilities/Nat", Locale.getDefault());
+            if(Locale.getDefault().getLanguage().equals("fr")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle(resourceBundle.getString("Error"));
+                alert.setContentText(resourceBundle.getString("invalidDataWarning"));
+                alert.showAndWait();
+            }
+
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
             alert.setContentText("Error: The data you entered is invalid. Please review and try again.");
@@ -109,6 +119,20 @@ public class addCustomerFormController {
     public void initialize() throws SQLException {
         countryComboBox.setItems(CountriesImp.getAllCountries());
         divisionsComboBox.setItems(DivisionsImp.getAllDivisions());
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("Utilities/Nat", Locale.getDefault());
+        if(Locale.getDefault().equals("fr")) {
+            customerDescriptionLabel.setText(resourceBundle.getString("addCustomerLabel"));
+            addCustomerHeadlineLabel.setText(resourceBundle.getString("addCustomer"));
+            customerIdTextField.setPromptText(resourceBundle.getString("custIdGen"));
+            customerNameTextField.setPromptText(resourceBundle.getString("Name"));
+            customerAddressTextField.setPromptText(resourceBundle.getString("Address"));
+            customerPhoneTextField.setPromptText(resourceBundle.getString("Phone"));
+            customerPostalCodeTextField.setPromptText(resourceBundle.getString("Postal"));
+            countryComboBox.setPromptText(resourceBundle.getString("Country"));
+            divisionsComboBox.setPromptText(resourceBundle.getString("City"));
+            customerSaveButton.setText(resourceBundle.getString("Save"));
+            customerCancelButton.setText(resourceBundle.getString("Cancel"));
+        }
     }
 
 }

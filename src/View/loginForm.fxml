@@ -11,17 +11,17 @@
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #41B3A3;" BorderPane.alignment="CENTER">
             <children>
-                <Label layoutX="33.0" layoutY="132.0" prefHeight="30.0" prefWidth="237.0" text="Welcome to scheduleMe" textFill="WHITE">
+                <Label fx:id="welcomeLabel" layoutX="33.0" layoutY="132.0" prefHeight="30.0" prefWidth="237.0" text="Welcome to scheduleMe" textFill="WHITE">
                     <font>
                         <Font name="SansSerif Bold" size="20.0" />
                     </font>
                 </Label>
-            <Label layoutX="33.0" layoutY="162.0" prefHeight="48.0" prefWidth="237.0" text="scheduleMe makes scheduling fast and easy for your business." textFill="WHITE" wrapText="true">
+            <Label fx:id="loginDescription" layoutX="33.0" layoutY="162.0" prefHeight="48.0" prefWidth="237.0" text="scheduleMe makes scheduling fast and easy for your business." textFill="WHITE" wrapText="true">
                <font>
                   <Font name="SansSerif Regular" size="13.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" layoutX="118.0" layoutY="217.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF; -fx-background-radius: 100;" text="Sign Up" textFill="#41b3a3">
+            <Button alignment="CENTER" layoutX="118.0" layoutY="217.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF; -fx-background-radius: 100;" text="Sign Up" textFill="#41b3a3" visible="false">
                <font>
                   <Font name="SansSerif Regular" size="13.0" />
                </font>
@@ -37,7 +37,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="108.0" layoutY="29.0" text="Sign In" textFill="#41b3a3">
+            <Label fx:id="signInLabel" layoutX="108.0" layoutY="29.0" text="Sign In" textFill="#41b3a3">
                <font>
                   <Font name="SansSerif Bold" size="25.0" />
                </font>
