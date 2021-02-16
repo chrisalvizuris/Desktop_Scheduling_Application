@@ -14,15 +14,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class updateCustomerFormController {
 
@@ -49,11 +47,6 @@ public class updateCustomerFormController {
     @FXML
     private ComboBox<FirstLevelDivision> divisionsComboBox;
 
-    @FXML
-    private Button updateCustomerSaveButton;
-
-    @FXML
-    private Button updateCustomerCancelButton;
 
     @FXML
     public void updateSaveButtonPushed(ActionEvent event) throws IOException, SQLException {
@@ -95,13 +88,19 @@ public class updateCustomerFormController {
 
     @FXML
     public void updateCancelButtonPushed(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-        Scene scene = new Scene(parent);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
+        Optional<ButtonType> result = alert.showAndWait();
 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
 
-        window.setScene(scene);
-        window.show();
+            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
+            Scene scene = new Scene(parent);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(scene);
+            window.show();
+        }
 
     }
 

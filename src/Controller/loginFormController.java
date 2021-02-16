@@ -60,13 +60,16 @@ public class loginFormController {
                 entry = username + " attempted to log in on " + String.valueOf(LocalDateTime.now()) + ". Login successful.";
                 outputFile.println(entry);
                 outputFile.close();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
+                Parent mainWindowParent = loader.load();
+                Scene mainWindowScene = new Scene(mainWindowParent);
 
-                Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-                Scene scene = new Scene(parent);
-
+                mainWindowController controller = loader.getController();
+                controller.initMainWindow(allUsers.get(i));
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-                window.setScene(scene);
+                window.setScene(mainWindowScene);
                 window.show();
             }
         }
@@ -79,18 +82,18 @@ public class loginFormController {
             entry = username + " attempted to log in on " + String.valueOf(LocalDateTime.now()) + ". Login UNSUCCESSFUL.";
             outputFile.println(entry);
             outputFile.close();
-
-            if(Locale.getDefault().equals("fr")) {
+            Locale fr = new Locale("fr");
+            if(Locale.getDefault().equals(fr)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle(resourceBundle.getString("Error"));
-                alert.setContentText(resourceBundle.getString("loginWarning"));
+                alert.setContentText("Le nom d'utilisateur ou le mot de passe que vous avez entré n'est pas valide. Veuillez vérifier et réessayer.");
+                alert.showAndWait();
+            }   else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setContentText("Error: The username or password you entered is invalid. Please review and try again.");
                 alert.showAndWait();
             }
-
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Message");
-            alert.setContentText("Error: The username or password you entered is invalid. Please review and try again.");
-            alert.showAndWait();
         }
 
 
@@ -98,8 +101,9 @@ public class loginFormController {
 
     public void initialize() {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("Utilities/Nat", Locale.getDefault());
-        if(Locale.getDefault().equals("fr")) {
-            usernameTextField.setPromptText(resourceBundle.getString("Username"));
+        Locale fr = new Locale("fr");
+        if(Locale.getDefault().equals(fr)) {
+            usernameTextField.setPromptText("Nom d'utilisateur");
             passwordTextField.setPromptText(resourceBundle.getString("Password"));
             signInLabel.setText(resourceBundle.getString("Login"));
             welcomeLabel.setText(resourceBundle.getString("LoginWelcome"));

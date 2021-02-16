@@ -24,6 +24,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.MonthDay;
+import java.util.Optional;
 
 public class addAppointmentFormController {
 
@@ -71,13 +72,17 @@ public class addAppointmentFormController {
 
     @FXML
     private void cancelAppointmentButtonPushed(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-        Scene scene = new Scene(parent);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
+            Scene scene = new Scene(parent);
 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        window.setScene(scene);
-        window.show();
+            window.setScene(scene);
+            window.show();
+        }
     }
 
     @FXML

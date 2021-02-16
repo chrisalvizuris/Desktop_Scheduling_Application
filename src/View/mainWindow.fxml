@@ -172,15 +172,15 @@
                            <children>
                               <TableView fx:id="appointmentsMonthTableView" layoutX="14.0" layoutY="14.0" prefHeight="304.0" prefWidth="770.0" style="-fx-background-color: #FFFFFF;">
                                 <columns>
-                                  <TableColumn fx:id="apptIdMonthColumn" prefWidth="69.0" style="-fx-background-color: #FFFFFF;" text="Apt ID" />
-                                  <TableColumn fx:id="apptTitleMonthColumn" prefWidth="109.0" style="-fx-background-color: #FFFFFF;" text="Title" />
-                                    <TableColumn fx:id="apptMonthDescriptionColumn" prefWidth="126.0" style="-fx-background-color: #FFFFFF;" text="Description" />
-                                    <TableColumn fx:id="apptMonthLocationColumn" prefWidth="79.0" style="-fx-background-color: #FFFFFF;" text="Location" />
-                                    <TableColumn fx:id="apptMonthContactColumn" prefWidth="70.0" style="-fx-background-color: #FFFFFF;" text="Contact" />
-                                    <TableColumn fx:id="apptMonthTypeColumn" prefWidth="68.0" style="-fx-background-color: #FFFFFF;" text="Type" />
-                                    <TableColumn fx:id="apptMonthStartColumn" prefWidth="83.0" style="-fx-background-color: #FFFFFF;" text="Start" />
-                                    <TableColumn fx:id="apptMonthEndColumn" prefWidth="84.0" style="-fx-background-color: #FFFFFF;" text="End" />
-                                    <TableColumn fx:id="apptMonthCustIdColumn" prefWidth="81.0" style="-fx-background-color: #FFFFFF;" text="Cust ID" />
+                                  <TableColumn fx:id="apptIdMonthColumn" prefWidth="69.0" text="Apt ID" />
+                                  <TableColumn fx:id="apptTitleMonthColumn" prefWidth="109.0" text="Title" />
+                                    <TableColumn fx:id="apptMonthDescriptionColumn" prefWidth="126.0" text="Description" />
+                                    <TableColumn fx:id="apptMonthLocationColumn" prefWidth="79.0" text="Location" />
+                                    <TableColumn fx:id="apptMonthContactColumn" prefWidth="70.0" text="Contact" />
+                                    <TableColumn fx:id="apptMonthTypeColumn" prefWidth="68.0" text="Type" />
+                                    <TableColumn fx:id="apptMonthStartColumn" prefWidth="83.0" text="Start" />
+                                    <TableColumn fx:id="apptMonthEndColumn" prefWidth="84.0" text="End" />
+                                    <TableColumn fx:id="apptMonthCustIdColumn" prefWidth="81.0" text="Cust ID" />
                                 </columns>
                               </TableView>
                            </children></AnchorPane>
@@ -192,15 +192,15 @@
                            <children>
                               <TableView fx:id="appointmentsWeekTableView" layoutX="14.0" layoutY="14.0" prefHeight="304.0" prefWidth="770.0" style="-fx-background-color: #FFFFFF;">
                                 <columns>
-                                  <TableColumn fx:id="apptWeekIdColumn" prefWidth="70.0" style="-fx-background-color: #FFFFFF;" text="Apt ID" />
-                                  <TableColumn fx:id="apptWeekTitleColumn" prefWidth="110.0" style="-fx-background-color: #FFFFFF;" text="Title" />
-                                    <TableColumn fx:id="apptWeekDescColumn" prefWidth="124.0" style="-fx-background-color: #FFFFFF;" text="Description" />
-                                    <TableColumn fx:id="apptWeekLocationColumn" style="-fx-background-color: #FFFFFF;" text="Location" />
-                                    <TableColumn fx:id="apptWeekContactColumn" prefWidth="69.0" style="-fx-background-color: #FFFFFF;" text="Contact" />
-                                    <TableColumn fx:id="apptWeekTypeColumn" prefWidth="68.0" style="-fx-background-color: #FFFFFF;" text="Type" />
-                                    <TableColumn fx:id="apptWeekStartColumn" prefWidth="85.0" style="-fx-background-color: #FFFFFF;" text="Start" />
-                                    <TableColumn fx:id="apptWeekEndColumn" prefWidth="82.0" style="-fx-background-color: #FFFFFF;" text="End" />
-                                    <TableColumn fx:id="apptWeekCustIdColumn" prefWidth="81.0" style="-fx-background-color: #FFFFFF;" text="CustID" />
+                                  <TableColumn fx:id="apptWeekIdColumn" prefWidth="69.0" text="Apt ID" />
+                                  <TableColumn fx:id="apptWeekTitleColumn" prefWidth="109.0" text="Title" />
+                                    <TableColumn fx:id="apptWeekDescColumn" prefWidth="126.0" text="Description" />
+                                    <TableColumn fx:id="apptWeekLocationColumn" prefWidth="79.0" text="Location" />
+                                    <TableColumn fx:id="apptWeekContactColumn" prefWidth="70.0" text="Contact" />
+                                    <TableColumn fx:id="apptWeekTypeColumn" prefWidth="68.0" text="Type" />
+                                    <TableColumn fx:id="apptWeekStartColumn" prefWidth="83.0" text="Start" />
+                                    <TableColumn fx:id="apptWeekEndColumn" prefWidth="84.0" text="End" />
+                                    <TableColumn fx:id="apptWeekCustIdColumn" prefWidth="81.0" text="Cust ID" />
                                 </columns>
                               </TableView>
                            </children></AnchorPane>

@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
 
 public class updateAppointmentFormController {
 
@@ -71,57 +72,62 @@ public class updateAppointmentFormController {
 
     @FXML
     private void updateSaveButtonPushed(ActionEvent event) throws IOException, SQLException {
-//        try {
-        int id = Integer.parseInt(updateAppointmentIDTextField.getText());
-        String newTitle = updateAppointmentTitleTextField.getText();
-        String newDescription = updateAppointmentDescriptionTextField.getText();
-        String newLocation = updateAppointmentLocationTextField.getText();
-        int newContactId = updateContactComboBox.getSelectionModel().getSelectedItem().getContactId();
-        String newType = updateTypeComboBox.getSelectionModel().getSelectedItem();
-        LocalDate updateStartDay = updateStartDatePicker.getValue();
-        LocalTime updateStartTime = LocalTime.parse(startTimeComboBox.getSelectionModel().getSelectedItem());
-        LocalDateTime newStart = LocalDateTime.of(updateStartDay, updateStartTime);
-        LocalDate updateEndDay = updateEndDatePicker.getValue();
-        LocalTime updateEndTime = LocalTime.parse(endTimeComboBox.getSelectionModel().getSelectedItem());
-        LocalDateTime newEnd = LocalDateTime.of(updateEndDay, updateEndTime);
-        int newCustomerId = updateCustomerIdComboBox.getSelectionModel().getSelectedItem().getCustomerId();
-        int newUserId = updateUserIdComboBox.getSelectionModel().getSelectedItem().getUserId();
+        try {
+            int id = Integer.parseInt(updateAppointmentIDTextField.getText());
+            String newTitle = updateAppointmentTitleTextField.getText();
+            String newDescription = updateAppointmentDescriptionTextField.getText();
+            String newLocation = updateAppointmentLocationTextField.getText();
+            int newContactId = updateContactComboBox.getSelectionModel().getSelectedItem().getContactId();
+            String newType = updateTypeComboBox.getSelectionModel().getSelectedItem();
+            LocalDate updateStartDay = updateStartDatePicker.getValue();
+            LocalTime updateStartTime = LocalTime.parse(startTimeComboBox.getSelectionModel().getSelectedItem());
+            LocalDateTime newStart = LocalDateTime.of(updateStartDay, updateStartTime);
+            LocalDate updateEndDay = updateEndDatePicker.getValue();
+            LocalTime updateEndTime = LocalTime.parse(endTimeComboBox.getSelectionModel().getSelectedItem());
+            LocalDateTime newEnd = LocalDateTime.of(updateEndDay, updateEndTime);
+            int newCustomerId = updateCustomerIdComboBox.getSelectionModel().getSelectedItem().getCustomerId();
+            int newUserId = updateUserIdComboBox.getSelectionModel().getSelectedItem().getUserId();
 
-        Appointments appointment = new Appointments(newTitle, newDescription, newLocation, newType, newStart, newEnd, newCustomerId);
-        appointment.setAppointmentId(id);
-        appointment.setContactId(newContactId);
-        appointment.setUserId(newUserId);
-        appointment.setAppointmentUpdateDate(LocalDateTime.now());
-        appointment.setAppointmentUpdatedBy("admin");
-        //TODO: find a way to automate this
+            Appointments appointment = new Appointments(newTitle, newDescription, newLocation, newType, newStart, newEnd, newCustomerId);
+            appointment.setAppointmentId(id);
+            appointment.setContactId(newContactId);
+            appointment.setUserId(newUserId);
+            appointment.setAppointmentUpdateDate(LocalDateTime.now());
+            appointment.setAppointmentUpdatedBy("admin");
+            //TODO: find a way to automate this
 
-        AppointmentImp.updateAppointment(appointment);
+            AppointmentImp.updateAppointment(appointment);
 
 
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-        Scene scene = new Scene(parent);
+            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
+            Scene scene = new Scene(parent);
 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        window.setScene(scene);
-        window.show();
-//        }   catch (Exception e) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Error Message");
-//            alert.setContentText("Error: The data you entered is invalid. Please review and try again.");
-//            alert.showAndWait();
-//        }
+            window.setScene(scene);
+            window.show();
+        }   catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setContentText("Error: The data you entered is invalid. Please review and try again.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     private void updateCancelButtonPushed(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-        Scene scene = new Scene(parent);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
+            Scene scene = new Scene(parent);
 
-        window.setScene(scene);
-        window.show();
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(scene);
+            window.show();
+        }
     }
 
     public void initUpdateAppointment(Appointments appointmentToUpdate) throws SQLException {

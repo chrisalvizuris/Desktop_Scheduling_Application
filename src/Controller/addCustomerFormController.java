@@ -15,13 +15,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class addCustomerFormController {
@@ -61,13 +61,18 @@ public class addCustomerFormController {
 
     @FXML
     private void cancelCustomerButtonPushed(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-        Scene scene = new Scene(parent);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
+        Optional<ButtonType> result = alert.showAndWait();
 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
+            Scene scene = new Scene(parent);
 
-        window.setScene(scene);
-        window.show();
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(scene);
+            window.show();
+        }
     }
 
     @FXML
