@@ -6,6 +6,7 @@ import Dao.DivisionsImp;
 import Model.Countries;
 import Model.Customers;
 import Model.FirstLevelDivision;
+import Model.Users;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,6 +48,11 @@ public class updateCustomerFormController {
     @FXML
     private ComboBox<FirstLevelDivision> divisionsComboBox;
 
+    @FXML
+    private Label loggedInLabel;
+
+    private Users loggedUser = null;
+
 
     @FXML
     public void updateSaveButtonPushed(ActionEvent event) throws IOException, SQLException {
@@ -64,20 +70,26 @@ public class updateCustomerFormController {
             int divisionId = city.getDivisionId();
             int countryId = country.getCountryID();
 
-            Customers customer = new Customers(updateName, updateAddress, updateZipCode, updatePhone, LocalDateTime.now(), "admin", updateDate, updatedBy);
+            Customers customer = new Customers(updateName, updateAddress, updateZipCode, updatePhone, LocalDateTime.now(), loggedInLabel.getText(), updateDate, updatedBy);
             customer.setDivisionId(divisionId);
             customer.setCustomerId(customerId);
             customer.setCountryId(countryId);
 
             CustomerImp.updateCustomer(customer);
 
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-            Scene scene = new Scene(parent);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
+            Parent mainWindowParent = loader.load();
+            Scene mainWindowScene = new Scene(mainWindowParent);
 
+            mainWindowController controller = loader.getController();
+            controller.initMainWindow(loggedUser);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(scene);
+            window.setScene(mainWindowScene);
             window.show();
+
+
         }   catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
@@ -87,18 +99,21 @@ public class updateCustomerFormController {
     }
 
     @FXML
-    public void updateCancelButtonPushed(ActionEvent event) throws IOException {
+    public void updateCancelButtonPushed(ActionEvent event) throws IOException, SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
         Optional<ButtonType> result = alert.showAndWait();
 
         if(result.isPresent() && result.get() == ButtonType.OK) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
+            Parent mainWindowParent = loader.load();
+            Scene mainWindowScene = new Scene(mainWindowParent);
 
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-            Scene scene = new Scene(parent);
-
+            mainWindowController controller = loader.getController();
+            controller.initMainWindow(loggedUser);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(scene);
+            window.setScene(mainWindowScene);
             window.show();
         }
 
@@ -120,10 +135,13 @@ public class updateCustomerFormController {
         }
     }
 
-    public void initUpdateCustomer(Customers customer) throws SQLException {
+    public void initUpdateCustomer(Customers customer, Users user) throws SQLException {
         countryComboBox.setItems(CountriesImp.getAllCountries());
         ObservableList<FirstLevelDivision> allDivisions = DivisionsImp.getAllDivisions();
         divisionsComboBox.setItems(DivisionsImp.getAllDivisions());
+
+        loggedInLabel.setText(user.getUserName());
+        loggedUser = user;
 
         updatedCustomer = customer;
         customerIdTextField.setText(String.valueOf(customer.getCustomerId()));

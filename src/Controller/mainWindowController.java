@@ -133,24 +133,40 @@ public class mainWindowController {
     private Tab weekTab;
 
     @FXML
-    public void newAppointmentButtonPushed(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/addAppointmentForm.fxml"));
-        Scene scene = new Scene(parent);
+    private Label mainAppointmentLabel;
 
+    @FXML
+    private Label userVariableLabel;
+
+    private Users loggedInUser;
+
+    @FXML
+    public void newAppointmentButtonPushed(ActionEvent event) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/addAppointmentForm.fxml"));
+        Parent addAppointmentParent = loader.load();
+        Scene addAppointmentScene = new Scene(addAppointmentParent);
+
+        addAppointmentFormController controller = loader.getController();
+        controller.initialize(loggedInUser);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        window.setScene(scene);
+        window.setScene(addAppointmentScene);
         window.show();
     }
 
     @FXML
-    public void newCustomerButtonPushed(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/View/addCustomerForm.fxml"));
-        Scene scene = new Scene(parent);
+    public void newCustomerButtonPushed(ActionEvent event) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/addCustomerForm.fxml"));
+        Parent addCustomerParent = loader.load();
+        Scene addCustomerScene = new Scene(addCustomerParent);
 
+        addCustomerFormController controller = loader.getController();
+        controller.initialize(loggedInUser);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        window.setScene(scene);
+        window.setScene(addCustomerScene);
         window.show();
     }
 
@@ -178,7 +194,7 @@ public class mainWindowController {
             Scene updateCustomerScene = new Scene(updateCustomerParent);
 
             updateCustomerFormController controller = loader.getController();
-            controller.initUpdateCustomer(customersTableView.getSelectionModel().getSelectedItem());
+            controller.initUpdateCustomer(customersTableView.getSelectionModel().getSelectedItem(), loggedInUser);
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -204,10 +220,10 @@ public class mainWindowController {
             updateAppointmentFormController controller = loader.getController();
 
             if (monthTab.isSelected()) {
-                controller.initUpdateAppointment(appointmentsMonthTableView.getSelectionModel().getSelectedItem());
+                controller.initUpdateAppointment(appointmentsMonthTableView.getSelectionModel().getSelectedItem(), loggedInUser);
             }
             if (weekTab.isSelected()) {
-                controller.initUpdateAppointment(appointmentsWeekTableView.getSelectionModel().getSelectedItem());
+                controller.initUpdateAppointment(appointmentsWeekTableView.getSelectionModel().getSelectedItem(), loggedInUser);
             }
 
             Stage window = (Stage) ((Node) updateAppointment.getSource()).getScene().getWindow();
@@ -259,6 +275,11 @@ public class mainWindowController {
         addCustomerButton.setTooltip(new Tooltip("Add Customer"));
         editCustomerButton.setTooltip(new Tooltip("Update Customer"));
         deleteCustomerButton.setTooltip(new Tooltip("Delete Customer"));
+
+        loggedInUser = user;
+
+        mainAppointmentLabel.setText(user.getUserName() + "'s Appointments");
+        userVariableLabel.setText(user.getUserName());
 
         ObservableList<Appointments> allAppointments = AppointmentImp.allUserAppointments(user);
         int apptID = 0;

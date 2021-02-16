@@ -70,17 +70,23 @@ public class addAppointmentFormController {
     @FXML
     private Button appointmentCancelButton;
 
+    private Users loggedInPerson;
+
     @FXML
-    private void cancelAppointmentButtonPushed(ActionEvent event) throws IOException {
+    private void cancelAppointmentButtonPushed(ActionEvent event) throws IOException, SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-            Scene scene = new Scene(parent);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
+            Parent mainWindowParent = loader.load();
+            Scene mainWindowScene = new Scene(mainWindowParent);
 
+            mainWindowController controller = loader.getController();
+            controller.initMainWindow(loggedInPerson);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(scene);
+            window.setScene(mainWindowScene);
             window.show();
         }
     }
@@ -100,24 +106,27 @@ public class addAppointmentFormController {
             LocalTime endTime = LocalTime.parse(endTimeComboBox.getSelectionModel().getSelectedItem());
             LocalDateTime appointmentEnd = LocalDateTime.of(endDate, endTime);
             int customerId = customerIdComboBox.getSelectionModel().getSelectedItem().getCustomerId();
-            int userId = userIdComboBox.getSelectionModel().getSelectedItem().getUserId();
+            int userId = loggedInPerson.getUserId();
 
             Appointments appointment = new Appointments(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, customerId);
             appointment.setContactId(contactID);
             appointment.setUserId(userId);
             appointment.setAppointmentCreateDate(LocalDateTime.now());
-            appointment.setAppointmentCreatedBy("admin");
-            //TODO: find a way to automate this createdby
+            appointment.setAppointmentCreatedBy(loggedInPerson.getUserName());
             appointment.setAppointmentUpdateDate(LocalDateTime.now());
 
             AppointmentImp.addAppointment(appointment);
 
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-            Scene scene = new Scene(parent);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
+            Parent mainWindowParent = loader.load();
+            Scene mainWindowScene = new Scene(mainWindowParent);
 
+            mainWindowController controller = loader.getController();
+            controller.initMainWindow(loggedInPerson);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(scene);
+            window.setScene(mainWindowScene);
             window.show();
         }   catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -127,7 +136,8 @@ public class addAppointmentFormController {
         }
     }
 
-    public void initialize() throws SQLException {
+    public void initialize(Users user) throws SQLException {
+        loggedInPerson = user;
         customerIdComboBox.setItems(CustomerImp.getAllCustomers());
         userIdComboBox.setItems(UserImp.getAllUsers());
         typeComboBox.setItems(AppointmentImp.appointmentTypes());

@@ -6,6 +6,7 @@ import Dao.DivisionsImp;
 import Model.Countries;
 import Model.Customers;
 import Model.FirstLevelDivision;
+import Model.Users;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,18 +60,26 @@ public class addCustomerFormController {
     @FXML
     private Label addCustomerHeadlineLabel;
 
+    private String userName;
+
+    private Users loggedUser;
+
     @FXML
-    private void cancelCustomerButtonPushed(ActionEvent event) throws IOException {
+    private void cancelCustomerButtonPushed(ActionEvent event) throws IOException, SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
         Optional<ButtonType> result = alert.showAndWait();
 
         if(result.isPresent() && result.get() == ButtonType.OK) {
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-            Scene scene = new Scene(parent);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
+            Parent mainWindowParent = loader.load();
+            Scene mainWindowScene = new Scene(mainWindowParent);
 
+            mainWindowController controller = loader.getController();
+            controller.initMainWindow(loggedUser);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(scene);
+            window.setScene(mainWindowScene);
             window.show();
         }
     }
@@ -87,8 +96,7 @@ public class addCustomerFormController {
 
 
             LocalDateTime createDate = LocalDateTime.now();
-            String createdBy = "admin";
-            //TODO: figure a way to automate createdBy
+            String createdBy = loggedUser.getUserName();
 
             LocalDateTime updateDate = LocalDateTime.now();
             String updatedBy = null;
@@ -100,12 +108,16 @@ public class addCustomerFormController {
             CustomerImp.addCustomer(customer);
 
 
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-            Scene scene = new Scene(parent);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
+            Parent mainWindowParent = loader.load();
+            Scene mainWindowScene = new Scene(mainWindowParent);
 
+            mainWindowController controller = loader.getController();
+            controller.initMainWindow(loggedUser);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(scene);
+            window.setScene(mainWindowScene);
             window.show();
         }   catch (Exception e) {
             ResourceBundle resourceBundle = ResourceBundle.getBundle("Utilities/Nat", Locale.getDefault());
@@ -139,7 +151,8 @@ public class addCustomerFormController {
         }
     }
 
-    public void initialize() throws SQLException {
+    public void initialize(Users user) throws SQLException {
+        loggedUser = user;
         countryComboBox.setItems(CountriesImp.getAllCountries());
         divisionsComboBox.setItems(DivisionsImp.getAllDivisions());
         ResourceBundle resourceBundle = ResourceBundle.getBundle("Utilities/Nat", Locale.getDefault());

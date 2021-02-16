@@ -63,7 +63,7 @@
                      </children>
                   </HBox>
                   <ComboBox fx:id="customerIdComboBox" focusTraversable="false" prefHeight="27.0" prefWidth="226.0" promptText="Select a Customer ID" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
-                  <ComboBox fx:id="userIdComboBox" focusTraversable="false" prefHeight="27.0" prefWidth="226.0" promptText="Select a User ID" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
+                  <ComboBox fx:id="userIdComboBox" focusTraversable="false" prefHeight="27.0" prefWidth="226.0" promptText="Select a User ID" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" disable="true"/>
                   <HBox prefHeight="30.0" prefWidth="360.0" spacing="10.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#saveAppointmentButtonPushed" style="-fx-background-color: #41B3A3; -fx-background-radius: 100;" text="Save" textFill="WHITE">

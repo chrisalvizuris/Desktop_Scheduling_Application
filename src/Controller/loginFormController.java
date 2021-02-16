@@ -60,6 +60,7 @@ public class loginFormController {
                 entry = username + " attempted to log in on " + String.valueOf(LocalDateTime.now()) + ". Login successful.";
                 outputFile.println(entry);
                 outputFile.close();
+
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
                 Parent mainWindowParent = loader.load();

@@ -70,6 +70,8 @@ public class updateAppointmentFormController {
     @FXML
     private ComboBox<String> endTimeComboBox;
 
+    private Users loggedInUser;
+
     @FXML
     private void updateSaveButtonPushed(ActionEvent event) throws IOException, SQLException {
         try {
@@ -93,18 +95,21 @@ public class updateAppointmentFormController {
             appointment.setContactId(newContactId);
             appointment.setUserId(newUserId);
             appointment.setAppointmentUpdateDate(LocalDateTime.now());
-            appointment.setAppointmentUpdatedBy("admin");
-            //TODO: find a way to automate this
+            appointment.setAppointmentUpdatedBy(loggedInUser.getUserName());
 
             AppointmentImp.updateAppointment(appointment);
 
 
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-            Scene scene = new Scene(parent);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
+            Parent mainWindowParent = loader.load();
+            Scene mainWindowScene = new Scene(mainWindowParent);
 
+            mainWindowController controller = loader.getController();
+            controller.initMainWindow(loggedInUser);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(scene);
+            window.setScene(mainWindowScene);
             window.show();
         }   catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -115,22 +120,27 @@ public class updateAppointmentFormController {
     }
 
     @FXML
-    private void updateCancelButtonPushed(ActionEvent event) throws IOException {
+    private void updateCancelButtonPushed(ActionEvent event) throws IOException, SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
 
-            Parent parent = FXMLLoader.load(getClass().getResource("/View/mainWindow.fxml"));
-            Scene scene = new Scene(parent);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
+            Parent mainWindowParent = loader.load();
+            Scene mainWindowScene = new Scene(mainWindowParent);
 
+            mainWindowController controller = loader.getController();
+            controller.initMainWindow(loggedInUser);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(scene);
+            window.setScene(mainWindowScene);
             window.show();
         }
     }
 
-    public void initUpdateAppointment(Appointments appointmentToUpdate) throws SQLException {
+    public void initUpdateAppointment(Appointments appointmentToUpdate, Users user) throws SQLException {
+        loggedInUser = user;
         updateContactComboBox.setItems(ContactsImp.getAllContacts());
         updateCustomerIdComboBox.setItems(CustomerImp.getAllCustomers());
         updateUserIdComboBox.setItems(UserImp.getAllUsers());
