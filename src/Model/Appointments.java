@@ -1,8 +1,5 @@
 package Model;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.time.LocalDateTime;
 
 public class Appointments {

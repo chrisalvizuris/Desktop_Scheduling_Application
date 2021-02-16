@@ -127,6 +127,39 @@ public class mainWindowController {
     private TableColumn<Appointments, Integer> apptWeekCustIdColumn;
 
     @FXML
+    private Tab allAppointmentsTab;
+
+    @FXML
+    private TableView<Appointments> appointmentsAllTableView;
+
+    @FXML
+    private TableColumn<Appointments, Integer> apptIdAllColumn;
+
+    @FXML
+    private TableColumn<Appointments, String> apptTitleAllColumn;
+
+    @FXML
+    private TableColumn<Appointments, String> apptDescriptionAllColumn;
+
+    @FXML
+    private TableColumn<Appointments, String> apptLocationAllColumn;
+
+    @FXML
+    private TableColumn<Appointments, Integer> apptContactAllColumn;
+
+    @FXML
+    private TableColumn<Appointments, String> apptTypeAllColumn;
+
+    @FXML
+    private TableColumn<Appointments, LocalDateTime> apptStartAllColumn;
+
+    @FXML
+    private TableColumn<Appointments, LocalDateTime> apptEndAllColumn;
+
+    @FXML
+    private TableColumn<Appointments, Integer> apptCustIdAllColumn;
+
+    @FXML
     private Tab monthTab;
 
     @FXML
@@ -139,6 +172,10 @@ public class mainWindowController {
     private Label userVariableLabel;
 
     private Users loggedInUser;
+
+    private int appointmentID;
+
+    private LocalDateTime appointmentTime;
 
     @FXML
     public void newAppointmentButtonPushed(ActionEvent event) throws IOException, SQLException {
@@ -225,6 +262,9 @@ public class mainWindowController {
             if (weekTab.isSelected()) {
                 controller.initUpdateAppointment(appointmentsWeekTableView.getSelectionModel().getSelectedItem(), loggedInUser);
             }
+            if (allAppointmentsTab.isSelected()) {
+                controller.initUpdateAppointment(appointmentsAllTableView.getSelectionModel().getSelectedItem(), loggedInUser);
+            }
 
             Stage window = (Stage) ((Node) updateAppointment.getSource()).getScene().getWindow();
             window.setScene(updateAppointmentScene);
@@ -239,6 +279,8 @@ public class mainWindowController {
 
 
     public void initMainWindow(Users user) throws SQLException {
+        ObservableList<Appointments> allAppointments = AppointmentImp.allUserAppointments(user);
+
         customersTableView.setItems(CustomerImp.getAllCustomers());
         custIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         custNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -269,6 +311,17 @@ public class mainWindowController {
         apptWeekEndColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
         apptWeekCustIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
 
+        appointmentsAllTableView.setItems(allAppointments);
+        apptIdAllColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        apptTitleAllColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
+        apptDescriptionAllColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+        apptLocationAllColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
+        apptContactAllColumn.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        apptTypeAllColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+        apptStartAllColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
+        apptEndAllColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
+        apptCustIdAllColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
         addAppointmentButton.setTooltip(new Tooltip("Add Appointment"));
         editAppointmentButton.setTooltip(new Tooltip("Update Appointment"));
         deleteAppointmentButton.setTooltip(new Tooltip("Delete Appointment"));
@@ -281,21 +334,18 @@ public class mainWindowController {
         mainAppointmentLabel.setText(user.getUserName() + "'s Appointments");
         userVariableLabel.setText(user.getUserName());
 
-        ObservableList<Appointments> allAppointments = AppointmentImp.allUserAppointments(user);
-        int apptID = 0;
-        LocalDateTime apptTime = null;
         int count = 0;
         for (int i = 0; i < allAppointments.size(); i++) {
             if (allAppointments.get(i).getAppointmentStart().isAfter(LocalDateTime.now()) && allAppointments.get(i).getAppointmentStart().isBefore(LocalDateTime.now().plusMinutes(15))) {
-                apptID = allAppointments.get(i).getAppointmentId();
-                apptTime = allAppointments.get(i).getAppointmentStart();
+                appointmentID = allAppointments.get(i).getAppointmentId();
+                appointmentTime = allAppointments.get(i).getAppointmentStart();
                 count += 1;
             }
         }
         if (count > 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning: Upcoming Meeting");
-            alert.setContentText("A meeting is scheduled to start within the next 15 minutes or less. Appointment ID: " + String.valueOf(apptID) + " starts at " + String.valueOf(apptTime));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Upcoming Meeting");
+            alert.setContentText("A meeting is scheduled to start within the next 15 minutes or less. Appointment ID: " + String.valueOf(appointmentID) + " starts at " + String.valueOf(appointmentTime));
             alert.show();
         }   else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -107,7 +107,23 @@
                         <Insets left="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="50.0" style="-fx-background-color: #41B3A3;" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Label text="Logged In:" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="userVariableLabel" text="Test" textFill="RED">
+                           <font>
+                              <Font name="SansSerif Regular" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="15.0" top="15.0" />
+                     </VBox.margin>
+                  </HBox>
                   <Button fx:id="signOutButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#signOutButtonPushed" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 100;" text="Sign Out" textAlignment="CENTER" textFill="#41b3a3">
                      <font>
                         <Font name="SansSerif Regular" size="14.0" />
@@ -154,7 +170,7 @@
             </VBox>
          </bottom>
          <top>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="829.0" style="-fx-background-color: #FFFFFF;" text="All Appointments" textFill="#41b3a3" BorderPane.alignment="CENTER">
+            <Label fx:id="mainAppointmentLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="829.0" style="-fx-background-color: #FFFFFF;" text="All Appointments" textFill="#41b3a3" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets top="10.0" />
                </BorderPane.margin>
@@ -206,6 +222,27 @@
                            </children></AnchorPane>
                   </content>
                 </Tab>
+                  <Tab fx:id="allAppointmentsTab" style="-fx-background-color: #41B3A3;" text="All Appointments">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;">
+                           <children>
+                              <TableView fx:id="appointmentsAllTableView" layoutX="14.0" layoutY="14.0" prefHeight="304.0" prefWidth="770.0" style="-fx-background-color: #FFFFFF;">
+                                 <columns>
+                                    <TableColumn fx:id="apptIdAllColumn" prefWidth="69.0" text="Apt ID" />
+                                    <TableColumn fx:id="apptTitleAllColumn" prefWidth="109.0" text="Title" />
+                                    <TableColumn fx:id="apptDescriptionAllColumn" prefWidth="126.0" text="Description" />
+                                    <TableColumn fx:id="apptLocationAllColumn" prefWidth="79.0" text="Location" />
+                                    <TableColumn fx:id="apptContactAllColumn" prefWidth="70.0" text="Contact" />
+                                    <TableColumn fx:id="apptTypeAllColumn" prefWidth="68.0" text="Type" />
+                                    <TableColumn fx:id="apptStartAllColumn" prefWidth="83.0" text="Start" />
+                                    <TableColumn fx:id="apptEndAllColumn" prefWidth="84.0" text="End" />
+                                    <TableColumn fx:id="apptCustIdAllColumn" prefWidth="81.0" text="Cust ID" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
               </tabs>
             </TabPane>
          </center>

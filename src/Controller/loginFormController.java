@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -42,6 +43,12 @@ public class loginFormController {
 
     @FXML
     private Label loginDescription;
+
+    @FXML
+    private Label zoneLabel;
+
+    @FXML
+    private Label locationLabel;
 
     public void signInButtonPushed(ActionEvent event) throws IOException, SQLException {
         ObservableList<Users> allUsers = UserImp.getAllUsers();
@@ -102,6 +109,9 @@ public class loginFormController {
 
     public void initialize() {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("Utilities/Nat", Locale.getDefault());
+
+        zoneLabel.setText(String.valueOf(ZonedDateTime.now().getZone()));
+
         Locale fr = new Locale("fr");
         if(Locale.getDefault().equals(fr)) {
             usernameTextField.setPromptText("Nom d'utilisateur");
@@ -110,7 +120,7 @@ public class loginFormController {
             welcomeLabel.setText(resourceBundle.getString("LoginWelcome"));
             loginDescription.setText(resourceBundle.getString("LoginDescription"));
             signInButton.setText(resourceBundle.getString("Login"));
-
+            locationLabel.setText(resourceBundle.getString("location"));
         }
     }
 }
