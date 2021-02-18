@@ -20,11 +20,9 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.MonthDay;
+import java.time.*;
 import java.util.Optional;
+import java.util.TimeZone;
 
 public class addAppointmentFormController {
 
@@ -115,19 +113,34 @@ public class addAppointmentFormController {
             appointment.setAppointmentCreatedBy(loggedInPerson.getUserName());
             appointment.setAppointmentUpdateDate(LocalDateTime.now());
 
-            AppointmentImp.addAppointment(appointment);
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
-            Parent mainWindowParent = loader.load();
-            Scene mainWindowScene = new Scene(mainWindowParent);
+            ZoneId newYorkZoneId = ZoneId.of("America/New_York");
+            ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
-            mainWindowController controller = loader.getController();
-            controller.initMainWindow(loggedInPerson);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            ZonedDateTime localZDT = ZonedDateTime.of(startDate, startTime, localZoneId);
+            ZonedDateTime localToNewYorkZDT = localZDT.withZoneSameInstant(newYorkZoneId);
 
-            window.setScene(mainWindowScene);
-            window.show();
+            if(localToNewYorkZDT.toLocalTime().isBefore(LocalTime.of(8,0)) || localToNewYorkZDT.toLocalTime().isAfter(LocalTime.of(21,59))) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Appointment Time Not Accepted Warning");
+                alert.setContentText("Please schedule an appointment during business hours, which is between 8:00am and 22:00pm EST.");
+                alert.showAndWait();
+            }   else {
+
+                AppointmentImp.addAppointment(appointment);
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
+                Parent mainWindowParent = loader.load();
+                Scene mainWindowScene = new Scene(mainWindowParent);
+
+                mainWindowController controller = loader.getController();
+                controller.initMainWindow(loggedInPerson);
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                window.setScene(mainWindowScene);
+                window.show();
+            }
         }   catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");

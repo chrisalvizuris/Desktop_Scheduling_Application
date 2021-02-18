@@ -19,10 +19,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.Optional;
+import java.util.TimeZone;
 
 public class updateAppointmentFormController {
 
@@ -97,20 +96,33 @@ public class updateAppointmentFormController {
             appointment.setAppointmentUpdateDate(LocalDateTime.now());
             appointment.setAppointmentUpdatedBy(loggedInUser.getUserName());
 
-            AppointmentImp.updateAppointment(appointment);
+            ZoneId newYorkZoneId = ZoneId.of("America/New_York");
+            ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
+
+            ZonedDateTime localZDT = ZonedDateTime.of(updateStartDay, updateStartTime, localZoneId);
+            ZonedDateTime localToNewYorkZDT = localZDT.withZoneSameInstant(newYorkZoneId);
+
+            if(localToNewYorkZDT.toLocalTime().isBefore(LocalTime.of(8,0)) || localToNewYorkZDT.toLocalTime().isAfter(LocalTime.of(21,59))) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Appointment Time Not Accepted Warning");
+                alert.setContentText("Please schedule an appointment during business hours, which is between 8:00am and 22:00pm EST.");
+                alert.showAndWait();
+            }   else {
+                AppointmentImp.updateAppointment(appointment);
 
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
-            Parent mainWindowParent = loader.load();
-            Scene mainWindowScene = new Scene(mainWindowParent);
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/View/mainWindow.fxml"));
+                Parent mainWindowParent = loader.load();
+                Scene mainWindowScene = new Scene(mainWindowParent);
 
-            mainWindowController controller = loader.getController();
-            controller.initMainWindow(loggedInUser);
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                mainWindowController controller = loader.getController();
+                controller.initMainWindow(loggedInUser);
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            window.setScene(mainWindowScene);
-            window.show();
+                window.setScene(mainWindowScene);
+                window.show();
+            }
         }   catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Message");
