@@ -363,6 +363,21 @@ public class mainWindowController {
         }
     }
 
+    @FXML
+    public void reportButtonPushed(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/View/reportsWindow.fxml"));
+        Parent reportWindowParent = loader.load();
+        Scene reportWindowScene = new Scene(reportWindowParent);
+
+        reportsWindowController controller = loader.getController();
+        controller.initialize(loggedInUser);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(reportWindowScene);
+        window.show();
+    }
 
     public void initMainWindow(Users user) throws SQLException {
         ObservableList<Appointments> allAppointments = AppointmentImp.allUserAppointments(user);
