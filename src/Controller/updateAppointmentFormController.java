@@ -61,12 +61,6 @@ public class updateAppointmentFormController {
     private ComboBox<Users> updateUserIdComboBox;
 
     @FXML
-    private Button updateSaveAppointmentButton;
-
-    @FXML
-    private Button updateCancelAppointmentButton;
-
-    @FXML
     private ComboBox<String> startTimeComboBox;
 
     @FXML

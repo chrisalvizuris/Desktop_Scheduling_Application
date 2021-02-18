@@ -44,6 +44,9 @@ public class mainWindowController {
     private Button deleteCustomerButton;
 
     @FXML
+    private Button reportsButton;
+
+    @FXML
     private Button signOutButton;
 
     @FXML
@@ -168,9 +171,6 @@ public class mainWindowController {
 
     @FXML
     private Label mainAppointmentLabel;
-
-    @FXML
-    private Label userVariableLabel;
 
     private Users loggedInUser;
 
@@ -418,7 +418,6 @@ public class mainWindowController {
         loggedInUser = user;
 
         mainAppointmentLabel.setText(user.getUserName() + "'s Appointments");
-        userVariableLabel.setText(user.getUserName());
 
         int count = 0;
         for (int i = 0; i < allAppointments.size(); i++) {

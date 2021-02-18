@@ -51,7 +51,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="deleteAppointmentButton" mnemonicParsing="false" prefHeight="156.0" prefWidth="152.0" style="-fx-background-color: #41B3A3;" onAction="#deleteAppointmentButtonPushed">
+                        <Button fx:id="deleteAppointmentButton" mnemonicParsing="false" onAction="#deleteAppointmentButtonPushed" prefHeight="156.0" prefWidth="152.0" style="-fx-background-color: #41B3A3;">
                            <graphic>
                               <ImageView fitHeight="56.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -93,7 +93,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="deleteCustomerButton" mnemonicParsing="false" prefHeight="156.0" prefWidth="152.0" style="-fx-background-color: #41B3A3;" onAction="#deleteCustomerButtonPushed">
+                        <Button fx:id="deleteCustomerButton" mnemonicParsing="false" onAction="#deleteCustomerButtonPushed" prefHeight="156.0" prefWidth="152.0" style="-fx-background-color: #41B3A3;">
                            <graphic>
                               <ImageView fitHeight="56.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -107,23 +107,14 @@
                         <Insets left="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
-                     <children>
-                        <Label text="Logged In:" textFill="WHITE">
-                           <font>
-                              <Font name="SansSerif Bold" size="15.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="userVariableLabel" text="Test" textFill="RED">
-                           <font>
-                              <Font name="SansSerif Regular" size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
+                  <Button fx:id="reportsButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 100;" text="Reports" textAlignment="CENTER" textFill="#41b3a3">
                      <VBox.margin>
-                        <Insets left="15.0" top="15.0" />
+                        <Insets left="75.0" top="50.0" />
                      </VBox.margin>
-                  </HBox>
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="signOutButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#signOutButtonPushed" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 100;" text="Sign Out" textAlignment="CENTER" textFill="#41b3a3">
                      <font>
                         <Font name="SansSerif Regular" size="14.0" />
