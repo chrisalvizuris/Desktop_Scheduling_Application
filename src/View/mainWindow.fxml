@@ -51,7 +51,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="deleteAppointmentButton" mnemonicParsing="false" prefHeight="156.0" prefWidth="152.0" style="-fx-background-color: #41B3A3;">
+                        <Button fx:id="deleteAppointmentButton" mnemonicParsing="false" prefHeight="156.0" prefWidth="152.0" style="-fx-background-color: #41B3A3;" onAction="#deleteAppointmentButtonPushed">
                            <graphic>
                               <ImageView fitHeight="56.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

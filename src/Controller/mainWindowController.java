@@ -294,6 +294,10 @@ public class mainWindowController {
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     CustomerImp.deleteCustomer(customersTableView.getSelectionModel().getSelectedItem().getCustomerId());
                     customersTableView.setItems(CustomerImp.getAllCustomers());
+                    Alert confirmationAlert = new Alert(Alert.AlertType.INFORMATION);
+                    confirmationAlert.setTitle("Deletion Successful");
+                    confirmationAlert.setContentText("Customer successfully deleted.");
+                    confirmationAlert.show();
                 }
             }   else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -301,6 +305,61 @@ public class mainWindowController {
                 alert.setContentText("All appointments scheduled with this customer must be deleted before the customer can be removed.");
                 alert.showAndWait();
             }
+        }
+    }
+
+    @FXML
+    public void deleteAppointmentButtonPushed(ActionEvent event) throws SQLException {
+        if(appointmentsAllTableView.getSelectionModel().getSelectedItem() != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                int id = appointmentsAllTableView.getSelectionModel().getSelectedItem().getAppointmentId();
+                String type = appointmentsAllTableView.getSelectionModel().getSelectedItem().getAppointmentType();
+                AppointmentImp.deleteAppointment(id);
+                appointmentsAllTableView.setItems(AppointmentImp.allUserAppointments(loggedInUser));
+                appointmentsMonthTableView.setItems(AppointmentImp.getAllUserAppointmentsMonth(loggedInUser));
+                appointmentsWeekTableView.setItems(AppointmentImp.getAllUserAppointmentsWeek(loggedInUser));
+                Alert confirmationAlert = new Alert(Alert.AlertType.INFORMATION);
+                confirmationAlert.setTitle("Deletion Successful");
+                confirmationAlert.setContentText(type + " appointment " + String.valueOf(id) + " was successfully deleted");
+                confirmationAlert.show();
+            }
+        }   else if(appointmentsWeekTableView.getSelectionModel().getSelectedItem() != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                int id = appointmentsWeekTableView.getSelectionModel().getSelectedItem().getAppointmentId();
+                String type = appointmentsWeekTableView.getSelectionModel().getSelectedItem().getAppointmentType();
+                AppointmentImp.deleteAppointment(id);
+                appointmentsWeekTableView.setItems(AppointmentImp.getAllUserAppointmentsWeek(loggedInUser));
+                appointmentsAllTableView.setItems(AppointmentImp.allUserAppointments(loggedInUser));
+                appointmentsMonthTableView.setItems(AppointmentImp.getAllUserAppointmentsMonth(loggedInUser));
+                Alert confirmationAlert = new Alert(Alert.AlertType.INFORMATION);
+                confirmationAlert.setTitle("Deletion Successful");
+                confirmationAlert.setContentText(type + " appointment " + String.valueOf(id) + " was successfully deleted");
+                confirmationAlert.show();
+            }
+        }   else if(appointmentsMonthTableView.getSelectionModel().getSelectedItem() != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                int id = appointmentsMonthTableView.getSelectionModel().getSelectedItem().getAppointmentId();
+                String type = appointmentsMonthTableView.getSelectionModel().getSelectedItem().getAppointmentType();
+                AppointmentImp.deleteAppointment(id);
+                appointmentsMonthTableView.setItems(AppointmentImp.getAllUserAppointmentsMonth(loggedInUser));
+                appointmentsWeekTableView.setItems(AppointmentImp.getAllUserAppointmentsWeek(loggedInUser));
+                appointmentsAllTableView.setItems(AppointmentImp.allUserAppointments(loggedInUser));
+                Alert confirmationAlert = new Alert(Alert.AlertType.INFORMATION);
+                confirmationAlert.setTitle("Deletion Successful");
+                confirmationAlert.setContentText(type + " appointment " + String.valueOf(id) + " was successfully deleted");
+                confirmationAlert.show();
+            }
+        }   else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Delete Warning");
+            alert.setContentText("Please select an appointment you would like to delete.");
+            alert.showAndWait();
         }
     }
 
@@ -381,67 +440,4 @@ public class mainWindowController {
             alert.show();
         }
     }
-
-    //Realized I needed to create an initializer that took in the user who logged in
-//    public void initialize() throws SQLException {
-//        customersTableView.setItems(CustomerImp.getAllCustomers());
-//        custIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-//        custNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-//        custAddressColumn.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
-//        custPostalColumn.setCellValueFactory(new PropertyValueFactory<>("customerPostal"));
-//        custPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("customerPhone"));
-//        custDivisionColumn.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
-//
-//        appointmentsWeekTableView.setItems(AppointmentImp.getAllAppointmentsThisWeek());
-//        apptWeekIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
-//        apptWeekTitleColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
-//        apptWeekDescColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
-//        apptWeekLocationColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
-//        apptWeekContactColumn.setCellValueFactory(new PropertyValueFactory<>("contactId"));
-//        apptWeekTypeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
-//        apptWeekStartColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
-//        apptWeekEndColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
-//        apptWeekCustIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-//
-//        appointmentsMonthTableView.setItems(AppointmentImp.getAllAppointmentsThisMonth());
-//        apptIdMonthColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
-//        apptTitleMonthColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
-//        apptMonthDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
-//        apptMonthLocationColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentLocation"));
-//        apptMonthContactColumn.setCellValueFactory(new PropertyValueFactory<>("contactId"));
-//        apptMonthTypeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
-//        apptMonthStartColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
-//        apptMonthEndColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
-//        apptMonthCustIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-//
-//        addAppointmentButton.setTooltip(new Tooltip("Add Appointment"));
-//        editAppointmentButton.setTooltip(new Tooltip("Update Appointment"));
-//        deleteAppointmentButton.setTooltip(new Tooltip("Delete Appointment"));
-//        addCustomerButton.setTooltip(new Tooltip("Add Customer"));
-//        editCustomerButton.setTooltip(new Tooltip("Update Customer"));
-//        deleteCustomerButton.setTooltip(new Tooltip("Delete Customer"));
-//
-//        ObservableList<Appointments> allAppointments = AppointmentImp.getAllAppointments();
-//        int apptID = 0;
-//        LocalDateTime apptTime = null;
-//        int count = 0;
-//        for (int i = 0; i < allAppointments.size(); i++) {
-//            if (allAppointments.get(i).getAppointmentStart().isAfter(LocalDateTime.now()) && allAppointments.get(i).getAppointmentStart().isBefore(LocalDateTime.now().plusMinutes(15))) {
-//                apptID = allAppointments.get(i).getAppointmentId();
-//                apptTime = allAppointments.get(i).getAppointmentStart();
-//                count += 1;
-//            }
-//        }
-//        if (count > 0) {
-//            Alert alert = new Alert(Alert.AlertType.WARNING);
-//            alert.setTitle("Warning: Upcoming Meeting");
-//            alert.setContentText("A meeting is scheduled to start within the next 15 minutes or less. Appointment ID: " + String.valueOf(apptID) + " starts at " + String.valueOf(apptTime));
-//            alert.show();
-//        }   else {
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("Appointment Updates");
-//            alert.setContentText("You have no meetings starting in the next 15 minutes.");
-//            alert.show();
-//        }
-//    }
 }
