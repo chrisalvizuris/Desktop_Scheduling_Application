@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class mainWindowController {
@@ -274,6 +275,32 @@ public class mainWindowController {
             alert.setTitle("Error Message");
             alert.setContentText("Please select an appointment you would like to update.");
             alert.showAndWait();
+        }
+    }
+    @FXML
+    public void deleteCustomerButtonPushed(ActionEvent deleteEvent) throws SQLException {
+        if (customersTableView.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Delete Warning");
+            alert.setContentText("Please select a customer you would like to delete.");
+            alert.showAndWait();
+            return;
+        }
+        if (customersTableView.getSelectionModel().getSelectedItem() != null) {
+            ArrayList<Appointments> customerAppointments = AppointmentImp.getCustomerAppointments(customersTableView.getSelectionModel().getSelectedItem().getCustomerId());
+            if (customerAppointments.size() == 0) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this customer?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    CustomerImp.deleteCustomer(customersTableView.getSelectionModel().getSelectedItem().getCustomerId());
+                    customersTableView.setItems(CustomerImp.getAllCustomers());
+                }
+            }   else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Customer Deletion Error");
+                alert.setContentText("All appointments scheduled with this customer must be deleted before the customer can be removed.");
+                alert.showAndWait();
+            }
         }
     }
 
