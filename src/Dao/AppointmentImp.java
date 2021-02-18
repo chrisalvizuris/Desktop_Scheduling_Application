@@ -9,6 +9,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 
 public class AppointmentImp {
@@ -510,6 +511,57 @@ public class AppointmentImp {
         }
         DatabaseConnection.closeConnection();
         return allAppointments;
+    }
+
+    public static ArrayList<Appointments> getCustomerAppointments(int customerId) throws SQLException {
+        ArrayList<Appointments> allCustomerAppointments = new ArrayList<>();
+        Connection connection = DatabaseConnection.beginConnection();
+        String selectStatement = "SELECT * FROM appointments WHERE Customer_ID = " + String.valueOf(customerId);
+        DatabaseQuery.setPreparedStatement(connection, selectStatement);
+        PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while(resultSet.next()) {
+            int apptId = resultSet.getInt("Appointment_ID");
+            String apptTitle = resultSet.getString("Title");
+            String apptDescription = resultSet.getString("Description");
+            String apptLocation = resultSet.getString("Location");
+            String apptType = resultSet.getString("Type");
+            LocalDate apptStart = resultSet.getDate("Start").toLocalDate();
+            LocalTime apptTime = resultSet.getTime("Start").toLocalTime();
+            LocalDateTime apptStartDate = LocalDateTime.of(apptStart, apptTime);
+            Timestamp startTS = resultSet.getTimestamp("Start");
+            LocalDate apptEnd = resultSet.getDate("End").toLocalDate();
+            LocalTime apptEndTime = resultSet.getTime("End").toLocalTime();
+            LocalDateTime apptEndDate = LocalDateTime.of(apptEnd, apptEndTime);
+            Timestamp endTS = resultSet.getTimestamp("End");
+            LocalDate createDate = resultSet.getDate("Create_Date").toLocalDate();
+            LocalTime createTime = resultSet.getTime("Create_Date").toLocalTime();
+            LocalDateTime apptCreateDate = LocalDateTime.of(createDate, createTime);
+            Timestamp createTS = resultSet.getTimestamp("Create_Date");
+            String apptCreatedBy = resultSet.getString("Created_By");
+            LocalDate updateDate = resultSet.getDate("Last_Update").toLocalDate();
+            LocalTime updateTime = resultSet.getTime("Last_Update").toLocalTime();
+            LocalDateTime apptUpdateDate = LocalDateTime.of(updateDate, updateTime);
+            Timestamp updateTS = resultSet.getTimestamp("Last_Update");
+            String apptUpdatedBy = resultSet.getString("Last_Updated_By");
+            int apptCustomerId = resultSet.getInt("Customer_ID");
+            int apptUserId = resultSet.getInt("User_ID");
+            int apptContactId = resultSet.getInt("Contact_ID");
+
+            Appointments appointment = new Appointments(apptTitle, apptDescription, apptLocation, apptType, startTS.toLocalDateTime(), endTS.toLocalDateTime(), apptCustomerId);
+            appointment.setAppointmentId(apptId);
+            appointment.setAppointmentCreateDate(createTS.toLocalDateTime());
+            appointment.setAppointmentCreatedBy(apptCreatedBy);
+            appointment.setAppointmentUpdateDate(updateTS.toLocalDateTime());
+            appointment.setAppointmentUpdatedBy(apptUpdatedBy);
+            appointment.setUserId(apptUserId);
+            appointment.setContactId(apptContactId);
+
+            allCustomerAppointments.add(appointment);
+        }
+        DatabaseConnection.closeConnection();
+        return allCustomerAppointments;
     }
 
     public static void deleteAppointment(int appointmentId) throws SQLException {

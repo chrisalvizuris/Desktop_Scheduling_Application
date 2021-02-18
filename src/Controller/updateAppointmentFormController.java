@@ -8,6 +8,8 @@ import Model.Appointments;
 import Model.Contacts;
 import Model.Customers;
 import Model.Users;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.*;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.TimeZone;
 
@@ -74,6 +77,8 @@ public class updateAppointmentFormController {
     @FXML
     private void updateSaveButtonPushed(ActionEvent event) throws IOException, SQLException {
         try {
+
+            //assign the entered fields to variables when save button is pushed
             int id = Integer.parseInt(updateAppointmentIDTextField.getText());
             String newTitle = updateAppointmentTitleTextField.getText();
             String newDescription = updateAppointmentDescriptionTextField.getText();
@@ -89,6 +94,7 @@ public class updateAppointmentFormController {
             int newCustomerId = updateCustomerIdComboBox.getSelectionModel().getSelectedItem().getCustomerId();
             int newUserId = updateUserIdComboBox.getSelectionModel().getSelectedItem().getUserId();
 
+            //create an appointment object from the information that was passed
             Appointments appointment = new Appointments(newTitle, newDescription, newLocation, newType, newStart, newEnd, newCustomerId);
             appointment.setAppointmentId(id);
             appointment.setContactId(newContactId);
@@ -96,6 +102,20 @@ public class updateAppointmentFormController {
             appointment.setAppointmentUpdateDate(LocalDateTime.now());
             appointment.setAppointmentUpdatedBy(loggedInUser.getUserName());
 
+            //create a list to eventually compare customer_ids for overlapping and create alert
+            ArrayList<Appointments> allCustomerAppointments = AppointmentImp.getCustomerAppointments(newCustomerId);
+            for (int i = 0; i < allCustomerAppointments.size(); i++) {
+                if((newStart.isAfter(allCustomerAppointments.get(i).getAppointmentStart().minusMinutes(1)) && newStart.isBefore(allCustomerAppointments.get(i).getAppointmentEnd())) ||
+                        (newEnd.isAfter(allCustomerAppointments.get(i).getAppointmentStart().plusMinutes(1))) && newEnd.isBefore(allCustomerAppointments.get(i).getAppointmentEnd().minusMinutes(1))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Overlapping Appointment Warning");
+                    alert.setContentText("This customer has an overlapping appointment. Please schedule another time.");
+                    alert.showAndWait();
+                    return;
+                }
+            }
+
+            //start checking if the scheduled start time falls within the business hours in EST. I used New York for reference
             ZoneId newYorkZoneId = ZoneId.of("America/New_York");
             ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
 
@@ -108,6 +128,7 @@ public class updateAppointmentFormController {
                 alert.setContentText("Please schedule an appointment during business hours, which is between 8:00am and 22:00pm EST.");
                 alert.showAndWait();
             }   else {
+                //if everything looks good, add object to database and change scenes.
                 AppointmentImp.updateAppointment(appointment);
 
 

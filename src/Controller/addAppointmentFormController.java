@@ -21,6 +21,7 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.*;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.TimeZone;
 
@@ -113,6 +114,18 @@ public class addAppointmentFormController {
             appointment.setAppointmentCreatedBy(loggedInPerson.getUserName());
             appointment.setAppointmentUpdateDate(LocalDateTime.now());
 
+            //create a list to eventually compare customer_ids for overlapping and create alert
+            ArrayList<Appointments> allCustomerAppointments = AppointmentImp.getCustomerAppointments(customerId);
+            for (int i = 0; i < allCustomerAppointments.size(); i++) {
+                if((appointmentStart.isAfter(allCustomerAppointments.get(i).getAppointmentStart().minusMinutes(1)) && appointmentStart.isBefore(allCustomerAppointments.get(i).getAppointmentEnd())) ||
+                        (appointmentEnd.isAfter(allCustomerAppointments.get(i).getAppointmentStart().plusMinutes(1))) && appointmentEnd.isBefore(allCustomerAppointments.get(i).getAppointmentEnd().minusMinutes(1))) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Overlapping Appointment Warning");
+                    alert.setContentText("This customer has an overlapping appointment. Please schedule another time.");
+                    alert.showAndWait();
+                    return;
+                }
+            }
 
             ZoneId newYorkZoneId = ZoneId.of("America/New_York");
             ZoneId localZoneId = ZoneId.of(TimeZone.getDefault().getID());
