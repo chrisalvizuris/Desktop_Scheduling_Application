@@ -235,6 +235,7 @@ public class AppointmentImp {
             appointment.setAppointmentUpdatedBy(apptUpdatedBy);
             appointment.setUserId(apptUserId);
             appointment.setContactId(apptContactId);
+            appointment.setMonth(apptStart.getMonth());
 
             allAppointments.add(appointment);
         }

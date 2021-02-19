@@ -1,6 +1,7 @@
 package Model;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 
 public class Appointments {
     private int appointmentId;
@@ -17,6 +18,7 @@ public class Appointments {
     private int customerId;
     private int userId;
     private int contactId;
+    private Month month;
 
     public Appointments(String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, int customerId) {
         this.appointmentTitle = appointmentTitle;
@@ -138,6 +140,14 @@ public class Appointments {
 
     public void setContactId(int contactId) {
         this.contactId = contactId;
+    }
+
+    public Month getMonth() {
+        return month;
+    }
+
+    public void setMonth(Month month) {
+        this.month = month;
     }
 
 }

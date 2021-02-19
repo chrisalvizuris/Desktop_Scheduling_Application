@@ -364,7 +364,7 @@ public class mainWindowController {
     }
 
     @FXML
-    public void reportButtonPushed(ActionEvent event) throws IOException {
+    public void reportButtonPushed(ActionEvent event) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/View/reportsWindow.fxml"));
         Parent reportWindowParent = loader.load();
