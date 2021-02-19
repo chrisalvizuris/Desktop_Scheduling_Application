@@ -19,6 +19,7 @@ public class Appointments {
     private int userId;
     private int contactId;
     private Month month;
+    private String contactName;
 
     public Appointments(String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, int customerId) {
         this.appointmentTitle = appointmentTitle;
@@ -150,4 +151,11 @@ public class Appointments {
         this.month = month;
     }
 
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
 }

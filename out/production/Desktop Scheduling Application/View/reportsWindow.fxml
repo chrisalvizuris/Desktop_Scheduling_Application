@@ -78,18 +78,18 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TreeTableView fx:id="contactReportTableView" prefHeight="412.0" prefWidth="700.0">
+                              <TableView fx:id="contactReportTableView" prefHeight="412.0" prefWidth="700.0">
                                 <columns>
-                                  <TreeTableColumn fx:id="contactNameColumn" prefWidth="75.0" text="Contact" />
-                                  <TreeTableColumn fx:id="apptIdColumn" prefWidth="75.0" text="Appt ID" />
-                                    <TreeTableColumn fx:id="apptTitleColumn" prefWidth="75.0" text="Title" />
-                                    <TreeTableColumn fx:id="apptDescColumn" prefWidth="75.0" text="Description" />
-                                    <TreeTableColumn fx:id="contactApptTypeColumn" prefWidth="75.0" text="Type" />
-                                    <TreeTableColumn fx:id="apptStartColumn" prefWidth="122.0" text="Start" />
-                                    <TreeTableColumn fx:id="apptEndColumn" prefWidth="121.0" text="End" />
-                                    <TreeTableColumn fx:id="custIdColumn" text="Cust ID" />
+                                  <TableColumn fx:id="contactNameColumn" prefWidth="75.0" text="Contact" />
+                                  <TableColumn fx:id="apptIdColumn" prefWidth="75.0" text="Appt ID" />
+                                    <TableColumn fx:id="apptTitleColumn" prefWidth="75.0" text="Title" />
+                                    <TableColumn fx:id="apptDescColumn" prefWidth="75.0" text="Description" />
+                                    <TableColumn fx:id="contactApptTypeColumn" prefWidth="75.0" text="Type" />
+                                    <TableColumn fx:id="apptStartColumn" prefWidth="122.0" text="Start" />
+                                    <TableColumn fx:id="apptEndColumn" prefWidth="121.0" text="End" />
+                                    <TableColumn fx:id="custIdColumn" text="Cust ID" />
                                 </columns>
-                              </TreeTableView>
+                              </TableView>
                            </children>
                         </AnchorPane>
                   </content>

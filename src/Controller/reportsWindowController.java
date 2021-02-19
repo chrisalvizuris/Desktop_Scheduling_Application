@@ -1,7 +1,9 @@
 package Controller;
 
 import Dao.AppointmentImp;
+import Dao.ContactsImp;
 import Model.Appointments;
+import Model.Contacts;
 import Model.Users;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -14,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,6 +24,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class reportsWindowController {
 
@@ -38,31 +42,31 @@ public class reportsWindowController {
     private Tab contactTab;
 
     @FXML
-    private TreeTableView<Appointments> contactReportTableView;
+    private TableView<Appointments> contactReportTableView;
 
     @FXML
-    private TreeTableColumn<Appointments, String> contactNameColumn;
+    private TableColumn<Appointments, String> contactNameColumn;
 
     @FXML
-    private TreeTableColumn<Appointments, Integer> apptIdColumn;
+    private TableColumn<Appointments, Integer> apptIdColumn;
 
     @FXML
-    private TreeTableColumn<Appointments, String> apptTitleColumn;
+    private TableColumn<Appointments, String> apptTitleColumn;
 
     @FXML
-    private TreeTableColumn<Appointments, String> apptDescColumn;
+    private TableColumn<Appointments, String> apptDescColumn;
 
     @FXML
-    private TreeTableColumn<Appointments, String> contactApptTypeColumn;
+    private TableColumn<Appointments, String> contactApptTypeColumn;
 
     @FXML
-    private TreeTableColumn<Appointments, LocalDateTime> apptStartColumn;
+    private TableColumn<Appointments, LocalDateTime> apptStartColumn;
 
     @FXML
-    private TreeTableColumn<Appointments, LocalDateTime> apptEndColumn;
+    private TableColumn<Appointments, LocalDateTime> apptEndColumn;
 
     @FXML
-    private TreeTableColumn<Appointments, Integer> custIdColumn;
+    private TableColumn<Appointments, Integer> custIdColumn;
 
     @FXML
     private Tab locationTab;
@@ -434,5 +438,28 @@ public class reportsWindowController {
 
         typeTableView.setItems(appointmentTypeList);
         resultsColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
+
+        //start setting up the contact appointment report
+        ObservableList<Contacts> allContacts = ContactsImp.getAllContacts();
+
+        for(int i = 0; i < allContacts.size(); i++) {
+            for(int k = 0; k < allAppointments.size(); k++) {
+                if(allAppointments.get(k).getContactId() == allContacts.get(i).getContactId()) {
+                    allAppointments.get(k).setContactName(allContacts.get(i).getContactName());
+                }
+            }
+        }
+        Comparator<Appointments> comparator = (appointment1, appointment2) -> appointment1.getContactName().compareTo(appointment2.getContactName());
+        allAppointments.sort(comparator);
+        contactReportTableView.setItems(allAppointments);
+        contactNameColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
+        apptIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        apptTitleColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
+        apptDescColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
+        contactApptTypeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+        apptStartColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
+        apptEndColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
+        custIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
     }
 }
