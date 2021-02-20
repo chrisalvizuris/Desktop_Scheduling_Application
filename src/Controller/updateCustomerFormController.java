@@ -87,6 +87,7 @@ public class updateCustomerFormController {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             window.setScene(mainWindowScene);
+            window.centerOnScreen();
             window.show();
 
 
@@ -114,6 +115,7 @@ public class updateCustomerFormController {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             window.setScene(mainWindowScene);
+            window.centerOnScreen();
             window.show();
         }
 

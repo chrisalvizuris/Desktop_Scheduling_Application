@@ -78,6 +78,7 @@ public class loginFormController {
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
                 window.setScene(mainWindowScene);
+                window.centerOnScreen();
                 window.show();
             }
         }

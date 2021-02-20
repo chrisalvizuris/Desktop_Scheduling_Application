@@ -80,6 +80,7 @@ public class addCustomerFormController {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             window.setScene(mainWindowScene);
+            window.centerOnScreen();
             window.show();
         }
     }
@@ -118,6 +119,7 @@ public class addCustomerFormController {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             window.setScene(mainWindowScene);
+            window.centerOnScreen();
             window.show();
         }   catch (Exception e) {
             ResourceBundle resourceBundle = ResourceBundle.getBundle("Utilities/Nat", Locale.getDefault());

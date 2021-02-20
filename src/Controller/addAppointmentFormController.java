@@ -86,6 +86,7 @@ public class addAppointmentFormController {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             window.setScene(mainWindowScene);
+            window.centerOnScreen();
             window.show();
         }
     }
@@ -168,6 +169,7 @@ public class addAppointmentFormController {
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
                 window.setScene(mainWindowScene);
+                window.centerOnScreen();
                 window.show();
             }
         }   catch (Exception e) {

@@ -190,6 +190,7 @@ public class mainWindowController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         window.setScene(addAppointmentScene);
+        window.centerOnScreen();
         window.show();
     }
 
@@ -205,6 +206,7 @@ public class mainWindowController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         window.setScene(addCustomerScene);
+        window.centerOnScreen();
         window.show();
     }
 
@@ -219,6 +221,7 @@ public class mainWindowController {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             window.setScene(scene);
+            window.centerOnScreen();
             window.show();
         }
     }
@@ -237,6 +240,7 @@ public class mainWindowController {
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             window.setScene(updateCustomerScene);
+            window.centerOnScreen();
             window.show();
         }   catch(Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -269,6 +273,7 @@ public class mainWindowController {
 
             Stage window = (Stage) ((Node) updateAppointment.getSource()).getScene().getWindow();
             window.setScene(updateAppointmentScene);
+            window.centerOnScreen();
             window.show();
         }   catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -376,6 +381,7 @@ public class mainWindowController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         window.setScene(reportWindowScene);
+        window.centerOnScreen();
         window.show();
     }
 
