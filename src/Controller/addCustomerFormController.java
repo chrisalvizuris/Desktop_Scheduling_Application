@@ -137,7 +137,7 @@ public class addCustomerFormController {
         }
     }
 
-    public void countryBoxSelected(ActionEvent countrySelected) throws IOException, SQLException {
+    public void countryBoxSelected() throws IOException, SQLException {
         if (!(countryComboBox.getSelectionModel().isEmpty())) {
             Countries country = countryComboBox.getSelectionModel().getSelectedItem();
             int countryId = country.getCountryID();

@@ -5,7 +5,6 @@ import Dao.CustomerImp;
 import Model.Appointments;
 import Model.Customers;
 import Model.Users;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,12 +41,6 @@ public class mainWindowController {
 
     @FXML
     private Button deleteCustomerButton;
-
-    @FXML
-    private Button reportsButton;
-
-    @FXML
-    private Button signOutButton;
 
     @FXML
     private TableView<Customers> customersTableView;
@@ -282,8 +275,9 @@ public class mainWindowController {
             alert.showAndWait();
         }
     }
+
     @FXML
-    public void deleteCustomerButtonPushed(ActionEvent deleteEvent) throws SQLException {
+    public void deleteCustomerButtonPushed() throws SQLException {
         if (customersTableView.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Delete Warning");
@@ -314,7 +308,7 @@ public class mainWindowController {
     }
 
     @FXML
-    public void deleteAppointmentButtonPushed(ActionEvent event) throws SQLException {
+    public void deleteAppointmentButtonPushed() throws SQLException {
         if(appointmentsAllTableView.getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
             Optional<ButtonType> result = alert.showAndWait();
