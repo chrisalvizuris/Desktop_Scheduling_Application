@@ -93,6 +93,7 @@ public class addAppointmentFormController {
     @FXML
     private void saveAppointmentButtonPushed(ActionEvent event) throws IOException, SQLException {
         try {
+
             String appointmentTitle = appointmentTitleTextField.getText();
             String appointmentDescription = appointmentDescriptionTextField.getText();
             String appointmentLocation = appointmentLocationTextField.getText();
@@ -106,6 +107,21 @@ public class addAppointmentFormController {
             LocalDateTime appointmentEnd = LocalDateTime.of(endDate, endTime);
             int customerId = customerIdComboBox.getSelectionModel().getSelectedItem().getCustomerId();
             int userId = loggedInPerson.getUserId();
+
+            if(appointmentEnd.isBefore(appointmentStart)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Scheduling Error");
+                alert.setContentText("Please make sure your appointment ends after it starts.");
+                alert.showAndWait();
+                return;
+            }
+            if(appointmentStart.isBefore(LocalDateTime.now())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Scheduling Error");
+                alert.setContentText("We can not schedule an appointment that takes place in the past.");
+                alert.showAndWait();
+                return;
+            }
 
             Appointments appointment = new Appointments(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, customerId);
             appointment.setContactId(contactID);

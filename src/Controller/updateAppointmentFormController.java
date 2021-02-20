@@ -88,6 +88,21 @@ public class updateAppointmentFormController {
             int newCustomerId = updateCustomerIdComboBox.getSelectionModel().getSelectedItem().getCustomerId();
             int newUserId = updateUserIdComboBox.getSelectionModel().getSelectedItem().getUserId();
 
+            if(newEnd.isBefore(newStart)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Scheduling Error");
+                alert.setContentText("Please make sure your appointment ends after it starts.");
+                alert.showAndWait();
+                return;
+            }
+            if(newStart.isBefore(LocalDateTime.now())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Scheduling Error");
+                alert.setContentText("We can not schedule an appointment that takes place in the past.");
+                alert.showAndWait();
+                return;
+            }
+
             //create an appointment object from the information that was passed
             Appointments appointment = new Appointments(newTitle, newDescription, newLocation, newType, newStart, newEnd, newCustomerId);
             appointment.setAppointmentId(id);
