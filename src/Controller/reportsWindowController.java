@@ -16,11 +16,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -73,6 +73,27 @@ public class reportsWindowController {
 
     @FXML
     private Button returnHomeButton;
+
+    @FXML
+    private Label mondayLabel;
+
+    @FXML
+    private Label tuesdayLabel;
+
+    @FXML
+    private Label wednesdayLabel;
+
+    @FXML
+    private Label thursdayLabel;
+
+    @FXML
+    private Label fridayLabel;
+
+    @FXML
+    private Label saturdayLabel;
+
+    @FXML
+    private Label sundayLabel;
 
     private Users loggedUser;
 
@@ -460,6 +481,54 @@ public class reportsWindowController {
         apptStartColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
         apptEndColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentEnd"));
         custIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
+        //start setting up report for weekly count report
+        ObservableList<Appointments> appointmentsThisWeek = AppointmentImp.getAllAppointmentsThisWeek();
+        int mondayCount = 0;
+        int tuesdayCount = 0;
+        int wednesdayCount = 0;
+        int thursdayCount = 0;
+        int fridayCount = 0;
+        int saturdayCount = 0;
+        int sundayCount = 0;
+        DayOfWeek mon = DayOfWeek.MONDAY;
+        DayOfWeek tue = DayOfWeek.TUESDAY;
+        DayOfWeek wed = DayOfWeek.WEDNESDAY;
+        DayOfWeek thur = DayOfWeek.THURSDAY;
+        DayOfWeek fri = DayOfWeek.FRIDAY;
+        DayOfWeek sat = DayOfWeek.SATURDAY;
+        DayOfWeek sun = DayOfWeek.SUNDAY;
+
+        for(int l = 0; l < appointmentsThisWeek.size(); l++) {
+            if(appointmentsThisWeek.get(l).getAppointmentStart().toLocalDate().getDayOfWeek().equals(mon)) {
+                mondayCount += 1;
+            }
+            if(appointmentsThisWeek.get(l).getAppointmentStart().toLocalDate().getDayOfWeek().equals(tue)) {
+                tuesdayCount += 1;
+            }
+            if(appointmentsThisWeek.get(l).getAppointmentStart().toLocalDate().getDayOfWeek().equals(wed)) {
+                wednesdayCount += 1;
+            }
+            if(appointmentsThisWeek.get(l).getAppointmentStart().toLocalDate().getDayOfWeek().equals(thur)) {
+                thursdayCount += 1;
+            }
+            if(appointmentsThisWeek.get(l).getAppointmentStart().toLocalDate().getDayOfWeek().equals(fri)) {
+                fridayCount += 1;
+            }
+            if(appointmentsThisWeek.get(l).getAppointmentStart().toLocalDate().getDayOfWeek().equals(sat)) {
+                saturdayCount += 1;
+            }
+            if(appointmentsThisWeek.get(l).getAppointmentStart().toLocalDate().getDayOfWeek().equals(sun)) {
+                sundayCount += 1;
+            }
+        }
+        mondayLabel.setText(String.valueOf(mondayCount));
+        tuesdayLabel.setText(String.valueOf(tuesdayCount));
+        wednesdayLabel.setText(String.valueOf(wednesdayCount));
+        thursdayLabel.setText(String.valueOf(thursdayCount));
+        fridayLabel.setText(String.valueOf(fridayCount));
+        saturdayLabel.setText(String.valueOf(saturdayCount));
+        sundayLabel.setText(String.valueOf(sundayCount));
 
     }
 }
