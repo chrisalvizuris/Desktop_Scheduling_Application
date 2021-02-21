@@ -11,6 +11,10 @@ public class FirstLevelDivision {
     private String divisionUpdateBy;
     private int divisionCountryId;
 
+    /**
+     * This method is the constructor for the division object.
+     * @param divisionName The name of the division.
+     */
     public FirstLevelDivision(String divisionName) {
         this.divisionName = divisionName;
         this.divisionCreateDate = LocalDateTime.now();

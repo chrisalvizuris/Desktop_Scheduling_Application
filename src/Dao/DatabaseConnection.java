@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
+
     //setting up jdbc url with strings
     private static final String protocol = "jdbc";
     private static final String vendorName = ":mysql:";
@@ -24,7 +25,10 @@ public class DatabaseConnection {
     //password
     private static final String password = "53688653713";
 
-    //method to start the connection
+    /**
+     * This method starts the connection to the database.
+     * @return
+     */
     public static Connection beginConnection() {
         try {
             Class.forName(MYSQLJDBCDriver);
@@ -36,6 +40,9 @@ public class DatabaseConnection {
         return conn;
     }
 
+    /**
+     * This method closes the database connection.
+     */
     public static void closeConnection() {
         try {
             conn.close();

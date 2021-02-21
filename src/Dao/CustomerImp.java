@@ -15,6 +15,11 @@ import java.util.Comparator;
 
 public class CustomerImp {
 
+    /**
+     * This method generates SQL query to lets you add a customer to the database.
+     * @param customer A customer parameter is passed to add to the database.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static void addCustomer(Customers customer) throws SQLException {
         Connection conn = DatabaseConnection.beginConnection();
         String insertStatement = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -56,7 +61,12 @@ public class CustomerImp {
 
     }
 
-
+    /**
+     * This method generates the query statement to retrieve a customer from the database.
+     * @param customerId The customer id that is going to be retrieved.
+     * @return Returns a customer object from database.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static Customers getCustomer(int customerId) throws SQLException {
         Connection conn = DatabaseConnection.beginConnection();
         String selectStatement = "SELECT * FROM customers WHERE Customer_ID = " + String.valueOf(customerId);
@@ -100,7 +110,11 @@ public class CustomerImp {
         return null;
     }
 
-
+    /**
+     * This method generates the SQL query to update customer from database.
+     * @param customer Customer that is going to be updated from database.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static void updateCustomer(Customers customer) throws SQLException {
         Connection conn = DatabaseConnection.beginConnection();
         String updateStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
@@ -141,7 +155,11 @@ public class CustomerImp {
 
     }
 
-
+    /**
+     * This method generates the SQL statement to delete customer from database.
+     * @param customerId The customer id of customer to be deleted from database.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static void deleteCustomer(int customerId) throws SQLException {
 
         Connection connection = DatabaseConnection.beginConnection();
@@ -163,7 +181,11 @@ public class CustomerImp {
 
     }
 
-
+    /**
+     * This method generates SQL statement to get all customers from database.
+     * @return Returns an observable list of customers from database.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static ObservableList<Customers> getAllCustomers() throws SQLException {
         ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
         Connection conn = DatabaseConnection.beginConnection();

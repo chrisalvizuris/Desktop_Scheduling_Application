@@ -21,6 +21,16 @@ public class Appointments {
     private Month month;
     private String contactName;
 
+    /**
+     * This method is the appointment constructor that is used when creating an appointment object.
+     * @param appointmentTitle The title of the appointment.
+     * @param appointmentDescription The description of the appointment.
+     * @param appointmentLocation The location of the appointment.
+     * @param appointmentType The type of appointment being scheduled.
+     * @param appointmentStart The start time of the appointment.
+     * @param appointmentEnd The end time of the appointment.
+     * @param customerId The customer id associated with the appointment.
+     */
     public Appointments(String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, int customerId) {
         this.appointmentTitle = appointmentTitle;
         this.appointmentDescription = appointmentDescription;

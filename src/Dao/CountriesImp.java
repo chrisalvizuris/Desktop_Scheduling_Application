@@ -3,8 +3,6 @@ package Dao;
 import Model.Countries;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.SingleSelectionModel;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +14,7 @@ import java.time.LocalTime;
 public class CountriesImp {
 
     /**
-     * This method returns all countries from database.
+     * This method generates SQL statement to return all countries from database.
      * @return Returns an observable list of countries.
      * @throws SQLException Throws an SQLException because database is called
      */
@@ -44,7 +42,7 @@ public class CountriesImp {
     }
 
     /**
-     * This method returns a specific country from database.
+     * This method generates SQL statement to return a specific country from database.
      * @param countryId Country id of country to return.
      * @return Returns a country.
      * @throws SQLException Throws an SQLException because database is called

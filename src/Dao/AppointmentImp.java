@@ -14,7 +14,7 @@ import java.util.Comparator;
 public class AppointmentImp {
 
     /**
-     * This method adds an appointment to the database.
+     * This method generates SQL statement to add an appointment to the database.
      * @param appointment Appointment to be added to database.
      * @throws SQLException SQLException is thrown because database is called.
      */
@@ -80,7 +80,7 @@ public class AppointmentImp {
     }
 
     /**
-     * This method reads an appointment from the database.
+     * This method generates SQL statement to read an appointment from the database.
      * @param appointmentId The id of the appointment to be called from database.
      * @return returns the appointment from database.
      * @throws SQLException SQLException is thrown because database is called.
@@ -147,7 +147,7 @@ public class AppointmentImp {
     }
 
     /**
-     * This method updates an appointment from the database.
+     * This method generates SQL statement to update an appointment from the database.
      * @param appointment The appointment to be updated.
      * @throws SQLException Throws an SQLException because database is called
      */
@@ -208,7 +208,7 @@ public class AppointmentImp {
     }
 
     /**
-     * This method returns all appointments from the database.
+     * This method generates SQL statement to return all appointments from the database.
      * @return returns the observable list of appointments
      * @throws SQLException Throws an SQLException because database is called
      */
@@ -264,7 +264,7 @@ public class AppointmentImp {
     }
 
     /**
-     * This method returns all appointments from this week.
+     * This method generates SQL statement to return all appointments from this week. A lambda expression is used to take two appointments and compare them when sorting by start date.
      * @return Returns an observable list of appointments
      * @throws SQLException Throws an SQLException because database is called
      */
@@ -313,7 +313,7 @@ public class AppointmentImp {
 
             allAppointmentsThisWeek.add(appointment);
 
-            //sort list by start date
+            //sort list by start date using lambda expression
             Comparator<Appointments> comparator = (appointment1, appointment2) -> appointment1.getAppointmentStart().compareTo(appointment2.getAppointmentStart());
             allAppointmentsThisWeek.sort(comparator);
         }
@@ -322,7 +322,7 @@ public class AppointmentImp {
     }
 
     /**
-     * This method returns all appointments from this month
+     * This method generates SQL statement to return all appointments from this month. A lambda expression is used to take two appointments and compare them when sorting by start date.
      * @return This method returns an observable list of appointments
      * @throws SQLException Throws an SQLException because database is called
      */
@@ -380,7 +380,7 @@ public class AppointmentImp {
     }
 
     /**
-     * This method returns all appointments this month for the logged in user from database.
+     * This method generates SQL statement to return all appointments this month for the logged in user from database. A lambda expression is used to take two appointments and compare them when sorting by start date.
      * @param user User who is logged in who has appointments to return.
      * @return Returns observable list of appointments
      * @throws SQLException Throws an SQLException because database is called
@@ -441,7 +441,7 @@ public class AppointmentImp {
     }
 
     /**
-     * This method returns all appointments this week for the logged in user.
+     * This method generates SQL statement to return all appointments this week for the logged in user. A lambda expression is used to take two appointments and compare them when sorting by start date.
      * @param user User who has appointments to return.
      * @return Returns an observable list of appointments
      * @throws SQLException Throws an SQLException because database is called
@@ -505,7 +505,7 @@ public class AppointmentImp {
     }
 
     /**
-     * This method returns all appointments for the logged in user from database.
+     * This method generates SQL statement to return all appointments for the logged in user from database.
      * @param user User who is logged in and has appointments to return.
      * @return Returns an observable list of appointments.
      * @throws SQLException Throws an SQLException because database is called
@@ -563,7 +563,7 @@ public class AppointmentImp {
     }
 
     /**
-     * This method returns all appointments for a specific customer from database.
+     * This method generates SQL statement and returns all appointments for a specific customer from database.
      * @param customerId customer id of customer we're searching for in database.
      * @return Returns an arraylist of appointments.
      * @throws SQLException Throws an SQLException because database is called
@@ -620,7 +620,7 @@ public class AppointmentImp {
     }
 
     /**
-     * This method deletes an appointment from the database.
+     * This method generates SQL statement to delete an appointment from the database.
      * @param appointmentId The appointment id of appointment to be deleted from database.
      * @throws SQLException Throws an SQLException because database is called
      */

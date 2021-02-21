@@ -11,6 +11,11 @@ public class Users {
     private LocalDateTime userUpdatedDate;
     private String userUpdatedBy;
 
+    /**
+     * This method is the constructor for the user object.
+     * @param userName The user's username.
+     * @param password The user's password.
+     */
     public Users(String userName, String password) {
         this.userName = userName;
         this.password = password;

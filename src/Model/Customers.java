@@ -15,6 +15,17 @@ public class Customers {
     private int countryId;
     private int divisionId;
 
+    /**
+     * This method is the constructor for the customer object.
+     * @param customerName The name of the customer.
+     * @param customerAddress The address of the customer.
+     * @param customerPostal The postal code of the customer.
+     * @param customerPhone The customer's phone number.
+     * @param customerCreateDate Date the customer was created.
+     * @param customerCreatedBy The user who created the customer.
+     * @param customerUpdateDate The date the customer was updated.
+     * @param customerUpdateBy The user who updated the customer.
+     */
     public Customers(String customerName, String customerAddress, String customerPostal, String customerPhone, LocalDateTime customerCreateDate, String customerCreatedBy, LocalDateTime customerUpdateDate, String customerUpdateBy) {
         this.customerName = customerName;
         this.customerAddress = customerAddress;

@@ -2,7 +2,6 @@ package Model;
 
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Countries {
 
@@ -13,6 +12,10 @@ public class Countries {
     private LocalDateTime countryLastUpdate;
     private String countryLastUpdateBy;
 
+    /**
+     * This method is the constructor called when creating a country object.
+     * @param countryName The name of the country.
+     */
     public Countries(String countryName) {
         this.countryName = countryName;
         this.countryCreateDate = LocalDateTime.now();

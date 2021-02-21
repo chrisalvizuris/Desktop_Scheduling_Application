@@ -14,6 +14,11 @@ import java.time.LocalTime;
 
 public class UserImp {
 
+    /**
+     * This method generates SQL statement to add a user to the database.
+     * @param user The user to be added to the database.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static void addUser(Users user) throws SQLException {
         Connection connection = DatabaseConnection.beginConnection();
         String insertStatement = "INSERT INTO users(User_Name, Password, Create_Date, Created_By, Last_Update, Last_Updated_By) VALUES (?, ?, ?, ?, ?, ?)";
@@ -51,6 +56,12 @@ public class UserImp {
 
     }
 
+    /**
+     * This method generates SQL statement to retrieve a user from the database.
+     * @param userId The user id of the user to be retrieved from database.
+     * @return Returns a user object.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static Users getUser(int userId) throws SQLException {
         Connection connection = DatabaseConnection.beginConnection();
         String selectStatement = "SELECT * FROM users WHERE User_ID = " + String.valueOf(userId);
@@ -95,6 +106,11 @@ public class UserImp {
         return null;
     }
 
+    /**
+     * This method generates a SQL statement to update a user from the database.
+     * @param user The user to be updated in the database.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static void updateUser(Users user) throws SQLException {
         Connection connection = DatabaseConnection.beginConnection();
         String updateStatement = "UPDATE users SET User_Name = ?, Password = ?, Last_Update = ?, Last_Updated_By = ? WHERE USER_ID = ?";
@@ -132,6 +148,11 @@ public class UserImp {
         DatabaseConnection.closeConnection();
     }
 
+    /**
+     * This method generates a SQL statement to delete a user from the database.
+     * @param userId The user id of the user to be deleted from database.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static void deleteUser(int userId) throws SQLException {
 
         Connection connection = DatabaseConnection.beginConnection();
@@ -152,6 +173,11 @@ public class UserImp {
         DatabaseConnection.closeConnection();
     }
 
+    /**
+     * This method generates a SQL statement to get all users from database.
+     * @return Returns an observable list of users.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static ObservableList<Users> getAllUsers() throws SQLException {
         ObservableList<Users> allUsers = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();

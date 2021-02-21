@@ -106,7 +106,7 @@ public class reportsWindowController {
     }
 
     /**
-     * This initializer sets up the various reports on all 3 tabs.
+     * This initializer sets up the various reports on all 3 tabs. A lambda expression is used to help pass the objects into the table column and to sort the report by contact name.
      * @param user User is passed to track the user who is logged in.
      * @throws SQLException SQLException is thrown because database is called.
      */
@@ -455,6 +455,7 @@ public class reportsWindowController {
         appointmentTypeList.add(decReportType3);
         appointmentTypeList.add(decReportType4);
 
+        //lambda expression is used to add values into the columns.
         typeTableView.setItems(appointmentTypeList);
         resultsColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
 
@@ -468,6 +469,7 @@ public class reportsWindowController {
                 }
             }
         }
+        //lamda expression used to compare appointments and sort by contact name.
         Comparator<Appointments> comparator = (appointment1, appointment2) -> appointment1.getContactName().compareTo(appointment2.getContactName());
         allAppointments.sort(comparator);
         contactReportTableView.setItems(allAppointments);

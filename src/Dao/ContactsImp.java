@@ -3,7 +3,6 @@ package Dao;
 import Model.Contacts;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +11,7 @@ import java.sql.SQLException;
 public class ContactsImp {
 
     /**
-     * This method gets all contacts from database.
+     * This method generates SQL statement to retrieve all contacts from database.
      * @return Returns an observable list of contacts.
      * @throws SQLException Throws an SQLException because database is called
      */
@@ -38,7 +37,7 @@ public class ContactsImp {
     }
 
     /**
-     * This method returns a specific contact from database.
+     * This method generates SQL statement to return a specific contact from database.
      * @param contactsID Contact id of contact to return from database.
      * @return Returns a contact from database.
      * @throws SQLException Throws an SQLException because database is called

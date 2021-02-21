@@ -14,6 +14,11 @@ import java.time.LocalTime;
 
 public class DivisionsImp {
 
+    /**
+     * This method generates SQL statement to get all divisions from database.
+     * @return Returns an observable list of divisions.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static ObservableList<FirstLevelDivision> getAllDivisions() throws SQLException {
         ObservableList<FirstLevelDivision> allDivisions = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
@@ -38,6 +43,12 @@ public class DivisionsImp {
         return allDivisions;
     }
 
+    /**
+     * This method generates the SQL statement to get a specific division.
+     * @param divisionId The division id of the division to be retrieved.
+     * @return Returns a division object.
+     * @throws SQLException Throws an SQLException because database is called.
+     */
     public static FirstLevelDivision getDivision(int divisionId) throws SQLException {
         Connection connection = DatabaseConnection.beginConnection();
         String selectStatement = "SELECT * FROM first_level_divisions WHERE Division_ID = " + String.valueOf(divisionId);
