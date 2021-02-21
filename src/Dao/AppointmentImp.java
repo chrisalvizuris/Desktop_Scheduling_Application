@@ -4,7 +4,6 @@ import Model.Appointments;
 import Model.Users;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +13,11 @@ import java.util.Comparator;
 
 public class AppointmentImp {
 
+    /**
+     * This method adds an appointment to the database.
+     * @param appointment Appointment to be added to database.
+     * @throws SQLException SQLException is thrown because database is called.
+     */
     public static void addAppointment(Appointments appointment) throws SQLException {
 
         Connection connection = DatabaseConnection.beginConnection();
@@ -75,6 +79,12 @@ public class AppointmentImp {
 
     }
 
+    /**
+     * This method reads an appointment from the database.
+     * @param appointmentId The id of the appointment to be called from database.
+     * @return returns the appointment from database.
+     * @throws SQLException SQLException is thrown because database is called.
+     */
     public static Appointments getAppointment(int appointmentId) throws SQLException {
 
         Connection connection = DatabaseConnection.beginConnection();
@@ -136,6 +146,11 @@ public class AppointmentImp {
         return null;
     }
 
+    /**
+     * This method updates an appointment from the database.
+     * @param appointment The appointment to be updated.
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static void updateAppointment(Appointments appointment) throws SQLException {
 
         Connection connection = DatabaseConnection.beginConnection();
@@ -192,6 +207,11 @@ public class AppointmentImp {
 
     }
 
+    /**
+     * This method returns all appointments from the database.
+     * @return returns the observable list of appointments
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static ObservableList<Appointments> getAllAppointments() throws SQLException {
         ObservableList<Appointments> allAppointments = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
@@ -243,6 +263,11 @@ public class AppointmentImp {
         return allAppointments;
     }
 
+    /**
+     * This method returns all appointments from this week.
+     * @return Returns an observable list of appointments
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static ObservableList<Appointments> getAllAppointmentsThisWeek() throws SQLException {
         ObservableList<Appointments> allAppointmentsThisWeek = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
@@ -296,6 +321,11 @@ public class AppointmentImp {
         return allAppointmentsThisWeek;
     }
 
+    /**
+     * This method returns all appointments from this month
+     * @return This method returns an observable list of appointments
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static ObservableList<Appointments> getAllAppointmentsThisMonth() throws SQLException {
         ObservableList<Appointments> allAppointmentsThisMonth = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
@@ -349,6 +379,12 @@ public class AppointmentImp {
         return allAppointmentsThisMonth;
     }
 
+    /**
+     * This method returns all appointments this month for the logged in user from database.
+     * @param user User who is logged in who has appointments to return.
+     * @return Returns observable list of appointments
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static ObservableList<Appointments> getAllUserAppointmentsMonth(Users user) throws SQLException {
         ObservableList<Appointments> allUserAppointmentsThisMonth = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
@@ -404,6 +440,12 @@ public class AppointmentImp {
         return allUserAppointmentsThisMonth;
     }
 
+    /**
+     * This method returns all appointments this week for the logged in user.
+     * @param user User who has appointments to return.
+     * @return Returns an observable list of appointments
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static ObservableList<Appointments> getAllUserAppointmentsWeek(Users user) throws SQLException {
         ObservableList<Appointments> allUserAppointmentsThisWeek = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
@@ -462,6 +504,12 @@ public class AppointmentImp {
         return allUserAppointmentsThisWeek;
     }
 
+    /**
+     * This method returns all appointments for the logged in user from database.
+     * @param user User who is logged in and has appointments to return.
+     * @return Returns an observable list of appointments.
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static ObservableList<Appointments> allUserAppointments(Users user) throws SQLException {
         ObservableList<Appointments> allAppointments = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
@@ -514,6 +562,12 @@ public class AppointmentImp {
         return allAppointments;
     }
 
+    /**
+     * This method returns all appointments for a specific customer from database.
+     * @param customerId customer id of customer we're searching for in database.
+     * @return Returns an arraylist of appointments.
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static ArrayList<Appointments> getCustomerAppointments(int customerId) throws SQLException {
         ArrayList<Appointments> allCustomerAppointments = new ArrayList<>();
         Connection connection = DatabaseConnection.beginConnection();
@@ -565,6 +619,11 @@ public class AppointmentImp {
         return allCustomerAppointments;
     }
 
+    /**
+     * This method deletes an appointment from the database.
+     * @param appointmentId The appointment id of appointment to be deleted from database.
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static void deleteAppointment(int appointmentId) throws SQLException {
 
         Connection connection = DatabaseConnection.beginConnection();
@@ -586,6 +645,10 @@ public class AppointmentImp {
 
     }
 
+    /**
+     * This method returns the appointment types as strings in a list.
+     * @return Returns all types of appointments as observable list.
+     */
     public static ObservableList<String> appointmentTypes() {
         ObservableList<String> allTypes = FXCollections.observableArrayList();
         String type1 = "General Meeting";
@@ -601,6 +664,10 @@ public class AppointmentImp {
         return allTypes;
     }
 
+    /**
+     * This method returns an observable list of start times for the appointment scenes.
+     * @return Returns an observable list for the combo box.
+     */
     public static ObservableList<String> getStartTimes() {
         ObservableList<String> allStartTimes = FXCollections.observableArrayList();
         String time1 = "05:00:00";
@@ -684,6 +751,10 @@ public class AppointmentImp {
         return allStartTimes;
     }
 
+    /**
+     * This method returns all end times for appointments.
+     * @return Returns an observable list of end times.
+     */
     public static ObservableList<String> getEndTimes() {
         ObservableList<String> allEndTimes = FXCollections.observableArrayList();
 

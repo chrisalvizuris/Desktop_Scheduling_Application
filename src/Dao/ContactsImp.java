@@ -11,6 +11,11 @@ import java.sql.SQLException;
 
 public class ContactsImp {
 
+    /**
+     * This method gets all contacts from database.
+     * @return Returns an observable list of contacts.
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static ObservableList<Contacts> getAllContacts() throws SQLException {
         ObservableList<Contacts> allContacts = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
@@ -32,6 +37,12 @@ public class ContactsImp {
         return allContacts;
     }
 
+    /**
+     * This method returns a specific contact from database.
+     * @param contactsID Contact id of contact to return from database.
+     * @return Returns a contact from database.
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static Contacts getContact(int contactsID) throws SQLException {
         Connection connection = DatabaseConnection.beginConnection();
         String selectStatement = "SELECT * FROM contacts WHERE Contact_ID = " + String.valueOf(contactsID);

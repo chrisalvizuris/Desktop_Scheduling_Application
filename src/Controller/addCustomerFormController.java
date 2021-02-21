@@ -17,7 +17,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -60,10 +59,14 @@ public class addCustomerFormController {
     @FXML
     private Label addCustomerHeadlineLabel;
 
-    private String userName;
-
     private Users loggedUser;
 
+    /**
+     * This method cancels the activity and changes scenes to main window.
+     * @param event Event is used to help change scenes.
+     * @throws IOException Throws IOException.
+     * @throws SQLException Throws SQLException because initializer calls on database.
+     */
     @FXML
     private void cancelCustomerButtonPushed(ActionEvent event) throws IOException, SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
@@ -85,8 +88,12 @@ public class addCustomerFormController {
         }
     }
 
+    /**
+     * This method saves the customer data to database and changes scenes to main window.
+     * @param event Event is used to help change scenes.
+     */
     @FXML
-    private void saveCustomerButtonPushed(ActionEvent event) throws IOException, SQLException {
+    private void saveCustomerButtonPushed(ActionEvent event) {
         try {
             String customerName = customerNameTextField.getText();
             String customerAddress = customerAddressTextField.getText();
@@ -137,6 +144,11 @@ public class addCustomerFormController {
         }
     }
 
+    /**
+     * This method is used to help filter the divisions combo box.
+     * @throws IOException This IOException isn't thrown but helps with the database calls.
+     * @throws SQLException SQLException is throw because this method calls on the database.
+     */
     public void countryBoxSelected() throws IOException, SQLException {
         if (!(countryComboBox.getSelectionModel().isEmpty())) {
             Countries country = countryComboBox.getSelectionModel().getSelectedItem();
@@ -153,6 +165,11 @@ public class addCustomerFormController {
         }
     }
 
+    /**
+     * This is the initializer for the add customer form. It passes a user as parameter.
+     * @param user Passes user to help track logged in user between add customer scene and main window.
+     * @throws SQLException This method throws SQLException because it calls on database.
+     */
     public void initialize(Users user) throws SQLException {
         loggedUser = user;
         countryComboBox.setItems(CountriesImp.getAllCountries());

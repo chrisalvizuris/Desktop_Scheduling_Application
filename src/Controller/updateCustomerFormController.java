@@ -17,7 +17,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -53,9 +52,12 @@ public class updateCustomerFormController {
 
     private Users loggedUser = null;
 
-
+    /**
+     * This method saves the data to database and changes scenes to main window.
+     * @param event Event is used to help change scenes.
+     */
     @FXML
-    public void updateSaveButtonPushed(ActionEvent event) throws IOException, SQLException {
+    public void updateSaveButtonPushed(ActionEvent event) {
         try {
             int customerId = Integer.parseInt(customerIdTextField.getText());
             String updateName = customerNameTextField.getText();
@@ -99,6 +101,12 @@ public class updateCustomerFormController {
         }
     }
 
+    /**
+     * This method cancels the activity on page. Uses a confirmation window.
+     * @param event Event is used to help change between scenes.
+     * @throws IOException IOException is thrown.
+     * @throws SQLException SQLException is thrown because database is called.
+     */
     @FXML
     public void updateCancelButtonPushed(ActionEvent event) throws IOException, SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
@@ -121,7 +129,11 @@ public class updateCustomerFormController {
 
     }
 
-    public void newCountrySelected(ActionEvent countrySelected) throws IOException, SQLException {
+    /**
+     * This method is used to help filter divisions based on country.
+     * @throws SQLException SQLException is thrown because database is called.
+     */
+    public void newCountrySelected() throws SQLException {
         if(!(countryComboBox.getSelectionModel().isEmpty())) {
             Countries country = countryComboBox.getSelectionModel().getSelectedItem();
             int countryId = country.getCountryID();
@@ -137,6 +149,12 @@ public class updateCustomerFormController {
         }
     }
 
+    /**
+     * This initializer loads customer data that was passed in.
+     * @param customer Customer who's data is being updated.
+     * @param user User is passed to track logged in user.
+     * @throws SQLException SQLException is thrown because database is called.
+     */
     public void initUpdateCustomer(Customers customer, Users user) throws SQLException {
         countryComboBox.setItems(CountriesImp.getAllCountries());
         ObservableList<FirstLevelDivision> allDivisions = DivisionsImp.getAllDivisions();

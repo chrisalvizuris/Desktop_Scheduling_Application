@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,6 +49,13 @@ public class loginFormController {
     @FXML
     private Label locationLabel;
 
+
+    /**
+     * This method is used to sign the user in. Login attempts are tracked in the login_activity file. Alerts are given if login info is wrong.
+     * @param event Event used to change scenes when button is pressed.
+     * @throws IOException This method throws an IOException
+     * @throws SQLException This method throws an SQLException
+     */
     public void signInButtonPushed(ActionEvent event) throws IOException, SQLException {
         ObservableList<Users> allUsers = UserImp.getAllUsers();
         String username = usernameTextField.getText();
@@ -108,6 +114,9 @@ public class loginFormController {
 
     }
 
+    /**
+     * Login Screen Initializer that loads the user's location on login screen. Translates to French if user's machine is set to French.
+     */
     public void initialize() {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("Utilities/Nat", Locale.getDefault());
 

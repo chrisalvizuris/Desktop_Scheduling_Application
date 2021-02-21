@@ -8,8 +8,6 @@ import Model.Appointments;
 import Model.Contacts;
 import Model.Customers;
 import Model.Users;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.*;
@@ -68,10 +65,13 @@ public class updateAppointmentFormController {
 
     private Users loggedInUser;
 
+    /**
+     * This method saves the updated data to the database. Sets alerts for time zone conversion, incorrect data, and incorrect dates.
+     * @param event Event is used to help change scenes.
+     */
     @FXML
-    private void updateSaveButtonPushed(ActionEvent event) throws IOException, SQLException {
+    private void updateSaveButtonPushed(ActionEvent event) {
         try {
-
             //assign the entered fields to variables when save button is pushed
             int id = Integer.parseInt(updateAppointmentIDTextField.getText());
             String newTitle = updateAppointmentTitleTextField.getText();
@@ -162,6 +162,12 @@ public class updateAppointmentFormController {
         }
     }
 
+    /**
+     * This method cancels the activity and changes scenes to main window.
+     * @param event Event is used to help change scenes.
+     * @throws IOException  IOException is thrown.
+     * @throws SQLException SQLException is thrown because database is called via initializer.
+     */
     @FXML
     private void updateCancelButtonPushed(ActionEvent event) throws IOException, SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
@@ -183,6 +189,12 @@ public class updateAppointmentFormController {
         }
     }
 
+    /**
+     * This initializer takes in appointments and users and calls on database to load data.
+     * @param appointmentToUpdate The appointment that is going to be updated in the database.
+     * @param user The user who is logged in to track between scenes.
+     * @throws SQLException SQLException is thrown because database is called.
+     */
     public void initUpdateAppointment(Appointments appointmentToUpdate, Users user) throws SQLException {
         loggedInUser = user;
         updateContactComboBox.setItems(ContactsImp.getAllContacts());

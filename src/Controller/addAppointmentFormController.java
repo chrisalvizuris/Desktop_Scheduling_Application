@@ -16,8 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.*;
@@ -26,9 +24,6 @@ import java.util.Optional;
 import java.util.TimeZone;
 
 public class addAppointmentFormController {
-
-    @FXML
-    private TextField appointmentIdTextField;
 
     @FXML
     private TextField appointmentTitleTextField;
@@ -63,14 +58,15 @@ public class addAppointmentFormController {
     @FXML
     private ComboBox<Users> userIdComboBox;
 
-    @FXML
-    private Button appointmentSaveButton;
-
-    @FXML
-    private Button appointmentCancelButton;
 
     private Users loggedInPerson;
 
+    /**
+     * This method cancels the activity and switches scenes to main window after user confirms.
+     * @param event Event is used to help switch scenes.
+     * @throws IOException IOException is thrown for this method.
+     * @throws SQLException SQLException is thrown because method calls on database via initializer.
+     */
     @FXML
     private void cancelAppointmentButtonPushed(ActionEvent event) throws IOException, SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?");
@@ -91,8 +87,12 @@ public class addAppointmentFormController {
         }
     }
 
+    /**
+     * This method saves the appointment to database and also displays alerts if data is incompatible.
+     * @param event Event is used to help switch scenes.
+     */
     @FXML
-    private void saveAppointmentButtonPushed(ActionEvent event) throws IOException, SQLException {
+    private void saveAppointmentButtonPushed(ActionEvent event) {
         try {
 
             String appointmentTitle = appointmentTitleTextField.getText();
@@ -180,6 +180,11 @@ public class addAppointmentFormController {
         }
     }
 
+    /**
+     * This initializer initializes data and sets combo box data.
+     * @param user User is passed to track the user who is logged in.
+     * @throws SQLException SQLException is thrown because it calls on the database.
+     */
     public void initialize(Users user) throws SQLException {
         loggedInPerson = user;
         customerIdComboBox.setItems(CustomerImp.getAllCustomers());

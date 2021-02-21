@@ -17,29 +17,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.Comparator;
 
 public class reportsWindowController {
 
 
     @FXML
-    private Tab typeTab;
-
-    @FXML
     private TableView<String> typeTableView;
 
     @FXML
     private TableColumn<String, String> resultsColumn;
-
-    @FXML
-    private Tab contactTab;
 
     @FXML
     private TableView<Appointments> contactReportTableView;
@@ -69,12 +61,6 @@ public class reportsWindowController {
     private TableColumn<Appointments, Integer> custIdColumn;
 
     @FXML
-    private Tab locationTab;
-
-    @FXML
-    private Button returnHomeButton;
-
-    @FXML
     private Label mondayLabel;
 
     @FXML
@@ -97,6 +83,12 @@ public class reportsWindowController {
 
     private Users loggedUser;
 
+    /**
+     * This method takes the user back to the main window.
+     * @param event Event used to help change scenes.
+     * @throws SQLException SQLException is thrown because initializer calls on database.
+     * @throws IOException IOException is thrown.
+     */
     @FXML
     private void returnButtonPressed(ActionEvent event) throws SQLException, IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -113,6 +105,11 @@ public class reportsWindowController {
         window.show();
     }
 
+    /**
+     * This initializer sets up the various reports on all 3 tabs.
+     * @param user User is passed to track the user who is logged in.
+     * @throws SQLException SQLException is thrown because database is called.
+     */
     public void initialize(Users user) throws SQLException {
         loggedUser = user;
 
@@ -359,54 +356,54 @@ public class reportsWindowController {
             }
         }
 
-        String janReportType1 = "January: " + String.valueOf(janGMCount) + " " + type1 + " appointments.";
-        String janReportType2 = "January: " + String.valueOf(janConsultCount) + " " + type2 + " appointments.";
-        String janReportType3 = "January: " + String.valueOf(janQBRCount) + " " + type3 + " appointments.";
-        String janReportType4 = "January: " + String.valueOf(janInterCount) + " " + type4 + " appointments.";
-        String febReportType1 = "February: " + String.valueOf(febGMCount) + " " + type1 + " appointments.";
-        String febReportType2 = "February: " + String.valueOf(febConsultCount) + " " + type2 + " appointments.";
-        String febReportType3 = "February: " + String.valueOf(febQBRCount) + " " + type3 + " appointments.";
-        String febReportType4 = "February: " + String.valueOf(febInterCount) + " " + type4 + " appointments.";
-        String marReportType1 = "March: " + String.valueOf(marGMCount) + " " + type1 + " appointments.";
-        String marReportType2 = "March: " + String.valueOf(marConsultCount) + " " + type2 + " appointments.";
-        String marReportType3 = "March: " + String.valueOf(marQBRCount) + " " + type3 + " appointments.";
-        String marReportType4 = "March: " + String.valueOf(marInterCount) + " " + type4 + " appointments.";
-        String aprReportType1 = "April: " + String.valueOf(aprGMCount) + " " + type1 + " appointments.";
-        String aprReportType2 = "April: " + String.valueOf(aprConsultCount) + " " + type2 + " appointments.";
-        String aprReportType3 = "April: " + String.valueOf(aprQBRCount) + " " + type3 + " appointments.";
-        String aprReportType4 = "April: " + String.valueOf(aprInterCount) + " " + type4 + " appointments.";
-        String mayReportType1 = "May: " + String.valueOf(mayGMCount) + " " + type1 + " appointments.";
-        String mayReportType2 = "May: " + String.valueOf(mayConsultCount) + " " + type2 + " appointments.";
-        String mayReportType3 = "May: " + String.valueOf(mayQBRCount) + " " + type3 + " appointments.";
-        String mayReportType4 = "May: " + String.valueOf(mayInterCount) + " " + type4 + " appointments.";
-        String juneReportType1 = "June: " + String.valueOf(juneGMCount) + " " + type1 + " appointments.";
-        String juneReportType2 = "June: " + String.valueOf(juneConsultCount) + " " + type2 + " appointments.";
-        String juneReportType3 = "June: " + String.valueOf(juneQBRCount) + " " + type3 + " appointments.";
-        String juneReportType4 = "June: " + String.valueOf(juneInterCount) + " " + type4 + " appointments.";
-        String julyReportType1 = "July: " + String.valueOf(julyGMCount) + " " + type1 + " appointments.";
-        String julyReportType2 = "July: " + String.valueOf(julyConsultCount) + " " + type2 + " appointments.";
-        String julyReportType3 = "July: " + String.valueOf(julyQBRCount) + " " + type3 + " appointments.";
-        String julyReportType4 = "July: " + String.valueOf(julyInterCount) + " " + type4 + " appointments.";
-        String augReportType1 = "August: " + String.valueOf(augGMCount) + " " + type1 + " appointments.";
-        String augReportType2 = "August: " + String.valueOf(augConsultCount) + " " + type2 + " appointments.";
-        String augReportType3 = "August: " + String.valueOf(augQBRCount) + " " + type3 + " appointments.";
-        String augReportType4 = "August: " + String.valueOf(augInterCount) + " " + type4 + " appointments.";
-        String septReportType1 = "September: " + String.valueOf(septGMCount) + " " + type1 + " appointments.";
-        String septReportType2 = "September: " + String.valueOf(septConsultCount) + " " + type2 + " appointments.";
-        String septReportType3 = "September: " + String.valueOf(septQBRCount) + " " + type3 + " appointments.";
-        String septReportType4 = "September: " + String.valueOf(septInterCount) + " " + type4 + " appointments.";
-        String octReportType1 = "October: " + String.valueOf(octGMCount) + " " + type1 + " appointments.";
-        String octReportType2 = "October: " + String.valueOf(octConsultCount) + " " + type2 + " appointments.";
-        String octReportType3 = "October: " + String.valueOf(octQBRCount) + " " + type3 + " appointments.";
-        String octReportType4 = "October: " + String.valueOf(octInterCount) + " " + type4 + " appointments.";
-        String novReportType1 = "November: " + String.valueOf(novGMCount) + " " + type1 + " appointments.";
-        String novReportType2 = "November: " + String.valueOf(novConsultCount) + " " + type2 + " appointments.";
-        String novReportType3 = "November: " + String.valueOf(novQBRCount) + " " + type3 + " appointments.";
-        String novReportType4 = "November: " + String.valueOf(novInterCount) + " " + type4 + " appointments.";
-        String decReportType1 = "December: " + String.valueOf(decGMCount) + " " + type1 + " appointments.";
-        String decReportType2 = "December: " + String.valueOf(decConsultCount) + " " + type2 + " appointments.";
-        String decReportType3 = "December: " + String.valueOf(decQBRCount) + " " + type3 + " appointments.";
-        String decReportType4 = "December: " + String.valueOf(decInterCount) + " " + type4 + " appointments.";
+        String janReportType1 = "January: " + janGMCount + " " + type1 + " appointments.";
+        String janReportType2 = "January: " + janConsultCount + " " + type2 + " appointments.";
+        String janReportType3 = "January: " + janQBRCount + " " + type3 + " appointments.";
+        String janReportType4 = "January: " + janInterCount + " " + type4 + " appointments.";
+        String febReportType1 = "February: " + febGMCount + " " + type1 + " appointments.";
+        String febReportType2 = "February: " + febConsultCount + " " + type2 + " appointments.";
+        String febReportType3 = "February: " + febQBRCount + " " + type3 + " appointments.";
+        String febReportType4 = "February: " + febInterCount + " " + type4 + " appointments.";
+        String marReportType1 = "March: " + marGMCount + " " + type1 + " appointments.";
+        String marReportType2 = "March: " + marConsultCount + " " + type2 + " appointments.";
+        String marReportType3 = "March: " + marQBRCount + " " + type3 + " appointments.";
+        String marReportType4 = "March: " + marInterCount + " " + type4 + " appointments.";
+        String aprReportType1 = "April: " + aprGMCount + " " + type1 + " appointments.";
+        String aprReportType2 = "April: " + aprConsultCount + " " + type2 + " appointments.";
+        String aprReportType3 = "April: " + aprQBRCount + " " + type3 + " appointments.";
+        String aprReportType4 = "April: " + aprInterCount + " " + type4 + " appointments.";
+        String mayReportType1 = "May: " + mayGMCount + " " + type1 + " appointments.";
+        String mayReportType2 = "May: " + mayConsultCount + " " + type2 + " appointments.";
+        String mayReportType3 = "May: " + mayQBRCount + " " + type3 + " appointments.";
+        String mayReportType4 = "May: " + mayInterCount + " " + type4 + " appointments.";
+        String juneReportType1 = "June: " + juneGMCount + " " + type1 + " appointments.";
+        String juneReportType2 = "June: " + juneConsultCount + " " + type2 + " appointments.";
+        String juneReportType3 = "June: " + juneQBRCount + " " + type3 + " appointments.";
+        String juneReportType4 = "June: " + juneInterCount + " " + type4 + " appointments.";
+        String julyReportType1 = "July: " + julyGMCount + " " + type1 + " appointments.";
+        String julyReportType2 = "July: " + julyConsultCount + " " + type2 + " appointments.";
+        String julyReportType3 = "July: " + julyQBRCount + " " + type3 + " appointments.";
+        String julyReportType4 = "July: " + julyInterCount + " " + type4 + " appointments.";
+        String augReportType1 = "August: " + augGMCount + " " + type1 + " appointments.";
+        String augReportType2 = "August: " + augConsultCount + " " + type2 + " appointments.";
+        String augReportType3 = "August: " + augQBRCount + " " + type3 + " appointments.";
+        String augReportType4 = "August: " + augInterCount + " " + type4 + " appointments.";
+        String septReportType1 = "September: " + septGMCount + " " + type1 + " appointments.";
+        String septReportType2 = "September: " + septConsultCount + " " + type2 + " appointments.";
+        String septReportType3 = "September: " + septQBRCount + " " + type3 + " appointments.";
+        String septReportType4 = "September: " + septInterCount + " " + type4 + " appointments.";
+        String octReportType1 = "October: " + octGMCount + " " + type1 + " appointments.";
+        String octReportType2 = "October: " + octConsultCount + " " + type2 + " appointments.";
+        String octReportType3 = "October: " + octQBRCount + " " + type3 + " appointments.";
+        String octReportType4 = "October: " + octInterCount + " " + type4 + " appointments.";
+        String novReportType1 = "November: " + novGMCount + " " + type1 + " appointments.";
+        String novReportType2 = "November: " + novConsultCount + " " + type2 + " appointments.";
+        String novReportType3 = "November: " + novQBRCount + " " + type3 + " appointments.";
+        String novReportType4 = "November: " + novInterCount + " " + type4 + " appointments.";
+        String decReportType1 = "December: " + decGMCount + " " + type1 + " appointments.";
+        String decReportType2 = "December: " + decConsultCount + " " + type2 + " appointments.";
+        String decReportType3 = "December: " + decQBRCount + " " + type3 + " appointments.";
+        String decReportType4 = "December: " + decInterCount + " " + type4 + " appointments.";
 
         ObservableList<String> appointmentTypeList = FXCollections.observableArrayList();
         appointmentTypeList.add(janReportType1);

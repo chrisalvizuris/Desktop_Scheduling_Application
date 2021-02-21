@@ -14,6 +14,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class CountriesImp {
+
+    /**
+     * This method returns all countries from database.
+     * @return Returns an observable list of countries.
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static ObservableList<Countries> getAllCountries() throws SQLException {
         ObservableList<Countries> allCountries = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
@@ -37,6 +43,12 @@ public class CountriesImp {
         return allCountries;
     }
 
+    /**
+     * This method returns a specific country from database.
+     * @param countryId Country id of country to return.
+     * @return Returns a country.
+     * @throws SQLException Throws an SQLException because database is called
+     */
     public static Countries getCountry(int countryId) throws SQLException {
         Connection connection = DatabaseConnection.beginConnection();
         String selectCountryStatement = "SELECT * FROM countries WHERE Country_ID = " + String.valueOf(countryId);

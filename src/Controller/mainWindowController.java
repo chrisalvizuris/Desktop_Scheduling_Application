@@ -171,6 +171,13 @@ public class mainWindowController {
 
     private LocalDateTime appointmentTime;
 
+
+    /**
+     * Method to change scenes to the new appointment page. Passes logged in user's info to next scene.
+     * @param event Parameter used to call the scene change from main window to new appointment scene.
+     * @throws IOException IOException is thrown for this event.
+     * @throws SQLException SQLException is thrown because the initializer calls from database.
+     */
     @FXML
     public void newAppointmentButtonPushed(ActionEvent event) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
@@ -187,6 +194,12 @@ public class mainWindowController {
         window.show();
     }
 
+    /**
+     * This method is called to change scenes from the main window to the new customer scene.
+     * @param event Event is called to help with changing scenes after loading initializer.
+     * @throws IOException This method throws an IOException.
+     * @throws SQLException This method throws an SQLException.
+     */
     @FXML
     public void newCustomerButtonPushed(ActionEvent event) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
@@ -203,6 +216,11 @@ public class mainWindowController {
         window.show();
     }
 
+    /**
+     * This method is used to sign the user out of the program.
+     * @param event Event is called to change scenes with initializer.
+     * @throws IOException This method throws an IOException
+     */
     @FXML
     public void signOutButtonPushed(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to sign out?");
@@ -219,8 +237,12 @@ public class mainWindowController {
         }
     }
 
+    /**
+     * This method is used to change scenes to update customer scene.
+     * @param event This parameter is used to help change scenes with initializer.
+     */
     @FXML
-    public void updateCustomerButtonPushed(ActionEvent event) throws IOException, SQLException {
+    public void updateCustomerButtonPushed(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/View/updateCustomerForm.fxml"));
@@ -244,8 +266,12 @@ public class mainWindowController {
 
     }
 
+    /**
+     * This method is used to change scenes from main window to the update appointment window. An alert is shown if nothing is selected.
+     * @param updateAppointment Parameter used to help change scenes and call initializer.
+     */
     @FXML
-    public void updateAppointmentButtonPushed(ActionEvent updateAppointment) throws IOException, SQLException {
+    public void updateAppointmentButtonPushed(ActionEvent updateAppointment) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/View/updateAppointmentForm.fxml"));
@@ -276,6 +302,10 @@ public class mainWindowController {
         }
     }
 
+    /**
+     * This method is used to delete a customer from the database. An alert is shown if nothing is selected. Confirmation is shown before and after. If customer has appointments, alert is shown.
+     * @throws SQLException This method throws an SQLException because it uses the database.
+     */
     @FXML
     public void deleteCustomerButtonPushed() throws SQLException {
         if (customersTableView.getSelectionModel().getSelectedItem() == null) {
@@ -307,6 +337,10 @@ public class mainWindowController {
         }
     }
 
+    /**
+     * This method is used to delete an appointment from the database. Confirmations and alerts are shown.
+     * @throws SQLException This method throws an SQLException because it uses the database.
+     */
     @FXML
     public void deleteAppointmentButtonPushed() throws SQLException {
         if(appointmentsAllTableView.getSelectionModel().getSelectedItem() != null) {
@@ -362,6 +396,12 @@ public class mainWindowController {
         }
     }
 
+    /**
+     * This method is used to change scenes from main window to report window.
+     * @param event The event is called to help change scenes and call the initializer.
+     * @throws IOException This method throws an IOException.
+     * @throws SQLException An SQLException is called because the initializer calls on the database.
+     */
     @FXML
     public void reportButtonPushed(ActionEvent event) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
@@ -379,6 +419,11 @@ public class mainWindowController {
         window.show();
     }
 
+    /**
+     * This method is the initializer. Other scenes will call on this method when coming back to the main window. A user is passed as parameter.
+     * @param user Passed as parameter to track the user who has data to be shown and is logged in.
+     * @throws SQLException SQLException is thrown because this method calls on the database.
+     */
     public void initMainWindow(Users user) throws SQLException {
         ObservableList<Appointments> allAppointments = AppointmentImp.allUserAppointments(user);
 
