@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.updateAppointmentFormController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.updateAppointmentFormController">
     <left>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #41B3A3;" BorderPane.alignment="CENTER">
             <children>
@@ -42,27 +42,77 @@
                 </Label>
             </top>
             <center>
-                <VBox prefHeight="362.0" prefWidth="362.0" spacing="10.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+                <VBox prefHeight="362.0" prefWidth="362.0" spacing="5.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
                     <children>
-                        <TextField fx:id="updateAppointmentIDTextField" focusTraversable="false" prefHeight="27.0" prefWidth="326.0" promptText="Appointment ID" disable="true"/>
+                  <Label text="ID" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
+                        <TextField fx:id="updateAppointmentIDTextField" disable="true" focusTraversable="false" prefHeight="27.0" prefWidth="326.0" promptText="Appointment ID" />
+                  <Label layoutX="10.0" layoutY="10.0" text="Title" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <TextField fx:id="updateAppointmentTitleTextField" focusTraversable="false" prefHeight="27.0" prefWidth="326.0" promptText="Title" />
+                  <Label layoutX="10.0" layoutY="63.0" text="Description" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <TextField fx:id="updateAppointmentDescriptionTextField" focusTraversable="false" prefHeight="27.0" prefWidth="326.0" promptText="Description" />
+                  <Label layoutX="10.0" layoutY="116.0" text="Location" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <TextField fx:id="updateAppointmentLocationTextField" focusTraversable="false" prefHeight="27.0" prefWidth="326.0" promptText="Location" />
+                  <Label layoutX="10.0" layoutY="169.0" text="Contact" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <ComboBox fx:id="updateContactComboBox" focusTraversable="false" prefHeight="27.0" prefWidth="226.0" promptText="Select a Contact" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
+                  <Label layoutX="10.0" layoutY="222.0" text="Appointment Type" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <ComboBox fx:id="updateTypeComboBox" focusTraversable="false" prefHeight="27.0" prefWidth="226.0" promptText="Appointment Type" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
+                  <Label layoutX="10.0" layoutY="277.0" text="Appointment Start" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <HBox prefHeight="36.0" prefWidth="360.0" spacing="10.0" style="-fx-background-color: #FFFFFF;">
                             <children>
                                 <DatePicker fx:id="updateStartDatePicker" focusTraversable="false" prefHeight="27.0" prefWidth="124.0" promptText="Start Date" />
                         <ComboBox fx:id="startTimeComboBox" prefWidth="150.0" promptText="Start Time" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
                             </children>
                         </HBox>
+                  <Label layoutX="10.0" layoutY="332.0" text="Appointment End" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <HBox prefHeight="36.0" prefWidth="360.0" spacing="10.0" style="-fx-background-color: #FFFFFF;">
                             <children>
                                 <DatePicker fx:id="updateEndDatePicker" focusTraversable="false" prefHeight="27.0" prefWidth="125.0" promptText="End Date" />
                         <ComboBox fx:id="endTimeComboBox" prefWidth="150.0" promptText="End Time" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
                             </children>
                         </HBox>
+                  <Label text="Customer ID" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <ComboBox fx:id="updateCustomerIdComboBox" focusTraversable="false" prefHeight="27.0" prefWidth="226.0" promptText="Select a Customer ID" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
+                  <Label layoutX="10.0" layoutY="456.0" text="User ID" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <ComboBox fx:id="updateUserIdComboBox" focusTraversable="false" prefHeight="27.0" prefWidth="226.0" promptText="Select a User ID" style="-fx-background-color: #FFFFFF; -fx-border-color: #d8d8d8;" />
                         <HBox prefHeight="30.0" prefWidth="360.0" spacing="10.0">
                             <children>

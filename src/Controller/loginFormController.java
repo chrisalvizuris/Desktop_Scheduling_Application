@@ -119,10 +119,8 @@ public class loginFormController {
      */
     public void initialize() {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("Utilities/Nat", Locale.getDefault());
-
         zoneLabel.setText(String.valueOf(ZonedDateTime.now().getZone()));
 
-        Locale fr = new Locale("fr");
         if(Locale.getDefault().getLanguage().equals("fr") || Locale.getDefault().getLanguage().equals("en")) {
             usernameTextField.setPromptText(resourceBundle.getString("Username"));
             passwordTextField.setPromptText(resourceBundle.getString("Password"));
