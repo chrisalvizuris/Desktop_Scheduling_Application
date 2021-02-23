@@ -165,6 +165,9 @@ public class mainWindowController {
     @FXML
     private Label mainAppointmentLabel;
 
+    @FXML
+    private Label upcomingAppointmentLabel;
+
     private Users loggedInUser;
 
     private int appointmentID;
@@ -425,8 +428,9 @@ public class mainWindowController {
      * @throws SQLException SQLException is thrown because this method calls on the database.
      */
     public void initMainWindow(Users user) throws SQLException {
-        ObservableList<Appointments> allAppointments = AppointmentImp.allUserAppointments(user);
+        loggedInUser = user;
 
+        ObservableList<Appointments> allAppointments = AppointmentImp.allUserAppointments(user);
         customersTableView.setItems(CustomerImp.getAllCustomers());
         custIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         custNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
@@ -475,8 +479,6 @@ public class mainWindowController {
         editCustomerButton.setTooltip(new Tooltip("Update Customer"));
         deleteCustomerButton.setTooltip(new Tooltip("Delete Customer"));
 
-        loggedInUser = user;
-
         mainAppointmentLabel.setText(user.getUserName() + "'s Appointments");
 
         int count = 0;
@@ -488,11 +490,13 @@ public class mainWindowController {
             }
         }
         if (count > 0) {
+            upcomingAppointmentLabel.setText("Upcoming Meeting! Appointment ID: " + appointmentID + " starts at " + appointmentTime);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Upcoming Meeting");
             alert.setContentText("A meeting is scheduled to start within the next 15 minutes or less. Appointment ID: " + String.valueOf(appointmentID) + " starts at " + String.valueOf(appointmentTime));
             alert.show();
         }   else {
+            upcomingAppointmentLabel.setText("No Upcoming Meetings in the next 15 minutes");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Appointment Updates");
             alert.setContentText("You have no meetings starting in the next 15 minutes.");

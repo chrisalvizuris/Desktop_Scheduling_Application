@@ -388,7 +388,7 @@ public class AppointmentImp {
     public static ObservableList<Appointments> getAllUserAppointmentsMonth(Users user) throws SQLException {
         ObservableList<Appointments> allUserAppointmentsThisMonth = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
-        String selectStatement = "SELECT * FROM appointments WHERE MONTH(Start) = MONTH(CURDATE()) AND User_ID = " + String.valueOf(user.getUserId());
+        String selectStatement = "SELECT * FROM appointments WHERE MONTH(Start) = MONTH(CURDATE()) AND User_ID = " + user.getUserId();
         DatabaseQuery.setPreparedStatement(connection, selectStatement);
         PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
 
@@ -449,7 +449,7 @@ public class AppointmentImp {
     public static ObservableList<Appointments> getAllUserAppointmentsWeek(Users user) throws SQLException {
         ObservableList<Appointments> allUserAppointmentsThisWeek = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
-        String selectThisMonthStatement = "SELECT * FROM appointments WHERE YEARWEEK(Start) = YEARWEEK(CURDATE()) AND User_ID = " + String.valueOf(user.getUserId());
+        String selectThisMonthStatement = "SELECT * FROM appointments WHERE YEARWEEK(Start) = YEARWEEK(CURDATE()) AND User_ID = " + user.getUserId();
 
         DatabaseQuery.setPreparedStatement(connection, selectThisMonthStatement);
         PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
@@ -513,7 +513,7 @@ public class AppointmentImp {
     public static ObservableList<Appointments> allUserAppointments(Users user) throws SQLException {
         ObservableList<Appointments> allAppointments = FXCollections.observableArrayList();
         Connection connection = DatabaseConnection.beginConnection();
-        String selectAllStatement = "SELECT * FROM appointments WHERE User_ID = " + String.valueOf(user.getUserId());
+        String selectAllStatement = "SELECT * FROM appointments WHERE User_ID = " + user.getUserId();
         DatabaseQuery.setPreparedStatement(connection, selectAllStatement);
         PreparedStatement preparedStatement = DatabaseQuery.getPreparedStatement();
 

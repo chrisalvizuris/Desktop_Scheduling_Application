@@ -98,7 +98,7 @@ public class loginFormController {
             outputFile.println(entry);
             outputFile.close();
             Locale fr = new Locale("fr");
-            if(Locale.getDefault().equals(fr)) {
+            if(Locale.getDefault().getLanguage().equals("fr")) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle(resourceBundle.getString("Error"));
                 alert.setContentText("Le nom d'utilisateur ou le mot de passe que vous avez entré n'est pas valide. Veuillez vérifier et réessayer.");
@@ -123,8 +123,8 @@ public class loginFormController {
         zoneLabel.setText(String.valueOf(ZonedDateTime.now().getZone()));
 
         Locale fr = new Locale("fr");
-        if(Locale.getDefault().equals(fr)) {
-            usernameTextField.setPromptText("Nom d'utilisateur");
+        if(Locale.getDefault().getLanguage().equals("fr") || Locale.getDefault().getLanguage().equals("en")) {
+            usernameTextField.setPromptText(resourceBundle.getString("Username"));
             passwordTextField.setPromptText(resourceBundle.getString("Password"));
             signInLabel.setText(resourceBundle.getString("Login"));
             welcomeLabel.setText(resourceBundle.getString("LoginWelcome"));
