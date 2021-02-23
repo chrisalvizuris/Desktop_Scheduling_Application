@@ -50,28 +50,53 @@
                 </Label>
             </top>
             <center>
-                <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
                     <children>
+                  <Label layoutX="40.0" layoutY="197.0" text="ID" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <TextField fx:id="customerIdTextField" disable="true" editable="false" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Customer ID">
                             <font>
                                 <Font name="SansSerif Regular" size="13.0" />
                             </font>
                         </TextField>
+                  <Label prefHeight="17.0" prefWidth="73.0" text="Name" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <TextField fx:id="customerNameTextField" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Customer Name">
                             <font>
                                 <Font name="SansSerif Regular" size="13.0" />
                             </font>
                         </TextField>
+                  <Label text="Address" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <TextField fx:id="customerAddressTextField" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Address">
                             <font>
                                 <Font name="SansSerif Regular" size="13.0" />
                             </font>
                         </TextField>
+                  <Label layoutX="40.0" layoutY="93.0" text="Postal" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <TextField fx:id="customerPostalCodeTextField" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Postal Code">
                             <font>
                                 <Font name="SansSerif Regular" size="13.0" />
                             </font>
                         </TextField>
+                  <Label layoutX="40.0" layoutY="145.0" text="Phone" textFill="#41b3a3">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </Label>
                         <TextField fx:id="customerPhoneTextField" focusTraversable="false" prefHeight="27.0" prefWidth="371.0" promptText="Phone Number">
                             <font>
                                 <Font name="SansSerif Regular" size="13.0" />

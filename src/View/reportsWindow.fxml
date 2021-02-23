@@ -99,6 +99,14 @@
                            <children>
                               <VBox prefHeight="412.0" prefWidth="700.0">
                                  <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="648.0" text="Appointment Count For This Week" textAlignment="CENTER" textFill="#41b3a3">
+                                       <font>
+                                          <Font name="SansSerif Bold" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </Label>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                                        <children>
                                           <Label text="Number of Appointments on Monday:" textFill="#41b3a3">
