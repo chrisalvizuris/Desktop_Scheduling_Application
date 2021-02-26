@@ -459,9 +459,10 @@ public class reportsWindowController {
         typeTableView.setItems(appointmentTypeList);
         resultsColumn.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
 
-        //start setting up the contact appointment report
+        //start setting up the contact appointment report and create a list
         ObservableList<Contacts> allContacts = ContactsImp.getAllContacts();
 
+        //find the contact id in both allcontacts and allappointments and add a contact name to each appointment
         for(int i = 0; i < allContacts.size(); i++) {
             for(int k = 0; k < allAppointments.size(); k++) {
                 if(allAppointments.get(k).getContactId() == allContacts.get(i).getContactId()) {
@@ -469,9 +470,12 @@ public class reportsWindowController {
                 }
             }
         }
+
         //lamda expression used to compare appointments and sort by contact name.
         Comparator<Appointments> comparator = (appointment1, appointment2) -> appointment1.getContactName().compareTo(appointment2.getContactName());
         allAppointments.sort(comparator);
+
+        //set the contact columns
         contactReportTableView.setItems(allAppointments);
         contactNameColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         apptIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
